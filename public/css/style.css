@@ -1,3 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat';
+}
+
+:root {
+    --logo-size: 8.5rem;
+
+    /* Colors */
+    --primary-color: #EAAA00;
+    --secondary-color: #8C271E;
+    --gray-1: #0C1618;
+    --white-1: #FFF;
+    --white-2: #eef4f6;
+
+    /* Font sizes */
+    --font-xsm: 8pt;
+    --font-sm: 10pt;
+    --font-md: 12pt;
+    --font-lg: 14pt;
+    --font-xl: 16pt;
+    --font-xxl: 18pt;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     
@@ -9,9 +37,9 @@
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
+/* @media only screen and (min-width: 768px) {
     
-}
+} */
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
@@ -20,5 +48,110 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 3.5rem;
+        background: linear-gradient(45deg, #0b1314 0%, #140d0d 40%, #0a0303 60%, #02161a 100%);
+        box-shadow: 0px 10px 40px 5px rgba(0,0,0,0.75);
+    }
+
+    .logo {
+        width: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        transition: all ease-in-out 0.45s;
+    }
+
+    .logo:hover {
+        transform: scale(1.02);
+    }
     
+    .logo_image {
+        min-width: var(--logo-size);
+        max-width: var(--logo-size);
+    }
+
+    .header_buttons {
+        width: 25%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+    .reserve_page {
+        width: 50%;
+        height: 100%;
+        background: #d23a2d;
+        background: linear-gradient(45deg, #d23a2d, #bd3528, #a82f24, #d23a2d);
+        background-position: 100%;
+        background-size: 300%;
+        transition: all ease-in-out 0.85s;
+        
+        & a {
+            color: var(--white-1);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all ease-in-out 0.3s;
+        }
+    }
+
+    .reserve_page:hover {
+        background-position: 0%;
+
+        & a {
+            transform: scale(1.03);
+        }
+    }
+
+    .account_pages {
+        width: 50%;
+        height: 100%;
+        color: var(--white-1);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        & .profile_picture {
+            width: 2.25rem;
+            background-color: var(--white-1);
+            border: 3px solid var(--white-1);
+            border-radius: 50%;
+        }
+
+        & .account_buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        & a {
+            color: var(--white-1);
+            transition: all ease-in-out 0.2s;
+        }
+
+        & a:hover {
+            transform: scale(1.017);
+        }
+    }
+
+
+    .header_buttons a, .header_buttons {
+        font-size: var(--font-sm);
+        font-weight: bold;
+    }
 }
