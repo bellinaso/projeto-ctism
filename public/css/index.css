@@ -1,0 +1,178 @@
+@import url('global.css');
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+    
+} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    header {
+        width: 100%;
+        /* min-height: 90vh; */
+        min-height: 52.25rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        background-image: url('../images/header_background_image.jpg');
+        background-repeat: no-repeat;
+        background-position: center 10%;
+    }
+    
+    .header {
+        width: 98%;
+        position: absolute;
+        top: 1.5rem;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        height: 4.2rem;
+        background: linear-gradient(45deg, #0b1314 0%, #140d0d 40%, #0a0303 60%, #02161a 100%);
+        box-shadow: 10px 10px 40px 5px rgba(0,0,0,0.75);
+    }
+
+    .logo {
+        width: 26rem;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    
+    .logo_image {
+        min-width: var(--logo-size);
+        max-width: var(--logo-size);
+        transition: all ease-in-out 0.45s;
+    }
+
+    .logo_image:hover {
+        transform: scale(1.02);
+    }
+
+    .header_buttons {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    
+
+    .reserve_page {
+        width: 16rem;
+        height: 80%;
+    }
+
+    .account_pages {
+        width: 18.5rem;
+        height: 100%;
+        color: var(--white-1);
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: .5rem;
+
+        &  {
+            .profile_picture {
+                width: 2.25rem;
+                align-self: flex-end;
+                background-color: var(--white-1);
+                border: 3px solid var(--white-1);
+                border-radius: 50%;
+            }
+    
+            .account_buttons {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: .3rem;
+            }
+    
+            a {
+                color: var(--white-1);
+                transition: all ease-in-out 0.2s;
+            }
+    
+            a:hover {
+                transform: scale(1.017);
+            }
+        }
+    }
+
+    .header_buttons {
+        font-size: var(--font-sm);
+        font-weight: bold;
+    }
+
+    .header_slogan {
+        align-self: flex-start;
+        position: absolute;
+        text-align: left;
+        top: 50%;
+        left: 7%;
+        transform: translateY(-50%);
+        text-shadow: 0px 0px 25px var(--gray-1);
+        
+        & {
+            h1 {
+                color: var(--white-2);
+                font-size: 68pt;
+                opacity: 0.9;
+            }
+        }
+    }
+
+    .see_more {
+        width: 50%;
+        height: 3rem;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @keyframes jump_effect {
+        0% {transform: scale(1);}
+        25% {transform: scale(1.1);}
+        40% {transform: scale(1.05);}
+        60% {transform: scale(1.07);}
+        100% {transform: scale(1.1);}
+    }
+
+    .arrow_down {
+        width: 4.3rem;
+    }
+
+    .arrow_down:hover {
+        animation-name: jump_effect;
+        animation-duration: 1s;
+        animation-fill-mode: both;
+    }
+
+}

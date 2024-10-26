@@ -1,0 +1,26 @@
+.red_button {
+    background: #d23a2d;
+    background: linear-gradient(45deg, #d23a2d, #bd3528, #a82f24, #d23a2d);
+    background-position: 100%;
+    background-size: 300%;
+    transition: all ease-in-out 0.85s;
+    border-radius: 0.5rem;
+    & a, button {
+        color: var(--white-1);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        transition: all ease-in-out 0.27s;
+    }
+}
+
+.red_button:hover {
+    background-position: 0%;
+
+    & a, button {
+        transform: scale(1.03);
+    }
+}
