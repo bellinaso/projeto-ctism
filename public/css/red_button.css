@@ -5,6 +5,7 @@
     background-size: 300%;
     transition: all ease-in-out 0.85s;
     border-radius: 0.5rem;
+    
     & a, button {
         color: var(--white-1);
         width: 100%;

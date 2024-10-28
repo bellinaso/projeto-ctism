@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookease - Login</title>
+    <title>Bookease - Entrar</title>
     <link rel="stylesheet" href="/public/css/login.css">
     <link rel="stylesheet" href="/public/css/red_button.css">
 </head>
@@ -24,10 +24,10 @@
                         <img src="/public/images/checkmark.svg" alt="" class="checkmark">
                         Gerencia facilmente seus agendamentos
                     </li>
-                    <li>
+                    <!-- <li>
                         <img src="/public/images/checkmark.svg" alt="" class="checkmark">
                         
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 </div>
             </header>
             <div class="login_form">
-                <h1>Acesse sua conta </h1>
+                <h1>Acesse sua conta</h1>
                 <form action="/controller/login_controller.php">
                     <div class="login_input">
                         <label for="login">
@@ -60,7 +60,7 @@
                     </div>
                 </form>
                 <p class="create_account">
-                    Não possui conta? <a href="">Criar conta aqui</a>
+                    Não possui conta? <a href="/view/register.php">Crie sua conta aqui</a>
                 </p>
             </div>
         </div>
