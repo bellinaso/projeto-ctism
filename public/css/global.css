@@ -19,10 +19,13 @@ a {
     --primary-color: #EAAA00;
     --red-1: #bd3528;
     --red-2: #8C271E;
+    --red-3: #f5d8d6;
     --gray-1: #0C1618;
     --gray-2: #4b6268;
+    --gray-3: #d4d4d4;
     --white-1: #FFF;
     --white-2: #eef4f6;
+    --white-3: #f5f3f3;
 
     /* Font sizes */
     --font-xsm: 8pt;

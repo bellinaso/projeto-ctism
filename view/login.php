@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookease - Entrar</title>
     <link rel="stylesheet" href="/public/css/login.css">
-    <link rel="stylesheet" href="/public/css/red_button.css">
+    <link rel="stylesheet" href="/public/css/components/red_button.css">
 </head>
 
 <body>

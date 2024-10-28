@@ -40,6 +40,7 @@
     }
 
     .benefits_section {
+        border-radius: 1rem;
         width: 27.5rem;
         display: flex;
         flex-direction: column;
