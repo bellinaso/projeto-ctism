@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/public/css/establishments.css">
     <link rel="stylesheet" href="/public/css/components/red_button.css">
     <link rel="stylesheet" href="/public/css/components/header.css">
+    <script src="../config.js"></script>
 </head>
 
 <body>
@@ -25,6 +26,11 @@
                     </a>
                     <div>
                         <?php
+                            require_once '../controller/map_controller.php';
+
+                            $jsonLocations = json_encode(get_locations());
+
+
                             if(!isset($_SESSION['login'])) {
                                 echo '
                                     <span class="account_buttons">
@@ -431,7 +437,7 @@
                     }));
                 d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
             })({
-                key: "AIzaSyD29lksFM_NdrFgMbs_zbho640AYbERlg8",
+                key: API_KEY,
                 v: "weekly",
                 // Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
                 // Add other bootstrap parameters as needed, using camel case.
