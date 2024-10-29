@@ -11,7 +11,7 @@
 
 <body>
     <main>
-    <div class="login_section">
+    <div class="register_section">
             <header>
                 <div class="logo">
                     <a href="/view/index.php">
@@ -19,44 +19,44 @@
                     </a>
                 </div>
             </header>
-            <div class="login_form">
+            <div class="register_form">
                 <h1>Acesse sua conta</h1>
-                <form action="/controller/login_controller.php">
-                    <div class="login_input">
+                <form action="/controller/register_controller.php">
+                    <div class="register_input">
                         <label for="login">
-                            Nome
+                            Nome completo
                         </label>
-                        <input type="text" name="password" id="login" placeholder="Digite seu endereço e-mail ou CPF">
+                        <input type="text" name="password" id="login" placeholder="Insira o seu nome completo">
                     </div>
-                    <div class="login_input">
-                        <label for="login">
-                            Email
+                    <div class="register_input">
+                        <label for="email">
+                            Endereço e-mail
                         </label>
-                        <input type="text" name="password" id="login" placeholder="Digite seu endereço e-mail ou CPF">
+                        <input type="text" name="password" id="email" placeholder="Insira seu endereço e-mail">
                     </div>
-                    <div class="login_input">
-                        <label for="login">
-                            Telefone
+                    <div class="register_input">
+                        <label for="phone">
+                            Número de telefone
                         </label>
-                        <input type="text" name="password" id="login" placeholder="Digite seu endereço e-mail ou CPF">
+                        <input type="text" name="password" id="phone" placeholder="Seu número de telefone com DDD">
                     </div>
-                    <div class="login_input">
-                        <label for="login">
+                    <div class="register_input">
+                        <label for="cpf">
                             CPF
                         </label>
-                        <input type="text" name="password" id="login" placeholder="Digite seu endereço e-mail ou CPF">
+                        <input type="text" name="password" id="cpf" placeholder="Digite apenas os números, sem pontos ou traços">
                     </div>
                     <div class="password_input">
                         <label for="password">
-                            Senha
+                            Crie uma senha
                         </label>
-                        <input type="password" name="password" id="password" placeholder="Digite a sua senha">
+                        <input type="password" name="password" id="password" placeholder="Crie uma senha forte">
                     </div>
                     <div class="password_input">
-                        <label for="password">
-                            Confirmar
+                        <label for="password_confirm">
+                            Confirme sua senha
                         </label>
-                        <input type="password" name="password" id="password" placeholder="Digite a sua senha">
+                        <input type="password" name="password" id="password_confirm" placeholder="Digite a senha novamente para confirmar">
                     </div>
                     <div class="submit red_button">
                         <button type="submit">Continuar</button>
@@ -71,16 +71,25 @@
         <div class="benefits_section">
             <img src="/public/images/account_benefits.svg" alt="" class="benefits_image">
             <div class="benefits">
-                <p>Entrando na sua conta, você:</p>
+                <p>Criando sua conta, você aproveita:</p>
                 <ul>
                     <li>
                         <img src="/public/images/checkmark.svg" alt="" class="checkmark">
-                        Acessa rapidamente aos seus compromissos
+                        Todos os compromissos em um só lugar
                     </li>
                     <li>
                         <img src="/public/images/checkmark.svg" alt="" class="checkmark">
-                        Gerencia facilmente seus agendamentos
+                        Uma plataforma segura e confiável
                     </li>
+                    <li>
+                        <img src="/public/images/checkmark.svg" alt="" class="checkmark">
+                        Sua agenda gerenciada de forma prática e rápida
+                    </li>
+                    <li>
+                        <img src="/public/images/checkmark.svg" alt="" class="checkmark">
+                        Compromissos agendados com facilidade
+                    </li>
+
                     <!-- <li>
                         <img src="/public/images/checkmark.svg" alt="" class="checkmark">
                         
