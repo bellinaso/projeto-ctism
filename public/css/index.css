@@ -38,13 +38,36 @@
         border-radius: 1rem;
     }
 
+    .header_buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 5rem;
+        padding-right: 3rem;
+    }
+
+    .about_us_page {
+        display: flex;
+        & {
+            a {
+            color: var(--white-1);
+            transition: all ease-in-out 0.2s;
+        }
+
+        a:hover {
+            transform: scale(1.017);
+        }
+    }
+    }
+
     .reserve_page {
-        width: 16rem;
+        width: 14rem;
         height: 80%;
     }
 
     .account_pages {
-        width: 18.5rem;
+        width: 12rem;
         height: 100%;
         color: var(--white-1);
         display: flex;
@@ -127,6 +150,55 @@
         animation-name: jump_effect;
         animation-duration: 1s;
         animation-fill-mode: both;
+    }
+
+    .about_us {
+        min-width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5rem;
+        margin-bottom: 5rem;
+        
+        & {
+            .card_section  {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                gap: 3rem;
+            }
+
+            .card {
+                width: 18rem;
+                background-color: var(--white-2);
+                padding: 1.5rem;
+                border-radius: 1rem;
+                box-shadow: 0px 10px 20px 0px #140d0d;
+                text-align: justify;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+                
+                & {
+                    .rounded_card_image {
+                        width: 7rem;
+                        background-color: var(--white-1);
+                        border-radius: 45%;
+                        box-shadow: 0px 5px 15px 0px #140d0d;
+                    }
+                }
+            }
+        }
+    }
+
+    footer {
+        height: 15rem;
+        margin-top: 5rem;
+        background: linear-gradient(45deg, #0b1314 0%, #140d0d 40%, #0a0303 60%, #02161a 100%);
     }
 
 }

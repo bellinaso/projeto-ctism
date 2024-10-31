@@ -19,6 +19,11 @@
                 </a>
             </div>
             <div class="header_buttons">
+                <div class="about_us_page">
+                    <a href="#about_us">
+                        Sobre nós
+                    </a>
+                </div>
                 <div class="reserve_page red_button">
                     <a href="/view/establishments.php">
                         RESERVAR AGORA
@@ -62,9 +67,45 @@
         </div>
     </header>
     <main>
-        <a href="#">
+        <a href="#about_us">
             <img class="arrow_down" src="/public/images/arrow_down.svg" alt="">
         </a>
+        <div class="about_us" id="about_us">
+            <h1>Nossa missão</h1>
+            <div class="card_section">
+                <div class="card">
+                    <h2>Missão 1</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, architecto exercitationem repudiandae sequi iusto debitis porro et dolores nostrum consectetur impedit, possimus distinctio ducimus, harum hic accusantium. Nihil, molestias nisi!</p>
+                </div>
+                <div class="card">
+                    <h2>Missão 2</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, architecto exercitationem repudiandae sequi iusto debitis porro et dolores nostrum consectetur impedit, possimus distinctio ducimus, harum hic accusantium. Nihil, molestias nisi!</p>
+                </div>
+                <div class="card">
+                    <h2>Missão 3</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, architecto exercitationem repudiandae sequi iusto debitis porro et dolores nostrum consectetur impedit, possimus distinctio ducimus, harum hic accusantium. Nihil, molestias nisi!</p>
+                </div>
+                <div class="card">
+                    <h2>Missão 4</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, architecto exercitationem repudiandae sequi iusto debitis porro et dolores nostrum consectetur impedit, possimus distinctio ducimus, harum hic accusantium. Nihil, molestias nisi!</p>
+                </div>
+            </div>
+        </div>
+        <div class="about_us">
+            <h1>Quem nós somos?</h1>
+            <div class="card_section">
+                <div class="card">
+                    <img src="/public/images/profile_picture.svg" alt="" class="rounded_card_image">
+                    <h3>Arthur Bernardo Paul</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, architecto exercitationem repudiandae sequi iusto debitis porro et dolores nostrum consectetur impedit, possimus distinctio ducimus, harum hic accusantium. Nihil, molestias nisi!</p>
+                </div>
+                <div class="card">
+                    <img src="/public/images/profile_picture.svg" alt="" class="rounded_card_image">
+                    <h3>Bruno Bellinaso Brasil</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, architecto exercitationem repudiandae sequi iusto debitis porro et dolores nostrum consectetur impedit, possimus distinctio ducimus, harum hic accusantium. Nihil, molestias nisi!</p>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
 

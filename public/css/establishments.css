@@ -154,6 +154,18 @@
 
                         font-size: var(--font-sm);
                     }
+
+                    .open_establishment {
+                        align-self: flex-start;
+
+                        & {
+                            img {
+                                align-self: flex-start;
+                                justify-self: flex-start;
+                                width: 1.75rem;
+                            }
+                        }
+                    }
                 }
             }
         }

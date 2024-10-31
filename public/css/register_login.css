@@ -1,0 +1,224 @@
+@import url('global.css');
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+    
+} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    body {
+        min-width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    main {
+        min-width: 50%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    .benefits_section {
+        border-radius: 1rem;
+        width: 27.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        & {
+            .benefits_image {
+                border-radius: 1rem 1rem 0rem 0rem;
+                align-self: center;
+                width: 100%;
+                background-color: #f5d8d6;
+            }
+
+            .benefits {
+                background-color: #f5f3f3;
+                width: 100%;
+                padding: 1rem 0rem 1rem 1rem;
+                border-radius: 0rem 0rem 1rem 1rem;
+            }
+    
+            p {
+                font-size: var(--font-md);
+                font-weight: bold;
+            }
+    
+            li {
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+            }
+    
+            .checkmark {
+                width: 1.7rem;
+            }
+        }
+
+        
+    }
+
+    header {
+        margin-bottom: 3rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        & {
+            .logo_image {
+                min-width: var(--logo-size);
+                max-width: var(--logo-size);
+                transition: all ease-in-out 0.45s;
+            }
+        
+            .logo_image:hover {
+                transform: scale(1.02);
+            }
+
+            .go_back {
+                
+                & {
+                    a {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-content: center;
+                        gap: 0.3rem;
+                        color: var(--gray-1);
+                        text-decoration: none;
+                        font-weight: bold;
+                        transition: all ease-in-out 0.27s;
+                    }
+
+                    a:hover {
+                        transform: scale(1.03);
+                    }
+                }
+            }
+
+            .go_back_image {
+                transform: translateY(-0.1rem);
+                min-width: 1.3rem;
+                max-width: 1.3rem;
+            }
+        }
+    }
+
+    .login_section {
+        width: 27rem;
+
+        & {
+            .login_form {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: start;
+                align-items: start;
+                
+                & {
+                    h1 {
+                        font-size: var(--font-xxl);
+                        margin-bottom: 1rem;
+                    }
+
+                    form {
+                        width: 100%;
+                    }
+                }
+
+            }
+
+        }
+    }
+
+    .form_input {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 1rem;
+        
+        & {
+            input {
+                width: 100%;
+                height: 2.5rem;
+                padding: 1rem;
+                margin-top: .3rem;
+                border: none;
+                outline: 1px solid var(--gray-2);
+                border-radius: .5rem;
+                font-size: var(--font-sm);
+                transition: all ease-in-out 0.27s;
+            }
+            
+            label {
+                color: var(--gray-1);
+                font-size: var(--font-sm);
+                font-weight: bold;
+            }
+
+            input:hover {
+                padding-left: 1.17rem;
+            }
+            
+            input:focus {
+                outline: 1px solid var(--red-1);
+                padding-left: 1.17rem;
+            }
+        }
+    }
+
+    .submit {
+        width: 100%;
+        height: 3rem;
+
+        & {
+            button {
+                border: none;
+                background: none;
+            }
+        }
+    }
+
+    .create_account {
+        display: flex;
+        flex-direction: row;
+        gap: .3rem;
+        margin-top: .5rem;
+        align-self: flex-end;
+        font-size: var(--font-sm);
+
+        & {
+            a {
+                transition: all ease-in-out 0.27s;
+            }
+    
+            a:hover {
+                transform: scale(1.03);
+            }
+        }
+    }
+}

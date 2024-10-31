@@ -27,7 +27,10 @@
                     <div>
                         <?php
                             require_once '../controller/map_controller.php';
-
+                            require_once '../controller/establishments_controller.php';
+                
+                            
+                            $establishments = get_establishments();
                             $jsonLocations = json_encode(get_locations());
 
 
@@ -70,8 +73,49 @@
             </div>
 
             <div class="establishments_list">
+                <?php
+                    foreach($establishments as $e) {
+                        echo '
+                            <div class="establishment">
+
+                                <div class="establishment_image">
+                                    <a href="#">
+                                        <img src="/public/images/image_icon.svg" alt="" class="image_icon">
+                                    </a>
+                                </div>
+
+                                <div class="establishment_info">
+                                    <h3>
+                                        <a href="#">
+                                        '.$e['name'].'
+                                        </a>
+                                    </h3>
+                                    <p>
+                                        <span>Descrição: </span>
+                                        '.$e['description'].'
+                                    </p>
+                                    <p>
+                                        <span>Categoria: </span>
+                                        '.$e['category'].'
+                                    </p>
+                                    <p>
+                                        <span>Endereço: </span>
+                                        '.$e['address'].'
+                                    </p>
+                                </div>
+
+                                <div class="open_establishment">
+                                    <a href="#">
+                                        <img src="/public//images/open_in_new_window.svg" alt="">
+                                    </a>
+                                </div>
+
+                        </div>
+                        ';
+                    }
+                ?>
                 
-                <div class="establishment">
+                <!-- <div class="establishment">
 
                     <div class="establishment_image">
                         <a href="#">
@@ -97,259 +141,11 @@
                         </p>
                     </div>
 
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
+                    <div class="open_establishment">
+                        <img src="/public//images/open_in_new_window.svg" alt="">
                     </div>
 
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="establishment">
-
-                    <div class="establishment_image">
-                        <a href="#">
-                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                        </a>
-                    </div>
-
-                    <div class="establishment_info">
-                        <h3>
-                            <a href="#">Restaurante Tal</a>
-                        </h3>
-                        <p>
-                            <span>Descrição: </span>
-                            Oferecemos uma experiência única, com pratos que celebram o melhor da culinária nacional em um ambiente acolhedor. Sabores frescos para momentos inesquecíveis.
-                        </p>
-                        <p>
-                            <span>Categoria: </span>
-                            Gastronomia
-                        </p>
-                        <p>
-                            <span>Endereço: </span>
-                            Rua Presidente Fulanilson, 30
-                        </p>
-                    </div>
-
-                </div>
+                </div> -->
 
             </div>
         </div>
