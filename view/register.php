@@ -78,7 +78,8 @@
                                 Qual estado você mora?
                             </label>
                             <select name="" id="state">
-                                <option value="">Teste</option>
+                                <option value="" disabled selected>Selecione um estado</option>
+                                <option value="">Rio Grande do Sul</option>
                             </select>
                         </div>
                         <div class="form_input">
@@ -86,7 +87,8 @@
                                 Qual cidade você mora?
                             </label>
                             <select name="" id="city">
-                                <option value="">Teste</option>
+                                <option value="" disabled selected>Selecione uma cidade</option>
+                                <option value="">Santa Maria</option>
                             </select>
                         </div>
                     </div>

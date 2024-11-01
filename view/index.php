@@ -60,7 +60,7 @@
                 <h1>Agendar<br> nunca foi<br> tão fácil!</h1>
             </div>
             <div class="see_more red_button">
-                <a href="">
+                <a href="#about_us">
                     Saiba mais
                 </a>
             </div>
