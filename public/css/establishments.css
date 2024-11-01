@@ -22,11 +22,6 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    body {
-        max-height: 100vh;
-        overflow: hidden;
-    }
-
     main {
         display: flex;
         flex-direction: column;
@@ -36,6 +31,10 @@
 
     .search_bar_section {
         margin-top: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         & {
             form {
@@ -84,6 +83,38 @@
 
             img {
                 width: 2.4rem;
+            }
+
+            .categories_section {
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                flex-wrap: wrap;
+
+                & {
+                    a {
+                        text-decoration: none;
+                        font-size: var(--font-sm);
+                        font-weight: bold;
+                    }
+                }
+            }
+            
+            .category {
+                display: flex;
+                border-radius: 2rem;
+                margin: 0 1rem 1rem 1rem;
+                padding: .6rem;
+                background-color: var(--white-3);
+                border: 1px solid var(--gray-3);
+                transition: all ease-in-out 0.2s;
+            }
+
+            .category:hover {
+                transform: scale(1.04);
             }
         }
     }

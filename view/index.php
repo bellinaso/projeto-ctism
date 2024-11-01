@@ -65,11 +65,11 @@
                 </a>
             </div>
         </div>
+        <a href="#about_us" class="arrow_down">
+            <img src="/public/images/arrow_down.svg" alt="">
+        </a>
     </header>
     <main>
-        <a href="#about_us">
-            <img class="arrow_down" src="/public/images/arrow_down.svg" alt="">
-        </a>
         <div class="about_us" id="about_us">
             <h1>Nossa missão</h1>
             <div class="card_section">

@@ -28,9 +28,11 @@
                         <?php
                             require_once '../controller/map_controller.php';
                             require_once '../controller/establishments_controller.php';
+                            require_once '../controller/category_controller.php';
                 
                             
                             $establishments = get_establishments();
+                            $categories = get_category();
                             $jsonLocations = json_encode(get_locations());
 
 
@@ -65,6 +67,19 @@
                     <img src="/public/images/search_icon.svg" alt="">
                 </button>
             </form>
+            <div class="categories_section">
+                <?php
+                    foreach($categories as $c) {
+                        echo '
+                            <a href="">
+                                <div class="category">
+                                    '.$c['name'].'
+                                </div>
+                            </a>
+                        ';
+                    }
+                ?>
+            </div>
         </div>
 
         <div class="establishments_section">
