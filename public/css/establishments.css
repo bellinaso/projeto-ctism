@@ -146,6 +146,7 @@
                     }
                     
                     .establishment_info {
+                        width: 100%;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
@@ -156,6 +157,7 @@
                     }
 
                     .open_establishment {
+                        justify-self: end;
                         align-self: flex-start;
 
                         & {

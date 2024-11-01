@@ -20,8 +20,8 @@ class connect_database {
         $this->mysqli = new mysqli($this->host, $this->user, $this->password, $this->database);
 
         if ($this->mysqli->errno) {
-           echo("Error while connecting to database. Error:" . $this->mysqli->connect_errno);
-           exit();
+            echo("Error while connecting to database. Error:" . $this->mysqli->connect_errno);
+            exit();
         }
         
         $this->mysqli->set_charset('utf8');

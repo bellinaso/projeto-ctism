@@ -54,7 +54,7 @@
                         <label for="login">
                             Faça login com seu endereço e-mail ou CPF
                         </label>
-                        <input type="text" name="password" id="login" placeholder="Digite seu endereço e-mail ou CPF">
+                        <input type="text" name="login" id="login" placeholder="Digite seu endereço e-mail ou CPF">
                     </div>
                     <div class="form_input">
                         <label for="password">

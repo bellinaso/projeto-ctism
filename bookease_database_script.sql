@@ -8,6 +8,8 @@ CREATE TABLE user(
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     phone VARCHAR(14) UNIQUE,
+    state VARCHAR(50),
+    city VARCHAR(50),
     password VARCHAR(100),
     user_type enum('user','admin','manager'),
     creation_date DATE,
@@ -15,12 +17,14 @@ CREATE TABLE user(
 );
 
 CREATE TABLE establishments(
-	id int auto_increment,
+	id INT auto_increment,
     cnpj VARCHAR(18) UNIQUE,
     user_id INT,
     email varchar(100) UNIQUE,
     name VARCHAR(200),
     adress VARCHAR(200),
+    latitude DOUBLE,
+    longitude DOUBLE,
     phone VARCHAR(14) UNIQUE,
     description TEXT,
     creation_date DATE,

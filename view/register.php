@@ -29,42 +29,70 @@
             <div class="register_form">
                 <h1>Acesse sua conta</h1>
                 <form action="/controller/register_controller.php">
+
                     <div class="form_input">
                         <label for="login">
                             Nome completo
                         </label>
-                        <input type="text" name="password" id="login" placeholder="Insira o seu nome completo">
+                        <input type="text" name="complete_name" id="login" placeholder="Insira o seu nome completo">
                     </div>
+
                     <div class="form_input">
                         <label for="email">
                             Endereço e-mail
                         </label>
-                        <input type="text" name="password" id="email" placeholder="Insira seu endereço e-mail">
+                        <input type="text" name="email" id="email" placeholder="Insira seu endereço e-mail">
                     </div>
+
                     <div class="form_input">
                         <label for="phone">
                             Número de telefone
                         </label>
-                        <input type="text" name="password" id="phone" placeholder="Seu número de telefone com DDD">
+                        <input type="text" name="phone" id="phone" placeholder="Seu número de telefone com DDD">
                     </div>
+
                     <div class="form_input">
                         <label for="cpf">
                             CPF
                         </label>
-                        <input type="text" name="password" id="cpf" placeholder="Digite apenas os números, sem pontos ou traços">
+                        <input type="text" name="cpf" id="cpf" placeholder="Digite apenas os números, sem pontos ou traços">
                     </div>
+
                     <div class="form_input">
                         <label for="password">
                             Crie uma senha
                         </label>
                         <input type="password" name="password" id="password" placeholder="Crie uma senha forte">
                     </div>
+
                     <div class="form_input">
                         <label for="password_confirm">
                             Confirme sua senha
                         </label>
-                        <input type="password" name="password" id="password_confirm" placeholder="Digite a senha novamente para confirmar">
+                        <input type="password" name="password_confirm" id="password_confirm" placeholder="Digite a senha novamente para confirmar">
                     </div>
+
+                    <div class="form_input_group">
+                        <div class="form_input">
+                            <label for="state">
+                                Qual estado você mora?
+                            </label>
+                            <select name="" id="state">
+                                <option value="">Teste</option>
+                            </select>
+                        </div>
+                        <div class="form_input">
+                            <label for="city">
+                                Qual cidade você mora?
+                            </label>
+                            <select name="" id="city">
+                                <option value="">Teste</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- https://blog.logrocket.com/creating-custom-select-dropdown-css/ -->
+
                     <div class="submit red_button">
                         <button type="submit">Continuar</button>
                     </div>
