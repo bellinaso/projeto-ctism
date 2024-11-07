@@ -11,6 +11,14 @@
 </head>
 
 <body>
+    <?php
+        require_once '../controller/authentication_controller.php';
+        require_once '../controller/redirect_controller.php';
+
+        if (is_logged()) {
+            redirect_to('index.php');
+        }
+    ?>
     <main>
         <div class="benefits_section">
             <img src="/public/images/account_benefits_1.svg" alt="" class="benefits_image">
@@ -25,15 +33,11 @@
                         <img src="/public/images/checkmark.svg" alt="" class="checkmark">
                         Gerencia facilmente seus agendamentos
                     </li>
-                    <!-- <li>
-                        <img src="/public/images/checkmark.svg" alt="" class="checkmark">
-                        
-                    </li> -->
                 </ul>
             </div>
         </div>
 
-        <div class="login_section">
+        <div class="form_section">
             <header>
                 <div class="logo">
                     <a href="/view/index.php">
@@ -48,8 +52,21 @@
                 </div>
             </header>
             <div class="login_form">
-                <h1>Acesse sua conta</h1>
-                <form action="/controller/login_controller.php">
+                <h1>Acesse sua conta!</h1>
+                <?php
+                if (isset($_REQUEST) && isset($_REQUEST['code'])) {
+                    switch ($_REQUEST['code']) {
+                        case 401:
+                            echo '
+                            <div class="form_error">
+                                <span>Usuário ou senha incorretos!</span> Verifique se todos os campos foram corrigidos corretamente e tente novamente.
+                            </div>
+                            ';
+                            break;
+                    }
+                }
+                ?>
+                <form method="post" action="/controller/login_controller.php">
                     <div class="form_input">
                         <label for="login">
                             Faça login com seu endereço e-mail ou CPF

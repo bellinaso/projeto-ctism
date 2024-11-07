@@ -46,7 +46,7 @@
             }
 
             .search_bar {
-                width: 24rem;
+                width: 26rem;
                 height: 3rem;
                 padding: 1rem;
                 border: 1px solid var(--gray-3);
@@ -86,14 +86,13 @@
             }
 
             .categories_section {
-                margin-top: 2rem;
-                margin-bottom: 2rem;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
                 flex-wrap: wrap;
-
+                margin-top: 2rem;
+                margin-bottom: 2rem;
                 & {
                     a {
                         text-decoration: none;

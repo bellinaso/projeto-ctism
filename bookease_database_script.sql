@@ -2,14 +2,14 @@ CREATE DATABASE bookease;
 
 USE bookease;
 
-CREATE TABLE user(
+CREATE TABLE users(
 	id int auto_increment,
     cpf VARCHAR(14) UNIQUE,
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     phone VARCHAR(14) UNIQUE,
-    state VARCHAR(50),
-    city VARCHAR(50),
+    state VARCHAR(80),
+    city VARCHAR(80),
     password VARCHAR(100),
     user_type enum('user','admin','manager'),
     creation_date DATE,
@@ -32,7 +32,7 @@ CREATE TABLE establishments(
     FOREIGN KEY(user_id) REFERENCES user(id)
 );
 
-CREATE TABLE reserve(
+CREATE TABLE reserves(
     id INT auto_increment,
     user_id INT,
     establishments_id INT,
@@ -54,7 +54,7 @@ CREATE TABLE services(
     FOREIGN KEY(establishments_id) REFERENCES establishments(id)
 );
 
-CREATE TABLE review(
+CREATE TABLE reviews(
     id INT auto_increment,
     reserve_id INT,
     review_note INT,
@@ -74,7 +74,7 @@ CREATE TABLE availability(
     FOREIGN KEY(service_id) REFERENCES services(id)
 );
 
-CREATE TABLE category(
+CREATE TABLE categories(
     id INT auto_increment,
     name VARCHAR(100),
     description VARCHAR(100),

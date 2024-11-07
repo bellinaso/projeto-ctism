@@ -11,8 +11,16 @@
 </head>
 
 <body>
+    <?php
+    require_once '../controller/authentication_controller.php';
+    require_once '../controller/redirect_controller.php';
+
+    if (is_logged()) {
+        redirect_to('index.php');
+    }
+    ?>
     <main>
-    <div class="register_section">
+        <div class="form_section">
             <header>
                 <div class="logo">
                     <a href="/view/index.php">
@@ -27,35 +35,48 @@
                 </div>
             </header>
             <div class="register_form">
-                <h1>Acesse sua conta</h1>
-                <form action="/controller/register_controller.php">
+                <h1>Crie sua conta!</h1>
+                <?php
+                if (isset($_REQUEST) && isset($_REQUEST['code'])) {
+                    switch ($_REQUEST['code']) {
+                        case 422:
+                            echo '
+                            <div class="form_error">
+                                <span>Algo deu errado!</span> Verifique se todos os campos foram corrigidos corretamente e tente novamente.
+                            </div>
+                            ';
+                            break;
+                    }
+                }
+                ?>
+                <form method="post" action="/controller/register_controller.php">
 
                     <div class="form_input">
-                        <label for="login">
+                        <label for="complete_name">
                             Nome completo
                         </label>
-                        <input type="text" name="complete_name" id="login" placeholder="Insira o seu nome completo">
+                        <input type="text" name="complete_name" id="complete_name" placeholder="Insira o seu nome completo">
                     </div>
 
                     <div class="form_input">
                         <label for="email">
                             Endereço e-mail
                         </label>
-                        <input type="text" name="email" id="email" placeholder="Insira seu endereço e-mail">
+                        <input type="email" name="email" id="email" placeholder="Insira seu endereço e-mail">
                     </div>
 
                     <div class="form_input">
                         <label for="phone">
                             Número de telefone
                         </label>
-                        <input type="text" name="phone" id="phone" placeholder="Seu número de telefone com DDD">
+                        <input type="phone" name="phone" id="phone" placeholder="Insira apenas números com DDD">
                     </div>
 
                     <div class="form_input">
                         <label for="cpf">
                             CPF
                         </label>
-                        <input type="text" name="cpf" id="cpf" placeholder="Digite apenas os números, sem pontos ou traços">
+                        <input type="text" name="cpf" id="cpf" oninput="cpf_format(this)" onkeydown="pressed_key(event, this)" maxlength="14" placeholder="Insira apenas números">
                     </div>
 
                     <div class="form_input">
@@ -77,7 +98,7 @@
                             <label for="state">
                                 Qual estado você mora?
                             </label>
-                            <select name="" id="state">
+                            <select name="state" id="state">
                                 <option value="" disabled selected>Selecione um estado</option>
                                 <option value="">Rio Grande do Sul</option>
                             </select>
@@ -86,7 +107,7 @@
                             <label for="city">
                                 Qual cidade você mora?
                             </label>
-                            <select name="" id="city">
+                            <select name="city" id="city">
                                 <option value="" disabled selected>Selecione uma cidade</option>
                                 <option value="">Santa Maria</option>
                             </select>
@@ -130,6 +151,31 @@
             </div>
         </div>
     </main>
+    <script>
+        function cpf_format(input) {
+            let value = input.value;
+
+            // Remove qualquer caractere que não seja número
+            value = value.replace(/\D/g, "");
+
+            // Limita o CPF a 11 dígitos
+            value = value.substring(0, 11);
+
+            // Adiciona pontos e hífen conforme necessário
+            if (value.length > 3 && value.length <= 6) {
+                value = value.replace(/(\d{3})(\d+)/, "$1.$2");
+            }
+            else if (value.length > 6 && value.length <= 9) {
+                value = value.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
+            }
+            else if (value.length > 9) {
+                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            }
+
+            // Atualiza o valor do campo de entrada
+            input.value = value;
+        }
+    </script>
 </body>
 
 </html>

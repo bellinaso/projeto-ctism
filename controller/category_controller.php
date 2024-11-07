@@ -1,6 +1,7 @@
 <?php
     function get_category() {
         return array(
+            array("name" => "Todos"),
             array("name" => "Gastronomia"),
             array("name" => "Saúde e Bem-Estar"),
             array("name" => "Beleza e Estética"),

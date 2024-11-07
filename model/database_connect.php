@@ -16,7 +16,7 @@ class connect_database {
     }
 
 
-    public function connection() {
+    public function connect() {
         $this->mysqli = new mysqli($this->host, $this->user, $this->password, $this->database);
 
         if ($this->mysqli->errno) {
@@ -28,9 +28,9 @@ class connect_database {
     }
 
 
-    public function execute($sql) {
+    public function execute($query) {
         try {
-            if ($resultado = $this->mysqli->query($sql)){
+            if ($resultado = $this->mysqli->query($query)){
                 $this->mysqli->commit();
             }
             else {
@@ -45,9 +45,9 @@ class connect_database {
     }
 
 
-    public function consult($sql) {
+    public function consult($query) {
         try {
-            if ($result = $this->mysqli->query($sql)){
+            if ($result = $this->mysqli->query($query)){
                 $this->rows_affected = $result->num_rows;
                 return $result;
             } else {

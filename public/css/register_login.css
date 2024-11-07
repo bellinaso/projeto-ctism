@@ -129,7 +129,7 @@
         }
     }
 
-    .login_section {
+    .form_section {
         width: 27rem;
 
         & {
@@ -151,6 +151,22 @@
                     }
                 }
 
+            }
+
+            .form_error {
+                width: 100%;
+                margin: 1rem 0 1rem 0;
+                padding: .5rem;
+                border: 1px solid var(--red-1);
+                border-radius: .6rem;
+                background-color: var(--red-3);
+                font-size: var(--font-sm);
+
+                & {
+                    span {
+                        font-weight: bold;
+                    }
+                }
             }
 
         }
