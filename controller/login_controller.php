@@ -7,11 +7,7 @@
         $login = $_POST['login'];
         $password = $_POST['password'];
         
-        $con = new connect_database();
-        $con->connect();
-
-        $query = "SELECT * FROM users WHERE (email = $login OR cpf = $login) AND password = $password;";
-        $result = $con->consult($query);
+        $result = user_login($login, $password);
 
         if($result != null) {
             @session_start();
@@ -22,5 +18,16 @@
         else {
             redirect_to('login.php?code=401');
         }
+    }
+
+
+    function user_login($login, $password) {
+        $con = new connect_database();
+        $con->connect();
+
+        $query = "SELECT * FROM users WHERE (email = $login OR cpf = $login) AND password = $password;";
+        $result = $con->consult($query);
+
+        return $result;
     }
 ?>

@@ -4,10 +4,10 @@ USE bookease;
 
 CREATE TABLE users(
 	id int auto_increment,
-    cpf VARCHAR(14) UNIQUE,
+    cpf VARCHAR(11) UNIQUE,
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
-    phone VARCHAR(14) UNIQUE,
+    phone VARCHAR(11) UNIQUE,
     state VARCHAR(80),
     city VARCHAR(80),
     password VARCHAR(100),
@@ -29,7 +29,7 @@ CREATE TABLE establishments(
     description TEXT,
     creation_date DATE,
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES user(id)
+    FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 CREATE TABLE reserves(
@@ -40,7 +40,7 @@ CREATE TABLE reserves(
     service_date DATE,
     reserve_status ENUM('pending', 'confirmed', 'cancelled', 'completed'),
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES user(id),
+    FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(establishments_id) REFERENCES establishments(id)
 );
 
@@ -61,7 +61,7 @@ CREATE TABLE reviews(
     commentary TEXT,
     review_date DATE,
     PRIMARY KEY(id),
-    FOREIGN KEY(reserve_id) REFERENCES reserve(id)
+    FOREIGN KEY(reserve_id) REFERENCES reserves(id)
 );
 
 CREATE TABLE availability(
@@ -85,5 +85,5 @@ CREATE TABLE services_categories(
     service_id INT,
     category_id INT,
     FOREIGN KEY(service_id) REFERENCES services(id),
-    FOREIGN KEY(category_id) REFERENCES category(id)
+    FOREIGN KEY(category_id) REFERENCES categories(id)
 );

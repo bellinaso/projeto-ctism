@@ -35,12 +35,13 @@ class connect_database {
             }
             else {
                 $this->rows_affected = 0;
-                throw new Exception('Erro');
+                throw new Exception();
             }
         }
         catch (Exception $exc) {
             $this->mysqli->rollback();
             $this->disconnect();
+            return $exc;
         }
     }
 
@@ -50,7 +51,8 @@ class connect_database {
             if ($result = $this->mysqli->query($query)){
                 $this->rows_affected = $result->num_rows;
                 return $result;
-            } else {
+            }
+            else {
                 $this->rows_affected = 0;
                 return null;
             }

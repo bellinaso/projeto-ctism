@@ -11,6 +11,10 @@
 </head>
 
 <body>
+    <?php
+        @session_start();
+        $_SESSION['last_page'] = 'index.php';
+    ?>
     <header>
         <div class="header">
             <div class="logo">
@@ -36,6 +40,8 @@
                     <div>
                         <?php
                             if(!isset($_SESSION['login'])) {
+                                @session_start();
+                                $_SESSION['last_page'] = 'myaccount.php';
                                 echo '
                                     <span class="account_buttons">
                                         <a href="/view/login.php">

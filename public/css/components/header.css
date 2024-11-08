@@ -38,6 +38,7 @@
         align-items: center;
         height: 4.2rem;
         background: linear-gradient(45deg, #0b1314 0%, #140d0d 40%, #0a0303 60%, #02161a 100%);
+        /* background: linear-gradient(45deg, #f2fdff 0%, #ffffff 40%, #fff8f8 50%, #ffffff 60%, #f2fdff 100%); */
         box-shadow: 10px 10px 40px 5px rgba(0,0,0,0.75);
     }
 

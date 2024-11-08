@@ -48,6 +48,34 @@
         }
     }
 
+    .error_at {
+        font-weight: bold;
+        font-size: var(--font-sm);
+        color: var(--red-1);
+    }
+
+    .must_have {
+        font-size: var(--font-xsm);
+        font-weight: bold;
+        
+        color: var(--gray-2);
+        
+        & {
+            .password_requiriments {
+                font-weight: normal;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                column-gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+        }
+    }
+
+    #password_match {
+        font-size: var(--font-xsm);
+    }
+
     header {
         margin-bottom: 1.5rem;
         display: flex;

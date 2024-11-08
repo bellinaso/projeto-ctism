@@ -12,6 +12,10 @@
 </head>
 
 <body>
+    <?php
+        @session_start();
+        $_SESSION['last_page'] = 'establishments.php';
+    ?>
     <header>
         <div class="header">
             <div class="logo">

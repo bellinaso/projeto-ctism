@@ -37,25 +37,81 @@
             <div class="register_form">
                 <h1>Crie sua conta!</h1>
                 <?php
-                if (isset($_REQUEST) && isset($_REQUEST['code'])) {
-                    switch ($_REQUEST['code']) {
-                        case 422:
-                            echo '
-                            <div class="form_error">
-                                <span>Algo deu errado!</span> Verifique se todos os campos foram corrigidos corretamente e tente novamente.
-                            </div>
-                            ';
-                            break;
+                if (isset($_REQUEST)) {
+                    
+                    if(isset($_REQUEST['code'])) {
+                        
+                        switch ($_REQUEST['code']) {
+                            case 422:
+                                echo '
+                                <div class="form_error">
+                                    <span>Algo deu errado!</span> Verifique se todos os campos foram corrigidos corretamente e tente novamente.
+                                </div>
+                                ';
+                                break;
+                        }
+                    }
+                    if(isset($_REQUEST['error_at'])) {
+
+                        switch($_REQUEST['error_at']) {
+                            case 'email_validation':
+                                echo '
+                                <span class="error_at">O email inserido é inválido!</span>
+                                ';
+                                break;
+
+                            case 'phone_validation':
+                                echo '
+                                <span class="error_at">Número de telefone inválido!</span>
+                                ';
+                                break;
+
+                            case 'cpf_validation':
+                                echo '
+                                <span class="error_at">Número de CPF inválido!</span>
+                                ';
+                                break;
+
+                            case 'password_format_validation':
+                                echo '
+                                <span class="error_at">Formato de senha inválido!</span>
+                                ';
+                                break;
+
+                            case 'password_match_validation':
+                                echo '
+                                <span class="error_at">Senhas não coincidem!</span>
+                                ';
+                                break;
+
+                            case 'duplicated_cpf':
+                                echo '
+                                <span class="error_at">CPF já cadastrado!</span>
+                                ';
+                                break;
+
+                            case 'duplicated_email':
+                                echo '
+                                <span class="error_at">E-mail já cadastrado!</span>
+                                ';
+                                break;
+
+                            case 'duplicated_phone':
+                                echo '
+                                <span class="error_at">Telefone já cadastrado!</span>
+                                ';
+                                break;
+                        }
                     }
                 }
                 ?>
                 <form method="post" action="/controller/register_controller.php">
 
                     <div class="form_input">
-                        <label for="complete_name">
+                        <label for="name">
                             Nome completo
                         </label>
-                        <input type="text" name="complete_name" id="complete_name" placeholder="Insira o seu nome completo">
+                        <input type="text" name="name" id="name" placeholder="Insira o seu nome completo">
                     </div>
 
                     <div class="form_input">
@@ -69,28 +125,41 @@
                         <label for="phone">
                             Número de telefone
                         </label>
-                        <input type="phone" name="phone" id="phone" placeholder="Insira apenas números com DDD">
+                        <input type="phone" name="phone" id="phone" oninput="phone_format(this)" placeholder="Insira apenas números com DDD">
                     </div>
 
                     <div class="form_input">
                         <label for="cpf">
                             CPF
                         </label>
-                        <input type="text" name="cpf" id="cpf" oninput="cpf_format(this)" onkeydown="pressed_key(event, this)" maxlength="14" placeholder="Insira apenas números">
+                        <input type="text" name="cpf" id="cpf" oninput="cpf_format(this)" maxlength="14" placeholder="Insira apenas números">
                     </div>
 
                     <div class="form_input">
                         <label for="password">
                             Crie uma senha
                         </label>
-                        <input type="password" name="password" id="password" placeholder="Crie uma senha forte">
+                        <div class="must_have">
+                            <p>
+                                Precisa conter no mínimo:
+                            </p>
+                            <p class="password_requiriments">
+                                <span id="char_amount">8 caracteres</span>
+                                <span id="number">1 número</span>
+                                <span id="upper_case_letter">1 letra maiuscula</span>
+                                <span id="lower_case_letter">1 letra minuscula</span>
+                                <span id="symbol">1 símbolo especial</span>
+                            </p>
+                        </div>
+                        <input type="password" name="password" id="password" oninput="password_validate(this), password_confirm_validate(document.getElementById('password_confirm'))" placeholder="Crie uma senha forte">
                     </div>
 
                     <div class="form_input">
                         <label for="password_confirm">
                             Confirme sua senha
                         </label>
-                        <input type="password" name="password_confirm" id="password_confirm" placeholder="Digite a senha novamente para confirmar">
+                        <span id="password_match"></span>
+                        <input type="password" name="password_confirm" id="password_confirm" oninput="password_confirm_validate(this)" placeholder="Digite a senha novamente para confirmar">
                     </div>
 
                     <div class="form_input_group">
@@ -100,7 +169,7 @@
                             </label>
                             <select name="state" id="state">
                                 <option value="" disabled selected>Selecione um estado</option>
-                                <option value="">Rio Grande do Sul</option>
+                                <option value="RS">Rio Grande do Sul</option>
                             </select>
                         </div>
                         <div class="form_input">
@@ -109,7 +178,7 @@
                             </label>
                             <select name="city" id="city">
                                 <option value="" disabled selected>Selecione uma cidade</option>
-                                <option value="">Santa Maria</option>
+                                <option value="Santa Maria">Santa Maria</option>
                             </select>
                         </div>
                     </div>
@@ -151,31 +220,7 @@
             </div>
         </div>
     </main>
-    <script>
-        function cpf_format(input) {
-            let value = input.value;
-
-            // Remove qualquer caractere que não seja número
-            value = value.replace(/\D/g, "");
-
-            // Limita o CPF a 11 dígitos
-            value = value.substring(0, 11);
-
-            // Adiciona pontos e hífen conforme necessário
-            if (value.length > 3 && value.length <= 6) {
-                value = value.replace(/(\d{3})(\d+)/, "$1.$2");
-            }
-            else if (value.length > 6 && value.length <= 9) {
-                value = value.replace(/(\d{3})(\d{3})(\d+)/, "$1.$2.$3");
-            }
-            else if (value.length > 9) {
-                value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-            }
-
-            // Atualiza o valor do campo de entrada
-            input.value = value;
-        }
-    </script>
+    <script src="../public/js/input_format.js"></script>
 </body>
 
 </html>

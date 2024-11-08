@@ -18,7 +18,6 @@
 
         if(is_logged() == false) {
             @session_start();
-
             $_SESSION['last_page'] = 'myaccount.php';
 
             redirect_to('login.php');
