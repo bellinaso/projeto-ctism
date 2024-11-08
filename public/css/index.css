@@ -38,70 +38,22 @@
         border-radius: 1rem;
     }
 
-    .header_buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 5rem;
-        padding-right: 3rem;
-    }
-
     .about_us_page {
         display: flex;
         & {
             a {
-            color: var(--white-1);
             transition: all ease-in-out 0.2s;
-        }
+            }
 
-        a:hover {
-            transform: scale(1.017);
-        }
-    }
+            a:hover {
+                transform: scale(1.017);
+            }
+        }   
     }
 
     .reserve_page {
         width: 14rem;
         height: 80%;
-    }
-
-    .account_pages {
-        width: 12rem;
-        height: 100%;
-        color: var(--white-1);
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: .5rem;
-
-        &  {
-            .profile_picture {
-                width: 2.25rem;
-                align-self: flex-end;
-                background-color: var(--white-1);
-                border: 3px solid var(--white-1);
-                border-radius: 50%;
-            }
-    
-            .account_buttons {
-                display: flex;
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: center;
-                gap: .3rem;
-            }
-    
-            a {
-                color: var(--white-1);
-                transition: all ease-in-out 0.2s;
-            }
-    
-            a:hover {
-                transform: scale(1.017);
-            }
-        }
     }
 
     .header_slogan {

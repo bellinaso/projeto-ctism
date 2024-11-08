@@ -12,6 +12,7 @@
         if($result != null) {
             @session_start();
 
+            // print_r($result);
             $_SESSION['login'] = $result['email'];
             redirect_to($_SESSION['last_page']);
         }
@@ -25,7 +26,7 @@
         $con = new connect_database();
         $con->connect();
 
-        $query = "SELECT * FROM users WHERE (email = $login OR cpf = $login) AND password = $password;";
+        $query = "SELECT * FROM users WHERE (email = '$login' OR cpf = '$login') AND password = '$password';";
         $result = $con->consult($query);
 
         return $result;

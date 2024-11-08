@@ -13,6 +13,17 @@
 
 <body>
     <?php
+        require_once '../controller/map_controller.php';
+        require_once '../controller/establishments_controller.php';
+        require_once '../controller/category_controller.php';
+
+        
+        $establishments = get_establishments();
+        $categories = get_category();
+        $jsonLocations = json_encode(get_locations());
+
+
+
         @session_start();
         $_SESSION['last_page'] = 'establishments.php';
     ?>
@@ -30,16 +41,6 @@
                     </a>
                     <div>
                         <?php
-                            require_once '../controller/map_controller.php';
-                            require_once '../controller/establishments_controller.php';
-                            require_once '../controller/category_controller.php';
-                
-                            
-                            $establishments = get_establishments();
-                            $categories = get_category();
-                            $jsonLocations = json_encode(get_locations());
-
-
                             if(!isset($_SESSION['login'])) {
                                 echo '
                                     <span class="account_buttons">
@@ -53,6 +54,13 @@
                                             CADASTRE-SE
                                         </a>
                                     </span>
+                                ';
+                            }
+                            else {
+                                echo '
+                                    <a href="/view/myaccount.php">
+                                        <span>MINHA CONTA</span>
+                                    </a>
                                 ';
                             }
                         ?>

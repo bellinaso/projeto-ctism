@@ -56,6 +56,13 @@
                                     </span>
                                 ';
                             }
+                            else {
+                                echo '
+                                    <a href="/view/myaccount.php">
+                                        <span>MINHA CONTA</span>
+                                    </a>
+                                ';
+                            }
                         ?>
                     </div>
                 </div>

@@ -30,8 +30,9 @@ class connect_database {
 
     public function execute($query) {
         try {
-            if ($resultado = $this->mysqli->query($query)){
+            if ($result = $this->mysqli->query($query)){
                 $this->mysqli->commit();
+                return $result;
             }
             else {
                 $this->rows_affected = 0;
@@ -50,6 +51,7 @@ class connect_database {
         try {
             if ($result = $this->mysqli->query($query)){
                 $this->rows_affected = $result->num_rows;
+                $result = mysqli_fetch_assoc($result);
                 return $result;
             }
             else {

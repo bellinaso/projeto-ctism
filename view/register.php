@@ -135,6 +135,7 @@
                         <input type="text" name="cpf" id="cpf" oninput="cpf_format(this)" maxlength="14" placeholder="Insira apenas números">
                     </div>
 
+                    <!-- TODO: show password button -->
                     <div class="form_input">
                         <label for="password">
                             Crie uma senha
