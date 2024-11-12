@@ -76,46 +76,52 @@
                                 break;
                             
                             default:
-                                echo '';
-                                break;
+                                header('Location:./myaccount.php');
+
                         }
                     }
+                    else {
+                        echo '
+                            <div class="account">
+                                <div class="personal_info">
+                                    <h2>Informações pessoais:</h2>
+            
+                                    <div class="table">
+                                        <div class="table_row">
+                                                <img src="../public/images/profile_picture.svg" alt="">
+                                                <div class="table_column">
+                                                    <span class="table_strong">Nome:</span>
+                                                    <span class="table_strong">CPF:</span>
+                                                    <span class="table_strong">Estado:</span>
+                                                    <span class="table_strong">Cidade:</span>
+                                                </div>
+                                                <div class="table_column">
+                                                    <span>Nome Teste da Silva</span>
+                                                    <span>000.000.000-00</span>
+                                                    <span>Blablabla</span>
+                                                    <span>Pipipi</span>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="account_info">
+                                    <h2>Informações da conta:</h2>
+                                    <div class="table">
+                                        <div class="table_column">
+                                            <span class="table_strong">E-mail:</span>
+                                            <span class="table_strong">Data de criação:</span>
+                                        </div>
+                                        <div class="table_column">
+                                            <span>nometestedasilva@gmail.com</span>
+                                            <span>2024-11-11</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ';
+                    }
                 ?>
-                <div class="account">
-                    <div class="personal_info">
-                        <h2>Informações pessoais:</h2>
-                        <div class="account_row">
-                            <div class="profile_picture">
-                                <img src="../public/images/profile_picture.svg" alt="">
-                            </div>
-
-                            <div class="profile_info">
-                                <div class="profile_info_column">
-                                    <span>Nome:</span>
-                                    <span>Telefone:</span>
-                                    <span>CPF:</span>
-                                    <span>Estado:</span>
-                                    <span>Cidade:</span>
-                                </div>
-                                <div class="profile_info_column">
-                                    <span>Teste</span>
-                                    <span>Teste</span>
-                                    <span>Teste</span>
-                                    <span>Teste</span>
-                                    <span>Teste</span>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="account_info">
-                        <h2>Informações da conta:</h2>
-                        <div class="acount_row">
-
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </main>

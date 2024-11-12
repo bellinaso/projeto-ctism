@@ -91,34 +91,31 @@
                 gap: 3rem;
             }
 
-            .account_row {
+            img {
+                width: 8rem;
+                border-radius: 45%;
+            }
+            
+            .table {
                 display: flex;
                 flex-direction: row;
-                justify-content: start;
-                align-items: center;
-
+                
                 & {
-                    .profile_picture img {
-                        width: 8rem;
-                    }
-
-                    .profile_info {
+                    .table_row {
                         display: flex;
                         flex-direction: row;
-                        gap: 2rem;
-                        font-size: var(--font-md);
+                    }
 
-                        & {
-                            .profile_info_column {
-                                display: flex;
-                                flex-direction: column;
-                                gap: .5rem;
-                            }
-                            
-                            .profile_info_column:first-child {
-                                font-weight: bold;
-                            }
-                        }
+                    .table_column {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                    .table_strong {
+                        font-weight: bold;
+                    }
+                    span {
+                        padding: .7rem 1rem .1rem .3rem;
+                        border-bottom: 1px solid var(--gray-3);
                     }
                 }
             }
