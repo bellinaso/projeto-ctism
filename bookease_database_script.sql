@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS bookease;
+
 CREATE DATABASE bookease;
 
 USE bookease;
@@ -87,3 +89,11 @@ CREATE TABLE services_categories(
     FOREIGN KEY(service_id) REFERENCES services(id),
     FOREIGN KEY(category_id) REFERENCES categories(id)
 );
+
+-- DEBUG SECTION
+
+INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('12345678901', 'João Silva', 'joao.silva@email.com', '11987654321', 'São Paulo', 'São Paulo', 'senha123', 'user', '2024-10-01');
+
+INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('23456789012', 'Maria Oliveira', 'maria.oliveira@email.com', '21987654321', 'Rio de Janeiro', 'Rio de Janeiro', 'senha456', 'manager', '2024-10-02');
+
+INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('34567890123', 'Carlos Souza', 'carlos.souza@email.com', '31987654321', 'Minas Gerais', 'Belo Horizonte', 'senha789', 'admin', '2024-10-03');

@@ -4,7 +4,7 @@ class connect_database {
     protected $mysqli;
     protected $host = '127.0.0.1';
     protected $user = 'root';
-    protected $password = '';
+    protected $password = '12345';
     protected $database = 'bookease';
 
     public $rows_affected = 0;
@@ -33,6 +33,7 @@ class connect_database {
             if ($result = $this->mysqli->query($query)){
                 $this->mysqli->commit();
                 return $result;
+                // null
             }
             else {
                 $this->rows_affected = 0;

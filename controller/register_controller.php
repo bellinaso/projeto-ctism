@@ -1,6 +1,8 @@
 <?php
     require_once '../controller/redirect_controller.php';
 
+    define('DEBUG_MODE', true);
+
     if($_POST) {
         include_once '../model/database_connect.php';
 
@@ -18,8 +20,8 @@
             redirect_to('register.php?code=422&error_at=empty_input');
         }
         else {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
+            $name = ucwords(trim($_POST['name']));
+            $email = strtolower(trim($_POST['email']));
             $phone = preg_replace('/[^0-9]/', '', trim($_POST['phone']));
             $cpf = preg_replace('/[^0-9]/', '', trim($_POST['cpf']));
             // $cpf = $_POST['cpf'];
@@ -32,39 +34,39 @@
         }
 
 
-        // Validate email
-        if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            redirect_to('register.php?code=422&error_at=email_validation');
+        if(DEBUG_MODE == false) {
+            // Validate email
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                redirect_to('register.php?code=422&error_at=email_validation');
+            }
+
+
+            // Validate phone        
+            if(!is_numeric($phone) && (!strlen($phone) == 10 || !strlen($phone) == 11)) {
+                redirect_to('register.php?code=422&error_at=phone_validation');
+            }
+
+
+            // Validate CPF
+            if(!validate_cpf($cpf)) {
+                redirect_to('register.php?code=422&error_at=cpf_validation');
+            }
+
+
+            // Validate password
+            $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/';
+            if(
+                strlen($password) < 8 ||
+                !preg_match($pattern, $password) ||
+                preg_match('/\s/', $password)
+            ) {
+                redirect_to('register.php?code=422&error_at=password_format_validation');
+            }
+            else if($password != $password_confirm) {
+                redirect_to('register.php?code=422&error_at=password_match_validation');
+            }
         }
 
-
-        // Validate phone        
-        if(!is_numeric($phone) && (!strlen($phone) == 10 || !strlen($phone) == 11)) {
-            redirect_to('register.php?code=422&error_at=phone_validation');
-        }
-
-
-        // Validate CPF
-        if(!validate_cpf($cpf)) {
-            redirect_to('register.php?code=422&error_at=cpf_validation');
-        }
-
-
-        // Validate password
-        $pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/';
-        if(
-            strlen($password) < 8 ||
-            !preg_match($pattern, $password) ||
-            preg_match('/\s/', $password)
-        ) {
-            redirect_to('register.php?code=422&error_at=password_format_validation');
-        }
-        else if($password != $password_confirm) {
-            redirect_to('register.php?code=422&error_at=password_match_validation');
-        }
-
-
-        // Tenta executar a inserção
         $error_message = user_register($cpf, $name, $email, $phone, $state, $city, $password, 'user', date('Y-m-d'));
         
         if($error_message == null) {
@@ -91,10 +93,13 @@
 
         $result = $con -> execute($query);
 
-        if($result == null) {
+        if($result == 1) {
+            $result = null;
+            print_r($result);
             return $result;
         }
         else {
+            print_r($result);
             return $result->getMessage();
         }
     }
