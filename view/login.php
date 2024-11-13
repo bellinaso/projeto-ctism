@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/public/css/register_login.css">
     <link rel="stylesheet" href="/public/css/login.css">
     <link rel="stylesheet" href="/public/css/components/red_button.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/0aaabe9207.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -46,7 +48,7 @@
                 </div>
                 <div class="go_back">
                     <a href="/view/index.php">
-                        <img src="/public/images/go_back.svg" alt="" class="go_back_image">
+                        <i class="fa-solid fa-chevron-left"></i>
                         Voltar
                     </a>
                 </div>

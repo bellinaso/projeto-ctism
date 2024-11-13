@@ -36,3 +36,26 @@ a {
     --font-xl: 16pt;
     --font-xxl: 18pt;
 }
+
+.not_found {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    color: var(--gray-3);
+    
+    & {
+        i {
+            z-index: -1;
+            color: var(--white-3);
+            position: absolute;
+            top: 12rem;
+            left: 32%;
+            font-size: 8rem;
+        }
+    }
+}

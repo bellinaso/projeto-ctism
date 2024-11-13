@@ -59,10 +59,11 @@
                         gap: 1rem;
                         color: var(--gray-1);
                         transition: all ease-in-out 0.3s;
+                        text-decoration: none;
                         
                         & {
-                            img, svg {
-                                width: 1.5rem;
+                            i {
+                                font-size: 1.3rem;
                             }
                         }
                     }

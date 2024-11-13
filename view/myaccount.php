@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/public/css/myaccount.css">
     <link rel="stylesheet" href="/public/css/components/red_button.css">
     <link rel="stylesheet" href="/public/css/components/header.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/0aaabe9207.js" crossorigin="anonymous"></script>
     <script src="../config.js"></script>
 </head>
 
@@ -24,7 +26,15 @@
 
             redirect_to('login.php');
         }
+
+        $con = new connect_database();
+        $con->connect();
+
+        $query = "SELECT * FROM users WHERE id = $_SESSION[login];";
+        $user = $con->consult($query);
     ?>
+    <!-- https://boxicons.com/ -->
+    <!-- https://fontawesome.com/ -->
     <header>
         <div class="header">
             <div class="logo">
@@ -53,17 +63,41 @@
     </header>
 
     <main>
-        <!-- IDEA: div central na página com coluna à esquerda com botões para "Minhas informações"... -->
-        <!-- TODO: Logout button -->
         <div class="main_content">
             <div class="aside_buttons">
                 <a href="./myaccount.php" class="aside_button">
-                    <!-- <img src="../public/images/profile_picture.svg" alt=""> -->
-                    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M20.5899 22C20.5899 18.13 16.7399 15 11.9999 15C7.25991 15 3.40991 18.13 3.40991 22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <i class='bx bxs-user'></i>
                     <span>Minhas informações</span>
+                </a>
+                <a href="#" class="aside_button">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Meus agendamentos</span>
+                </a>
+                <a href="#" class="aside_button">
+                    <i class="fa-regular fa-square-plus"></i>
+                    <span>Cadastrar meu estabelecimento</span>
+                </a>
+                <?php
+                    if($user['user_type'] == 'user') {
+                        echo '
+                            <a href="#" class="aside_button">
+                                <i class="fa-solid fa-store"></i>
+                                <span>Meus estabelecimentos</span>
+                            </a>
+                        ';
+                    }
+                    if($user['user_type'] == 'user') {
+                        echo '
+                            <a href="#" class="aside_button">
+                                <i class="fa-solid fa-gears"></i>
+                                <span>Painel de administrador</span>
+                            </a>
+                        ';
+                    }
+                ?>
+                <a href="../controller/logout_controller.php" class="aside_button">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sair</span>
                 </a>
             </div>
 
@@ -81,45 +115,45 @@
                         }
                     }
                     else {
-                        echo '
-                            <div class="account">
-                                <div class="personal_info">
+                        echo "
+                            <div class='account'>
+                                <div class='personal_info'>
                                     <h2>Informações pessoais:</h2>
             
-                                    <div class="table">
-                                        <div class="table_row">
-                                                <img src="../public/images/profile_picture.svg" alt="">
-                                                <div class="table_column">
-                                                    <span class="table_strong">Nome:</span>
-                                                    <span class="table_strong">CPF:</span>
-                                                    <span class="table_strong">Estado:</span>
-                                                    <span class="table_strong">Cidade:</span>
-                                                </div>
-                                                <div class="table_column">
-                                                    <span>Nome Teste da Silva</span>
-                                                    <span>000.000.000-00</span>
-                                                    <span>Blablabla</span>
-                                                    <span>Pipipi</span>
-                                                </div>
+                                    <div class='table'>
+                                        <div class='table_row'>
+                                            <img src='../public/images/profile_picture.svg' alt=''>
+                                            <div class='table_column'>
+                                                <span class='table_strong'>Nome:</span>
+                                                <span class='table_strong'>CPF:</span>
+                                                <span class='table_strong'>Estado:</span>
+                                                <span class='table_strong'>Cidade:</span>
                                             </div>
+                                            <div class='table_column'>
+                                                <span>$user[name]</span>
+                                                <span>$user[cpf]</span>
+                                                <span>$user[state]</span>
+                                                <span>$user[city]</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 
-                                <div class="account_info">
+                                <div class='account_info'>
                                     <h2>Informações da conta:</h2>
-                                    <div class="table">
-                                        <div class="table_column">
-                                            <span class="table_strong">E-mail:</span>
-                                            <span class="table_strong">Data de criação:</span>
+                                    <div class='table'>
+                                        <div class='table_column'>
+                                            <span class='table_strong'>E-mail:</span>
+                                            <span class='table_strong'>Data de criação:</span>
                                         </div>
-                                        <div class="table_column">
-                                            <span>nometestedasilva@gmail.com</span>
-                                            <span>2024-11-11</span>
+                                        <div class='table_column'>
+                                            <span>$user[email]</span>
+                                            <span>$user[creation_date]</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        ';
+                        ";
                     }
                 ?>
             </div>

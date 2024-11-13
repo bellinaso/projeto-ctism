@@ -4,7 +4,9 @@
     @session_start();
 
     function is_logged() {
-        if(isset($_SESSION) && isset($_SESSION['login'])) {
+        if(isset($_SESSION)
+            && isset($_SESSION['login'])
+            && $_SESSION['login'] != null) {
             return true;
         }
         else {

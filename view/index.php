@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/public/css/components/red_button.css">
     <link rel="stylesheet" href="/public/css/components/header.css">
     <link rel="stylesheet" href="/public/css/index.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/0aaabe9207.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -34,8 +36,8 @@
                     </a>
                 </div>
                 <div class="account_pages">
-                    <a href="/view/myaccount.php">
-                        <img class="profile_picture" src="/public/images/profile_picture.svg" alt="">
+                    <a href="/view/myaccount.php" class="profile_picture">
+                        <i class="fa-regular fa-user"></i>
                     </a>
                     <div>
                         <?php
@@ -79,7 +81,7 @@
             </div>
         </div>
         <a href="#about_us" class="arrow_down">
-            <img src="/public/images/arrow_down.svg" alt="">
+            <i class="fa-solid fa-chevron-down"></i>
         </a>
     </header>
     <main>

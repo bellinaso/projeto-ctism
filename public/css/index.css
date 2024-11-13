@@ -89,11 +89,12 @@
     
     .arrow_down {
         position: absolute;
-        top: 54rem;
-        opacity: 0.9;
+        top: 53.5rem;
+        opacity: 0.75;
         & {
-            img {
-                width: 4.3rem;
+            i {
+                color: var(--white-1);
+                font-size: 3.5rem;
             }
         }
     }

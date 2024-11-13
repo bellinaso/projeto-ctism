@@ -8,19 +8,22 @@
     <link rel="stylesheet" href="/public/css/establishments.css">
     <link rel="stylesheet" href="/public/css/components/red_button.css">
     <link rel="stylesheet" href="/public/css/components/header.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://kit.fontawesome.com/0aaabe9207.js" crossorigin="anonymous"></script>
     <script src="../config.js"></script>
 </head>
 
 <body>
     <?php
-        require_once '../controller/map_controller.php';
+        include '../config.php';
+        // require_once '../controller/map_controller.php';
         require_once '../controller/establishments_controller.php';
         require_once '../controller/category_controller.php';
 
         
         $establishments = get_establishments();
         $categories = get_category();
-        $jsonLocations = json_encode(get_locations());
+        $jsonEstablishments = json_encode($establishments);
 
 
 
@@ -36,8 +39,8 @@
             </div>
             <div class="header_buttons">
                 <div class="account_pages">
-                    <a href="/view/myaccount.php">
-                        <img class="profile_picture" src="/public/images/profile_picture.svg" alt="">
+                    <a href="/view/myaccount.php" class="profile_picture">
+                        <i class="fa-regular fa-user"></i>
                     </a>
                     <div>
                         <?php
@@ -79,63 +82,83 @@
                     <img src="/public/images/search_icon.svg" alt="">
                 </button>
             </form>
-            <div class="categories_section">
-                <?php
-                    foreach($categories as $c) {
-                        echo '
-                            <a href="">
-                                <div class="category">
-                                    '.$c['name'].'
-                                </div>
-                            </a>
-                        ';
-                    }
-                ?>
+            <div class="categories_slider">
+                <button class="slider_button left"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="categories_section">
+                    <?php
+                        foreach($categories as $c) {
+                            echo '
+                                <a href="" class="category">
+                                    <span>
+                                        '.$c['name'].'
+                                    </span>
+                                </a>
+                            ';
+                        }
+                    ?>
+                </div>
+                <button class="slider_button right"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
+        </div>
         <div class="establishments_section">
-            <div class="establishments_map" id="map">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2380.7735064094045!2d-53.81585528907984!3d-29.70293949589504!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9503cb7a4a7f533f%3A0xe441de11746b83df!2sR.%20C%C3%A2ndida%20Vargas%2C%2030%20-%20Nossa%20Sra.%20Medianeira%2C%20Santa%20Maria%20-%20RS%2C%2097060-100!5e0!3m2!1spt-BR!2sbr!4v1730141735726!5m2!1spt-BR!2sbr" width="90%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
+            <div class="establishments_map" id="map"></div>
 
             <div class="establishments_list">
                 <?php
-                    foreach($establishments as $e) {
-                        echo '
-                        <div class="establishment">
-
-                            <div class="establishment_image">
-                                <a href="#">
-                                    <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                                </a>
-                            </div>
-
-                            <div class="establishment_info">
-                                <h3>
+                    if($establishments != null) {
+                        foreach($establishments as $e) {
+                            echo '
+                            <div class="establishment">
+    
+                                <div class="establishment_image">
                                     <a href="#">
-                                    '.$e['name'].'
+                                        <img src="/public/images/image_icon.svg" alt="" class="image_icon">
                                     </a>
-                                </h3>
-                                <p>
-                                    <span>Descrição: </span>
-                                    '.$e['description'].'
-                                </p>
-                                <p>
-                                    <span>Categoria: </span>
-                                    '.$e['category'].'
-                                </p>
-                                <p>
-                                    <span>Endereço: </span>
-                                    '.$e['address'].'
-                                </p>
+                                </div>
+    
+                                <div class="establishment_info">
+                                    <h3>
+                                        <a href="#">
+                                        '.$e['name'].'
+                                        </a>
+                                    </h3>
+                                    <p>
+                                        <span>Descrição: </span>
+                                        '.$e['description'].'
+                                    </p>
+                                    <p>
+                                        <span>Categoria: </span>
+                                        '.$e['category'].'
+                                    </p>
+                                    <p>
+                                        <span>Endereço: </span>
+                                        '.$e['address'].'
+                                    </p>
+                                </div>
+    
+                                <div class="open_establishment">
+                                    <a href="#">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                    </a>
+                                </div>
+    
                             </div>
-
-                            <div class="open_establishment">
-                                <a href="#">
-                                    <img src="/public//images/open_in_new_window.svg" alt="">
-                                </a>
+                            ';
+                        }
+                    }
+                    else {
+                        echo '
+                            <div class="not_found">
+                                <i class="fa-solid fa-circle-exclamation"></i>
+                                <h1>
+                                    Ops!
+                                </h1>
+                                <h2>
+                                    Parece que nenhum<br>
+                                    estabelecimento<br>
+                                    foi encontrado!
+                                </h2>
                             </div>
-
-                        </div>
                         ';
                     }
                 ?>
@@ -174,35 +197,31 @@
                 
                 search_button.style.marginLeft = "0";
             })
-            
-            
-            // Search bar hover
-            // search_bar.addEventListener("mouseenter", () => {
-            //     search_button.style.borderLeft = "1px solid var(--gray-3";
-            //     search_button.style.borderRadius = "2rem";
-            //     search_bar.style.marginRight = "1rem";
-            //     search_bar.style.borderRadius = "2rem";
-            // })
-            
-            // search_bar.addEventListener("mouseleave", () => {
-            //     search_button.style.borderLeft = "0px solid var(--gray-3";
-            //     search_button.style.borderTopLeftRadius = "0";
-            //     search_button.style.borderTopRightRadius = "1rem";
-            //     search_button.style.borderBottomLeftRadius = "0";
-            //     search_button.style.borderBottomRightRadius = "1rem";
-
-            //     search_bar.style.borderTopLeftRadius = "1rem";
-            //     search_bar.style.borderTopRightRadius = "0";
-            //     search_bar.style.borderBottomLeftRadius = "1rem";
-            //     search_bar.style.borderBottomRightRadius = "0";
-
-            //     search_bar.style.marginRight = "0";
-            // })
-            
         });
     </script>
 
-    <!-- <script>
+
+    <script>
+        const leftButton = document.querySelector('.slider_button.left');
+        const rightButton = document.querySelector('.slider_button.right');
+        const categoriesSection = document.querySelector('.categories_section');
+
+        // Função para rolar o slider
+        function scrollSlider(direction) {
+            const scrollAmount = 350; // Ajuste o valor para controlar a distância da rolagem
+            categoriesSection.scrollBy({
+                left: direction === 'right' ? scrollAmount : -scrollAmount,
+                behavior: 'smooth',
+            });
+        }
+
+        // Eventos de clique para as setas de navegação
+        leftButton.addEventListener('click', () => scrollSlider('left'));
+        rightButton.addEventListener('click', () => scrollSlider('right'));
+    </script>
+
+
+    <script>
         (g => {
             var h, a, k, p = "The Google Maps JavaScript API",
                 c = "google",
@@ -234,8 +253,9 @@
         });
     </script>
 
+
     <script>
-        const locations = <?= $jsonLocations ?>;
+        const locations = <?= $jsonEstablishments ?>;
 
         let map;
 
@@ -249,13 +269,18 @@
 
             const map = new Map(document.getElementById("map"), {
                 center: {
-                    lat: -29.7173,
-                    lng: -29.7173
+                    lat: -29.6870867,
+                    lng: -53.8169043
                 },
-                zoom: 4,
+                zoom: 13,
                 gestureHandling: "cooperative",
                 mapId: "4504f8b37365c3d0",
+
+                streetViewControl: false,
+                mapTypeControl: false,
+                fullscreenControl: false,
             });
+
             
             locations.forEach(location => {
                 const marker = new google.maps.Marker({
@@ -271,7 +296,7 @@
 
                 // Opcional: Adiciona uma janela de informação para cada marcador
                 const infoWindow = new google.maps.InfoWindow({
-                    content: `<h3>${location.title}</h3><p>${location.address}</p>`
+                    content: `<h3>${location.name}</h3><p>${location.address}</p>`
                 });
 
                 // Exibe a infoWindow ao clicar no marcador
@@ -282,7 +307,7 @@
         }
 
         window.onload = initMap;
-    </script> -->
+    </script>
 </body>
 
 </html>

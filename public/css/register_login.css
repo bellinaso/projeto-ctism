@@ -118,6 +118,10 @@
                     a:hover {
                         transform: scale(1.03);
                     }
+
+                    i {
+                        font-size: var(--font-xl);
+                    }
                 }
             }
 

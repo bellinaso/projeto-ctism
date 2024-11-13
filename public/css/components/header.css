@@ -102,10 +102,15 @@
 
         &  {
             .profile_picture {
-                width: 2.25rem;
-                align-self: flex-end;
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.7rem;
+                color: var(--gray-1);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                align-self: center;
                 background-color: var(--white-1);
-                border: 3px solid var(--white-1);
                 border-radius: 50%;
             }
     
