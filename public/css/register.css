@@ -87,12 +87,6 @@
             .go_back {
                 margin-top: 1.5rem;
             }
-
-            .go_back_image {
-                transform: translateY(-0.1rem);
-                min-width: 1.3rem;
-                max-width: 1.3rem;
-            }
         }
     }
 }

@@ -2,6 +2,33 @@
     @include '../config.php';
     include_once '../model/database_connect.php';
 
+    // TODO
+    // <form method="post" action="yourFileName.php">
+    //     <input type="text" name="studentname">
+    //     <input type="submit" value="click" name="submit">
+    // IDEA assign a name for the button
+    // </form>
+
+    // <?php
+        // function display() {
+        //     echo "hello ".$_POST["studentname"];
+        // }
+        // if(isset($_POST['submit'])) {
+        //     display();
+        // } 
+    // ? >
+
+    if($_POST) {
+
+        if(isset($_POST['register'])) {
+            echo 'deu certo';
+            // TODO: validação de dados
+        }
+        else if(isset($_POST['update'])) {
+            
+        }
+    }
+
     
     function establishment_register($cnpj, $user_id, $email, $name, $adress, $latitude, $longitude, $phone, $description, $creation_date) {
 

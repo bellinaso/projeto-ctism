@@ -22,13 +22,13 @@ CREATE TABLE establishments(
 	id INT auto_increment,
     cnpj VARCHAR(18) UNIQUE,
     user_id INT,
-    email varchar(100) UNIQUE,
     name VARCHAR(200),
+    email VARCHAR(100),
+    phone VARCHAR(14),
     adress VARCHAR(200),
     latitude DOUBLE,
     longitude DOUBLE,
-    phone VARCHAR(14) UNIQUE,
-    description TEXT,
+    description VARCHAR(200),
     creation_date DATE,
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id)
@@ -40,7 +40,7 @@ CREATE TABLE reserves(
     establishments_id INT,
     reserve_date DATE,
     service_date DATE,
-    reserve_status ENUM('pending', 'confirmed', 'cancelled', 'completed'),
+    reserve_status ENUM('pending', 'cancelled', 'completed'),
     PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
     FOREIGN KEY(establishments_id) REFERENCES establishments(id)
@@ -90,6 +90,20 @@ CREATE TABLE services_categories(
     FOREIGN KEY(category_id) REFERENCES categories(id)
 );
 
+CREATE TABLE states(
+    id INT auto_increment,
+    state VARCHAR(60),
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE cities(
+    id INT auto_increment,
+    city VARCHAR(60),
+    state_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(state_id) REFERENCES states(id)
+);
+
 -- DEBUG SECTION
 
 INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('12345678901', 'João Silva', 'joao.silva@email.com', '11987654321', 'São Paulo', 'São Paulo', 'senha123', 'user', '2024-10-01');
@@ -97,3 +111,8 @@ INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, cr
 INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('23456789012', 'Maria Oliveira', 'maria.oliveira@email.com', '21987654321', 'Rio de Janeiro', 'Rio de Janeiro', 'senha456', 'manager', '2024-10-02');
 
 INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('34567890123', 'Carlos Souza', 'carlos.souza@email.com', '31987654321', 'Minas Gerais', 'Belo Horizonte', 'senha789', 'admin', '2024-10-03');
+
+
+INSERT INTO states (state) VALUES ('Rio Grande do Sul');
+
+INSERT INTO cities (city, state_id) VALUES ('Santa Maria', (SELECT id FROM states WHERE state = 'Rio Grande do Sul'));

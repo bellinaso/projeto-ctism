@@ -26,81 +26,31 @@
         min-width: 100vw;
         min-height: 100vh;
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: start;
         align-items: center;
     }
 
     main {
         min-width: 50%;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 4rem;
     }
 
-    .benefits_section {
-        border-radius: 1rem;
-        width: 27.5rem;
+    .form_section {
+        margin-top: 10rem;
         display: flex;
         flex-direction: column;
-        align-items: center;
         justify-content: center;
-
-        & {
-            .benefits_image {
-                border-radius: 1rem 1rem 0rem 0rem;
-                align-self: center;
-                width: 100%;
-                background-color: #f5d8d6;
-            }
-
-            .benefits {
-                background-color: #f5f3f3;
-                width: 100%;
-                padding: 1rem 0rem 1rem 1rem;
-                border-radius: 0rem 0rem 1rem 1rem;
-            }
-    
-            p {
-                font-size: var(--font-md);
-                font-weight: bold;
-            }
-    
-            li {
-                margin-top: 1rem;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-            }
-    
-            .checkmark {
-                width: 1.7rem;
-            }
-        }
-
-        
-    }
-
-    header {
-        margin-bottom: 3rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
         align-items: center;
+        width: 56rem;
 
         & {
-            .logo_image {
-                min-width: var(--logo-size);
-                max-width: var(--logo-size);
-                transition: all ease-in-out 0.45s;
-            }
-        
-            .logo_image:hover {
-                transform: scale(1.02);
-            }
-
             .go_back {
+                align-self: flex-start;
                 
                 & {
                     a {
@@ -114,41 +64,33 @@
                         font-weight: bold;
                         transition: all ease-in-out 0.27s;
                     }
-
+        
                     a:hover {
                         transform: scale(1.03);
                     }
-
+        
                     i {
                         font-size: var(--font-xl);
                     }
                 }
             }
-        }
-    }
 
-    .form_section {
-        width: 27rem;
-
-        & {
-            .login_form {
-                width: 100%;
+            form {
                 display: flex;
                 flex-direction: column;
-                justify-content: start;
-                align-items: start;
-                
-                & {
-                    h1 {
-                        font-size: var(--font-xxl);
-                        margin-bottom: 1rem;
-                    }
-
-                    form {
-                        width: 100%;
-                    }
-                }
-
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+            
+            h1 {
+                align-self: flex-start;
+                font-size: var(--font-xxl);
+                margin-bottom: 1rem;
+            }
+            
+            h3 {
+                align-self: flex-start;
             }
 
             .form_error {
@@ -177,7 +119,7 @@
         margin-bottom: 1rem;
         
         & {
-            input, select {
+            input, select, textarea {
                 width: 100%;
                 height: 2.5rem;
                 padding: 1rem;
@@ -188,22 +130,43 @@
                 font-size: var(--font-sm);
                 transition: all ease-in-out 0.27s;
             }
+
+            textarea#description {
+                min-width: 100%;
+                max-width: 100%;
+                min-height: 5rem;
+                max-height: 5rem;
+            }
             
             select {
                 padding: 0 0 0 1rem;
             }
             
-            label {
+            label, span {
                 color: var(--gray-1);
                 font-size: var(--font-sm);
                 font-weight: bold;
             }
 
-            input:hover, select:hover {
+            label {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            #description_count {
+                color: var(--gray-2);
+            }
+
+            #limit_exceeded {
+                color: var(--red-1);
+            }
+
+            input:hover, select:hover, textarea:hover {
                 padding-left: 1.17rem;
             }
             
-            input:focus, select:focus {
+            input:focus, select:focus, textarea:focus {
                 outline: 1px solid var(--red-1);
                 padding-left: 1.17rem;
             }
@@ -220,32 +183,13 @@
     }
 
     .submit {
-        width: 100%;
+        width: 50%;
         height: 3rem;
 
         & {
             button {
                 border: none;
                 background: none;
-            }
-        }
-    }
-
-    .create_account {
-        display: flex;
-        flex-direction: row;
-        gap: .3rem;
-        margin-top: .5rem;
-        align-self: flex-end;
-        font-size: var(--font-sm);
-
-        & {
-            a {
-                transition: all ease-in-out 0.27s;
-            }
-    
-            a:hover {
-                transform: scale(1.03);
             }
         }
     }

@@ -66,6 +66,24 @@ class connect_database {
     }
 
 
+    public function consult_all($query) {
+        try {
+            if ($result = $this->mysqli->query($query)){
+                $this->rows_affected = $result->num_rows;
+                $result = $result->fetch_all(MYSQLI_ASSOC);
+                return $result;
+            }
+            else {
+                $this->rows_affected = 0;
+                return null;
+            }
+        }
+        catch (Exception $exc) {
+            $this->disconnect();
+        }
+    }
+
+
     public function convert_to_date($date) {
         $date = explode('-', $date);
         return ' ' . $date[2] . '-' . $date[1] . '-' . $date[0];

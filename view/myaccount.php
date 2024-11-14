@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookease - Estabelecimentos</title>
+    <title>Bookease - Minha conta</title>
     <link rel="stylesheet" href="/public/css/myaccount.css">
     <link rel="stylesheet" href="/public/css/components/red_button.css">
     <link rel="stylesheet" href="/public/css/components/header.css">
@@ -73,10 +73,6 @@
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Meus agendamentos</span>
                 </a>
-                <a href="#" class="aside_button">
-                    <i class="fa-regular fa-square-plus"></i>
-                    <span>Cadastrar meu estabelecimento</span>
-                </a>
                 <?php
                     if($user['user_type'] == 'user') {
                         echo '
@@ -95,6 +91,10 @@
                         ';
                     }
                 ?>
+                <a href="../view/establishment_register.php" class="aside_button">
+                    <i class="fa-regular fa-square-plus"></i>
+                    <span>Cadastrar meu estabelecimento</span>
+                </a>
                 <a href="../controller/logout_controller.php" class="aside_button">
                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
                     <span>Sair</span>

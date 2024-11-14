@@ -22,6 +22,35 @@ function cpf_format(input) {
     input.value = value;
 }
 
+
+function cnpj_format(input) {
+    let value = input.value;
+
+    // Remove qualquer caractere que não seja número
+    value = value.replace(/\D/g, "");
+
+    // Limita o CNPJ a 14 dígitos
+    value = value.substring(0, 14);
+
+    // Adiciona pontos, barra e hífen conforme necessário
+    if (value.length > 2 && value.length <= 5) {
+        value = value.replace(/(\d{2})(\d+)/, "$1.$2");
+    }
+    else if (value.length > 5 && value.length <= 8) {
+        value = value.replace(/(\d{2})(\d{3})(\d+)/, "$1.$2.$3");
+    }
+    else if (value.length > 8 && value.length <= 12) {
+        value = value.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, "$1.$2.$3/$4");
+    }
+    else if (value.length > 12) {
+        value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, "$1.$2.$3/$4-$5");
+    }
+
+    // Atualiza o valor do campo de entrada
+    input.value = value;
+}
+
+
 function phone_format(input) {
     let value = input.value;
 
@@ -45,6 +74,7 @@ function phone_format(input) {
 
     // 55 5 5555 5555
 }
+
 
 function password_validate(input) {
     let value = input.value;
@@ -73,6 +103,7 @@ function password_validate(input) {
     (has_symbol.test(value)) ? symbol.style.color = "var(--green-1)" : symbol.style.color = "var(--red-1)";
 
 }
+
 
 function password_confirm_validate(input) {
     let password = document.getElementById("password").value;
