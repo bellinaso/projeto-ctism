@@ -120,7 +120,81 @@
                     }
                 }
             }
+
+            .establishments {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+            }
             
+            .establishments_list {
+                height: 100%;
+                overflow-y: scroll;
+            }
+            
+            .establishment {
+                width: 95%;
+                display: flex;
+                flex-direction: row;
+                justify-content: start;
+                align-items: center;
+                gap: 1rem;
+                padding: .7rem;
+                text-align: justify;
+                background-color: var(--white-3);
+                border: 1px solid var(--gray-3);
+                border-radius: 1rem;
+                
+                & {
+                    img {
+                        border-radius: 0;
+                    }
+                    
+                    a {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        transition: all ease-in-out 0.27s;
+                    }
+                    
+                    a:hover {
+                        transform: scale(1.007);
+                    }
+                    
+                    .image_icon {
+                        width: 6rem;
+                    }
+                    
+                    span {
+                        font-weight: bold;
+                        color: var(--red-2);
+                    }
+                    
+                    .establishment_info {
+                        width: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: start;
+                        gap: .3rem;
+
+                        font-size: var(--font-sm);
+                    }
+
+                    .open_establishment {
+                        justify-self: end;
+                        align-self: flex-start;
+
+                        & {
+                            i {
+                                align-self: flex-start;
+                                justify-self: flex-start;
+                                font-size: 1.17rem;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

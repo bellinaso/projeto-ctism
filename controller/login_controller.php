@@ -13,7 +13,7 @@
             @session_start();
 
             // print_r($result);
-            $_SESSION['login'] = $result['id'];
+            $_SESSION['login'] = $result['email'];
             redirect_to($_SESSION['last_page']);
         }
         else {

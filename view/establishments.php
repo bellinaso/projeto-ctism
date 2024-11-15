@@ -16,13 +16,12 @@
 <body>
     <?php
         include '../config.php';
-        // require_once '../controller/map_controller.php';
         require_once '../controller/establishments_controller.php';
-        require_once '../controller/category_controller.php';
+        require_once '../controller/categories_controller.php';
 
         
         $establishments = get_establishments();
-        $categories = get_category();
+        $categories = get_subcategory();
         $jsonEstablishments = json_encode($establishments);
 
 
@@ -111,7 +110,7 @@
                             <div class="establishment">
     
                                 <div class="establishment_image">
-                                    <a href="#">
+                                    <a href="/view/establishment_page.php">
                                         <img src="/public/images/image_icon.svg" alt="" class="image_icon">
                                     </a>
                                 </div>
@@ -128,7 +127,11 @@
                                     </p>
                                     <p>
                                         <span>Categoria: </span>
-                                        '.$e['category'].'
+                                        '.$e['category_name'].'
+                                    </p>
+                                    <p>
+                                        <span>Subcategoria: </span>
+                                        '.$e['subcategory_name'].'
                                     </p>
                                     <p>
                                         <span>Endereço: </span>
@@ -137,7 +140,7 @@
                                 </div>
     
                                 <div class="open_establishment">
-                                    <a href="#">
+                                    <a href="/view/establishment_page.php">
                                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                     </a>
                                 </div>

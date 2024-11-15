@@ -33,7 +33,12 @@
 
         $cities = $con->consult_all("SELECT * FROM cities");
 
+        $categories = $con->consult_all("SELECT * FROM categories");
+
+        $subcategories = $con->consult_all("SELECT * FROM subcategories");
+
         $jsonCities = json_encode($cities);
+        $jsonSubcategories = json_encode($subcategories);
     ?>
     <!-- https://boxicons.com/ -->
     <!-- https://fontawesome.com/ -->
@@ -73,6 +78,73 @@
                 </a>
             </div>
             <h1>Cadastre seu negócio!</h1>
+            <?php
+                if (isset($_REQUEST)) {
+                    
+                    if(isset($_REQUEST['code'])) {
+                        
+                        switch ($_REQUEST['code']) {
+                            case 422:
+                                echo '
+                                <div class="form_error">
+                                    <span>Algo deu errado!</span> Verifique se todos os campos foram corrigidos corretamente e tente novamente.
+                                </div>
+                                ';
+                                break;
+                        }
+                    }
+                    if(isset($_REQUEST['error_at'])) {
+
+                        switch($_REQUEST['error_at']) {
+                            case 'cnpj_validation':
+                                echo '
+                                <span class="error_at">CNPJ inválido!</span>
+                                ';
+                                break;
+                            case 'email_validation':
+                                echo '
+                                <span class="error_at">E-mail inválido!</span>
+                                ';
+                                break;
+                            case 'phone_validation':
+                                echo '
+                                <span class="error_at">Número de telefone inválido!</span>
+                                ';
+                                break;
+                            case 'invalid_state':
+                                echo '
+                                <span class="error_at">Endereço inválido! Estado inexistente.</span>
+                                ';
+                                break;
+                            case 'invalid_city':
+                                echo '
+                                <span class="error_at">Endereço inválido! Cidade inexistente.</span>
+                                ';
+                                break;
+                            case 'invalid_description':
+                                echo '
+                                <span class="error_at">Descrição inválida! Limite de caracteres excedido.</span>
+                                ';
+                                break;
+                            case 'invalid_category':
+                                echo '
+                                <span class="error_at">Categoria inválida! Categoria inexistente.</span>
+                                ';
+                                break;
+                            case 'invalid_subcategory':
+                                echo '
+                                <span class="error_at">Subategoria inválida! Subategoria inexistente.</span>
+                                ';
+                                break;
+                            case 'duplicated_cnpj':
+                                echo '
+                                <span class="error_at">Subategoria inválida! Subategoria inexistente.</span>
+                                ';
+                                break;
+                        }
+                    }
+                }
+            ?>
             <form method="post" action="/controller/establishments_controller.php">
 
                 <!-- 
@@ -80,6 +152,7 @@
                     - LAT E LNG
                     - CREATION DATE
                 -->
+                <h3>Informações</h3>
                 <div class="form_input_group">
                     <div class="form_input">
                         <label for="name">
@@ -103,6 +176,7 @@
                         </label>
                         <input type="email" name="email" id="email" placeholder="Insira o endereço e-mail do estabelecimento">
                     </div>
+
                     <div class="form_input">
                         <label for="phone">
                             Telefone
@@ -112,7 +186,7 @@
                 </div>
 
                 <!-- - ENDEREÇO (Rua, Número, Bairro, Cidade, Estado, País) -->
-                <h3>Endereço do estabelecimento</h3>
+                <h3>Endereço</h3>
                 <div class="form_input_group">
                     <div class="form_input">
                         <label for="state">
@@ -122,11 +196,12 @@
                             <option value="" disabled selected>Selecione o estado</option>
                             <?php
                                 foreach($states as $s) {
-                                    echo '<option value='.$s['id'].'>'.$s['state'].'</option>';
+                                    echo '<option value='.$s['id'].'>'.$s['name'].'</option>';
                                 }
                             ?>
                         </select>
                     </div>
+
                     <div class="form_input">
                         <label for="city">
                             Cidade
@@ -145,12 +220,14 @@
                         </label>
                         <input type="text" name="district" id="district" placeholder="Insira o bairro">
                     </div>
+
                     <div class="form_input">
                         <label for="street">
                             Rua
                         </label>
                         <input type="text" name="street" id="street" placeholder="Insira a rua">
                     </div>
+
                     <div class="form_input">
                         <label for="establishment_number">
                             Número
@@ -159,15 +236,40 @@
                     </div>
                 </div>
 
-                <div class="form_input">
-                    <label for="description">
-                        <span>Descrição</span>
-                        <span id="description_count">0/200</span>
-                    </label>
-                    <span id="limit_exceeded"></span>
-                    <!-- <input type="text" name="description" id="description" placeholder="Insira uma breve descrição do seu estabelecimento"> -->
-                    <textarea name="description" id="description" placeholder="Escreva uma breve descrição do seu estabelecimento" ></textarea>
+                <h3>Informações adicionais</h3>
+                <div class="form_input_group">
+                    <div class="form_input">
+                        <label for="category">
+                            Categoria
+                        </label>
+                        <select name="category" id="category">
+                            <option value="" disabled selected>Selecione uma categoria</option>
+                            <?php
+                                foreach($categories as $c) {
+                                    echo '<option value='.$c['id'].'>'.$c['name'].'</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+
+                    <div class="form_input">
+                        <label for="subcategory">
+                            Categoria
+                        </label>
+                        <select name="subcategory" id="subcategory">
+                            <option value="" disabled selected>Selecione uma subcategoria</option>
+                        </select>
+                    </div>
                 </div>
+
+                <div class="form_input">
+                        <label for="description">
+                            <span>Descrição</span>
+                            <span id="description_count">0/200</span>
+                        </label>
+                        <span id="limit_exceeded"></span>
+                        <textarea name="description" id="description" placeholder="Escreva uma breve descrição do seu estabelecimento" ></textarea>
+                    </div>
 
                 <!-- https://blog.logrocket.com/creating-custom-select-dropdown-css/ -->
 
@@ -199,7 +301,7 @@
             filtered_cities.forEach(city => {
                 const option = document.createElement("option");
                 option.value = city.id;
-                option.textContent = city.city;
+                option.textContent = city.name;
                 city_select.appendChild(option);
             });
         }
@@ -208,6 +310,34 @@
         state_select.addEventListener("change", () => {
             const selected_state_id = state_select.value;
             update_city_options(selected_state_id);
+        });
+    </script>
+
+    <script>
+        const subcategories = <?= $jsonSubcategories; ?>;
+        console.log(subcategories);
+
+        const category_select = document.getElementById("category");
+        const subcategory_select = document.getElementById("subcategory");
+
+        function update_subcategory_options(category_id) {
+            // Limpa as opções anteriores do select de cidades
+            subcategory_select.innerHTML = '<option value="" disabled selected>Selecione uma subcategoria</option>';
+
+            const filtered_subcategory = subcategories.filter(subcategory => subcategory.category_id == category_id);
+
+            filtered_subcategory.forEach(subcategory => {
+                const option = document.createElement("option");
+                option.value = subcategory.id;
+                option.textContent = subcategory.name;
+                subcategory_select.appendChild(option);
+            });
+        }
+
+        // Escuta a mudança no select de estados
+        category_select.addEventListener("change", () => {
+            const selected_category_id = category_select.value;
+            update_subcategory_options(selected_category_id);
         });
     </script>
 

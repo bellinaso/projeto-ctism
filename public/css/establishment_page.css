@@ -1,0 +1,77 @@
+@import url('global.css');
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+    
+} */
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    header {
+        height: 25rem;
+        position: relative;
+        background-color: #000;
+        background-image: url('../images/category_images/Gastronomia.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center 175%;
+        background-size: cover;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .establishment {
+        color: var(--gray-1);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        width: 72rem;
+        border-radius: 1rem;
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.4);
+        background-color: var(--white-3);
+        
+        & {
+            .establishment_header {
+                padding: 2rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: start;
+                border-bottom: 1px solid var(--gray-1);
+            }
+
+            img {
+                background-color: var(--white-1);
+                border-radius: 1rem;
+                width: 9rem;
+                box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+            }
+            
+            .establishment_content {
+                padding: 2rem;
+                display: flex;
+                flex-direction: column;
+            }
+        }
+    }
+}

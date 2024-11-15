@@ -58,7 +58,7 @@
                         switch($_REQUEST['error_at']) {
                             case 'email_validation':
                                 echo '
-                                <span class="error_at">O email inserido é inválido!</span>
+                                <span class="error_at"E-mail inválido!</span>
                                 ';
                                 break;
 

@@ -18,6 +18,20 @@ CREATE TABLE users(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE categories(
+    id INT auto_increment,
+    name VARCHAR(100),
+    PRIMARY KEY(id)
+);
+
+CREATE TABLE subcategories(
+    id INT auto_increment,
+    name VARCHAR(100),
+    category_id INT,
+    PRIMARY KEY(id),
+    FOREIGN KEY(category_id) REFERENCES categories(id)
+);
+
 CREATE TABLE establishments(
 	id INT auto_increment,
     cnpj VARCHAR(18) UNIQUE,
@@ -25,25 +39,17 @@ CREATE TABLE establishments(
     name VARCHAR(200),
     email VARCHAR(100),
     phone VARCHAR(14),
-    adress VARCHAR(200),
+    address VARCHAR(200),
     latitude DOUBLE,
     longitude DOUBLE,
     description VARCHAR(200),
+    category_id INT,
+    subcategory_id INT,
     creation_date DATE,
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES users(id)
-);
-
-CREATE TABLE reserves(
-    id INT auto_increment,
-    user_id INT,
-    establishments_id INT,
-    reserve_date DATE,
-    service_date DATE,
-    reserve_status ENUM('pending', 'cancelled', 'completed'),
-    PRIMARY KEY(id),
     FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(establishments_id) REFERENCES establishments(id)
+    FOREIGN KEY(category_id) REFERENCES categories(id),
+    FOREIGN KEY(subcategory_id) REFERENCES subcategories(id)
 );
 
 CREATE TABLE services(
@@ -54,6 +60,20 @@ CREATE TABLE services(
     creation_date DATE,
     PRIMARY KEY(id),
     FOREIGN KEY(establishments_id) REFERENCES establishments(id)
+);
+
+CREATE TABLE reserves(
+    id INT auto_increment,
+    user_id INT,
+    establishments_id INT,
+    service_id INT,
+    reserve_date DATE,
+    service_date DATE,
+    reserve_status ENUM('pending', 'cancelled', 'completed'),
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(establishments_id) REFERENCES establishments(id),
+    FOREIGN KEY(service_id) REFERENCES services(id)
 );
 
 CREATE TABLE reviews(
@@ -76,29 +96,15 @@ CREATE TABLE availability(
     FOREIGN KEY(service_id) REFERENCES services(id)
 );
 
-CREATE TABLE categories(
-    id INT auto_increment,
-    name VARCHAR(100),
-    description VARCHAR(100),
-    PRIMARY KEY(id)
-);
-
-CREATE TABLE services_categories(
-    service_id INT,
-    category_id INT,
-    FOREIGN KEY(service_id) REFERENCES services(id),
-    FOREIGN KEY(category_id) REFERENCES categories(id)
-);
-
 CREATE TABLE states(
     id INT auto_increment,
-    state VARCHAR(60),
+    name VARCHAR(60),
     PRIMARY KEY(id)
 );
 
 CREATE TABLE cities(
     id INT auto_increment,
-    city VARCHAR(60),
+    name VARCHAR(60),
     state_id INT,
     PRIMARY KEY(id),
     FOREIGN KEY(state_id) REFERENCES states(id)
@@ -113,6 +119,36 @@ INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, cr
 INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('34567890123', 'Carlos Souza', 'carlos.souza@email.com', '31987654321', 'Minas Gerais', 'Belo Horizonte', 'senha789', 'admin', '2024-10-03');
 
 
-INSERT INTO states (state) VALUES ('Rio Grande do Sul');
+INSERT INTO states (name) VALUES ('Rio Grande do Sul');
 
-INSERT INTO cities (city, state_id) VALUES ('Santa Maria', (SELECT id FROM states WHERE state = 'Rio Grande do Sul'));
+INSERT INTO cities (name, state_id) VALUES ('Santa Maria', (SELECT id FROM states WHERE name = 'Rio Grande do Sul'));
+
+
+INSERT INTO categories (name) VALUES
+('Estilo de Vida e Bem-Estar'),
+('Serviços e Manutenção'),
+('Educação e Aprendizado'),
+('Alimentação e Gastronomia'),
+('Lazer e Entretenimento');
+
+
+INSERT INTO subcategories (name, category_id) VALUES
+-- Estilo de Vida e Bem-Estar
+('Saúde e Bem-Estar', (SELECT id FROM categories WHERE name = 'Estilo de Vida e Bem-Estar')),
+('Beleza e Estética', (SELECT id FROM categories WHERE name = 'Estilo de Vida e Bem-Estar')),
+('Esportes e Atividades Físicas', (SELECT id FROM categories WHERE name = 'Estilo de Vida e Bem-Estar')),
+('Pets e Animais', (SELECT id FROM categories WHERE name = 'Estilo de Vida e Bem-Estar')),
+
+-- Serviços e Manutenção
+('Mecânica e Manutenção Automotiva', (SELECT id FROM categories WHERE name = 'Serviços e Manutenção')),
+('Tecnologia e Informática', (SELECT id FROM categories WHERE name = 'Serviços e Manutenção')),
+
+-- Educação e Aprendizado
+('Educação e Aulas Particulares', (SELECT id FROM categories WHERE name = 'Educação e Aprendizado')),
+('Turismo e Viagens', (SELECT id FROM categories WHERE name = 'Educação e Aprendizado')),
+
+-- Alimentação e Gastronomia
+('Gastronomia', (SELECT id FROM categories WHERE name = 'Alimentação e Gastronomia')),
+
+-- Lazer e Entretenimento
+('Eventos e Festas', (SELECT id FROM categories WHERE name = 'Lazer e Entretenimento'));

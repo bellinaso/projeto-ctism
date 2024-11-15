@@ -20,15 +20,17 @@
             redirect_to('register.php?code=422&error_at=empty_input');
         }
         else {
+            // User information
             $name = ucwords(trim($_POST['name']));
             $email = strtolower(trim($_POST['email']));
             $phone = preg_replace('/[^0-9]/', '', trim($_POST['phone']));
             $cpf = preg_replace('/[^0-9]/', '', trim($_POST['cpf']));
-            // $cpf = $_POST['cpf'];
 
+            // Password
             $password = $_POST['password'];
             $password_confirm = $_POST['password_confirm'];
 
+            // Location
             $state = $_POST['state'];
             $city = $_POST['city'];
         }

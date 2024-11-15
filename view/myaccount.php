@@ -18,10 +18,13 @@
         require_once '../controller/authentication_controller.php';
         require_once '../controller/redirect_controller.php';
 
+        require_once '../controller/establishments_controller.php';
+        require_once '../controller/categories_controller.php';
+
         include_once '../model/database_connect.php';
 
+        @session_start();
         if(is_logged() == false) {
-            @session_start();
             $_SESSION['last_page'] = 'myaccount.php';
 
             redirect_to('login.php');
@@ -30,8 +33,9 @@
         $con = new connect_database();
         $con->connect();
 
-        $query = "SELECT * FROM users WHERE id = $_SESSION[login];";
+        $query = "SELECT * FROM users WHERE email = '$_SESSION[login]';";
         $user = $con->consult($query);
+        
     ?>
     <!-- https://boxicons.com/ -->
     <!-- https://fontawesome.com/ -->
@@ -74,15 +78,17 @@
                     <span>Meus agendamentos</span>
                 </a>
                 <?php
-                    if($user['user_type'] == 'user') {
+                    // if($user['user_type'] == 'manager') {
+                    if($user['user_type'] != null) {
                         echo '
-                            <a href="#" class="aside_button">
+                            <a href="?info=my_establishments" class="aside_button">
                                 <i class="fa-solid fa-store"></i>
                                 <span>Meus estabelecimentos</span>
                             </a>
                         ';
                     }
-                    if($user['user_type'] == 'user') {
+                    // if($user['user_type'] == 'user') {
+                    if($user['user_type'] != null) {
                         echo '
                             <a href="#" class="aside_button">
                                 <i class="fa-solid fa-gears"></i>
@@ -105,8 +111,75 @@
                 <?php
                     if(isset($_REQUEST) && isset($_REQUEST['info'])) {
                         switch ($_REQUEST['info']) {
-                            case 'value':
-                                # code...
+                            case 'my_establishments':
+                                echo '
+                                    <div class="establishments">
+                                        <h2>Meus estabelecimentos</h2>
+                                        <div class="establishments_list">
+                                    ';
+                                
+                                $establishments = get_my_establishments();
+                                if($establishments != null) {
+                                    foreach($establishments as $e) {
+                                        echo '
+                                            <div class="establishment">
+                                                <div class="establishment_image">
+                                                    <a href="/view/establishment_page.php">
+                                                        <img src="/public/images/image_icon.svg" alt="" class="image_icon">
+                                                    </a>
+                                                </div>
+                                                <div class="establishment_info">
+                                                    <h3>
+                                                        <a href="#">
+                                                        '.$e['name'].'
+                                                        </a>
+                                                    </h3>
+                                                    <p>
+                                                        <span>Descrição: </span>
+                                                        '.$e['description'].'
+                                                    </p>
+                                                    <p>
+                                                        <span>Categoria: </span>
+                                                        '.$e['category_name'].'
+                                                    </p>
+                                                    <p>
+                                                        <span>Subcategoria: </span>
+                                                        '.$e['subcategory_name'].'
+                                                    </p>
+                                                    <p>
+                                                        <span>Endereço: </span>
+                                                        '.$e['address'].'
+                                                    </p>
+                                                </div>
+                                                <div class="open_establishment">
+                                                    <a href="/view/establishment_page.php">
+                                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        ';
+                                    }
+                                }
+                                else {
+                                    echo '
+                                        <div class="not_found">
+                                            <i class="fa-solid fa-circle-exclamation"></i>
+                                            <h1>
+                                                Ops!
+                                            </h1>
+                                            <h2>
+                                                Parece que você não<br>
+                                                possui nenhum<br>
+                                                estabelecimento<br>
+                                                Cadastrado!
+                                            </h2>
+                                        </div>
+                                    ';
+                                }
+                                echo'
+                                        </div>
+                                    </div>
+                                ';
                                 break;
                             
                             default:
