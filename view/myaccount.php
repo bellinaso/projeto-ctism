@@ -130,7 +130,7 @@
                                                 </div>
                                                 <div class="establishment_info">
                                                     <h3>
-                                                        <a href="#">
+                                                        <a href="/view/establishment_page.php?id='.$e['id'].'">
                                                         '.$e['name'].'
                                                         </a>
                                                     </h3>
@@ -152,7 +152,7 @@
                                                     </p>
                                                 </div>
                                                 <div class="open_establishment">
-                                                    <a href="/view/establishment_page.php">
+                                                    <a href="/view/establishment_page.php?id='.$e['id'].'">
                                                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                                     </a>
                                                 </div>

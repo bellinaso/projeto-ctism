@@ -24,7 +24,7 @@ a {
     --gray-2: #4b6268;
     --gray-3: #d4d4d4;
     --white-1: #FFF;
-    --white-2: #eef4f6;
+    --white-2: #f0f3f4;
     --white-3: #f5f3f3;
     --green-1: #5cb85c;
 
@@ -38,8 +38,8 @@ a {
 }
 
 .not_found {
-    width: 100%;
-    height: 100%;
+    width: 20rem;
+    height: 20rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -51,10 +51,10 @@ a {
     & {
         i {
             z-index: -1;
-            color: var(--white-3);
+            color: #bfbfbf;
             position: absolute;
-            top: 12rem;
-            left: 32%;
+            top: 15%;
+            left: 3%;
             font-size: 8rem;
         }
     }

@@ -1,0 +1,29 @@
+.green_button {
+    background: #3fda0b;
+    background: linear-gradient(45deg, #3fda0b, #38c20a, #38c20a, #3fda0b);
+    background-position: 100%;
+    background-size: 300%;
+    transition: all ease-in-out 0.85s;
+    border-radius: 0.5rem;
+    
+    & a, button {
+        background: none;
+        border: none;
+        color: var(--white-1);
+        width: 100%;
+        height: 100%;
+        display: flex;
+        font-weight: bold;
+        justify-content: center;
+        align-items: center;
+        transition: all ease-in-out 0.27s;
+    }
+}
+
+.green_button:hover {
+    background-position: 0%;
+
+    & a, button {
+        transform: scale(1.03);
+    }
+}

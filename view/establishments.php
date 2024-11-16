@@ -110,14 +110,14 @@
                             <div class="establishment">
     
                                 <div class="establishment_image">
-                                    <a href="/view/establishment_page.php">
+                                    <a href="/view/establishment_page.php?id='.$e['id'].'">
                                         <img src="/public/images/image_icon.svg" alt="" class="image_icon">
                                     </a>
                                 </div>
     
                                 <div class="establishment_info">
                                     <h3>
-                                        <a href="#">
+                                        <a href="/view/establishment_page.php?id='.$e['id'].'">
                                         '.$e['name'].'
                                         </a>
                                     </h3>
@@ -140,7 +140,7 @@
                                 </div>
     
                                 <div class="open_establishment">
-                                    <a href="/view/establishment_page.php">
+                                    <a href="/view/establishment_page.php?id='.$e['id'].'">
                                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                                     </a>
                                 </div>

@@ -181,10 +181,12 @@
         $con->connect();
 
         // $query = "SELECT * FROM establishments;";
-        $query = "SELECT *, categories.name AS category_name, subcategories.name subcategory_name
-                FROM establishments
-                JOIN categories ON establishments.category_id = categories.id
-                LEFT JOIN subcategories ON establishments.subcategory_id = subcategories.id;";
+        $query = "SELECT establishments.*, 
+                    categories.name AS category_name, 
+                    subcategories.name AS subcategory_name
+                    FROM establishments
+                    JOIN categories ON establishments.category_id = categories.id
+                    LEFT JOIN subcategories ON establishments.subcategory_id = subcategories.id;";
                 
         $result = $con->consult_all($query);
 
@@ -196,18 +198,46 @@
         }
     }
 
+
+    function get_one_establishment($id) {
+        $con = new connect_database();
+        $con->connect();
+
+        // $query = "SELECT * FROM establishments;";
+        $query = "SELECT establishments.*, 
+                    categories.name AS category_name, 
+                    subcategories.name AS subcategory_name
+                    FROM establishments
+                    JOIN categories ON establishments.category_id = categories.id
+                    LEFT JOIN subcategories ON establishments.subcategory_id = subcategories.id
+                    WHERE establishments.id = $id;";
+                
+        $result = $con->consult($query);
+
+        if($result != null) {
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+
     function get_my_establishments() {
         $con = new connect_database();
         $con->connect();
 
+        @session_start();
         $user_id = $con->consult("SELECT id FROM users where email = '$_SESSION[login]'");
 
         // $query = "SELECT * FROM establishments;";
-        $query = "SELECT *, categories.name AS category_name, subcategories.name subcategory_name
-                FROM establishments
-                JOIN categories ON establishments.category_id = categories.id
-                LEFT JOIN subcategories ON establishments.subcategory_id = subcategories.id
-                WHERE user_id = $user_id[id];";
+        $query = "SELECT establishments.*, 
+                    categories.name AS category_name, 
+                    subcategories.name AS subcategory_name
+                    FROM establishments
+                    JOIN categories ON establishments.category_id = categories.id
+                    LEFT JOIN subcategories ON establishments.subcategory_id = subcategories.id
+                WHERE establishments.user_id = $user_id[id];";
                 
         $result = $con->consult_all($query);
 

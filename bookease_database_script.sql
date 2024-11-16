@@ -76,6 +76,16 @@ CREATE TABLE reserves(
     FOREIGN KEY(service_id) REFERENCES services(id)
 );
 
+CREATE TABLE availability(
+    id INT auto_increment,
+    service_id INT,
+    week_days ENUM('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
+    start_time TIME,
+    -- finish_time TIME,
+    PRIMARY KEY(id),
+    FOREIGN KEY(service_id) REFERENCES services(id)
+);
+
 CREATE TABLE reviews(
     id INT auto_increment,
     reserve_id INT,
@@ -84,16 +94,6 @@ CREATE TABLE reviews(
     review_date DATE,
     PRIMARY KEY(id),
     FOREIGN KEY(reserve_id) REFERENCES reserves(id)
-);
-
-CREATE TABLE availability(
-    id INT auto_increment,
-    service_id INT,
-    week_days ENUM('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
-    start_time TIME,
-    finish_time TIME,
-    PRIMARY KEY(id),
-    FOREIGN KEY(service_id) REFERENCES services(id)
 );
 
 CREATE TABLE states(
