@@ -189,80 +189,201 @@
         }
 
         .largeCard .rounded_card_image {
-            width: 8rem;
+            width: 8    rem;
             border-radius: 50%;
             box-shadow: 0px 5px 15px 0px #140d0d;
         }
 
     }
+
+    
+
+    .footer {
+        background-color: var(--gray-1);
+        color: var(--white-1);
+        padding: 20px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+
+    .footer_top {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .footer_section {
+        max-width: 250px;
+    }
+
+    .footer_section h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        color: #bd3528;
+    }
+
+    .footer_section p,
+    .footer_section ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .footer_section ul li {
+        margin: 5px 0;
+    }
+
+    .footer_section ul li a {
+        color: #bd3528;
+        text-decoration: none;
+    }
+
+    .footer_section ul li a:hover {
+        text-decoration: underline;
+    }
+
+    .footer_socials a {
+        color: #fff;
+        margin: 0 10px;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+    .footer_socials a:hover {
+        color: #bd3528;
+    }
+
+    .footer_bottom {
+        margin-top: 10px;
+        font-size: 0.8rem;
+        color: #bbb;
+    }
+
+
+ /* Animação de fade-in */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-        .h1prim {
-            text-align: end;
-        }
+/* Animação para a divisória */
+@keyframes growDivider {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
 
-        .footer {
-            background-color: #333;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-        }
+/* Divisória com animação */
+.divider {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, #bd3528, #ff7043, #bd3528); /* Gradiente de cores */
+    margin: 2rem 0;
+    animation: growDivider 1s ease-out;
+}
 
-        .footer_top {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
+/* Animações no texto e imagem */
+.final {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+    padding: 2rem;
+    background-color: #f4f4f4;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    animation: fadeIn 1s forwards; /* Animação de fade-in */
+}
 
-        .footer_section {
-            max-width: 250px;
-        }
+.textp, .image-final {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
 
-        .footer_section h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: #ff5722;
-        }
+.textp {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
 
-        .footer_section p,
-        .footer_section ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
+.text-card {
+    padding: 1.5rem;
+    background-color: var(--white-2);
+    border-radius: 1rem;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
 
-        .footer_section ul li {
-            margin: 5px 0;
-        }
+.image-final {
+    flex: 1;
+    text-align: center;
+    animation: fadeIn 2s forwards; /* Animação das imagens */
+}
 
-        .footer_section ul li a {
-            color: #ff5722;
-            text-decoration: none;
-        }
+.image-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
 
-        .footer_section ul li a:hover {
-            text-decoration: underline;
-        }
+.image-card {
+    width: 15rem;
+    height: 15rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #0C1618;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efeito de hover */
+    text-align: center; /* Garantir que o nome fique centralizado */
+}
 
-        .footer_socials a {
-            color: #fff;
-            margin: 0 10px;
-            font-size: 1.5rem;
-            text-decoration: none;
-        }
+.image-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-        .footer_socials a:hover {
-            color: #ff5722;
-        }
+.image-card p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #333;
+    text-align: center;
+}
 
-        .footer_bottom {
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: #bbb;
-        }
+/* Efeito de hover nas imagens */
+.image-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+}
 
+/* Efeito de hover no texto */
+.text-card:hover {
+    background-color:#849296;
+    color: white;
+    transition: all ease-in-out .3s;
+}
 
+/* Animação suave de textos e botões quando aparecerem */
+.subtitle {
+    font-size: 1.5rem;
+    color: #bd3528;
+    margin-bottom: 1rem;
+    animation: fadeIn 2s forwards;
+}
+.rounded-image
+{
+    color: #0C1618;
+}    
 }

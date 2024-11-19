@@ -95,7 +95,7 @@
                 <p>Bookease é uma plataforma intuitiva e inovadora que conecta clientes a diversos estabelecimentos, oferecendo soluções práticas e eficientes para agendamentos online. Com foco na simplificação do dia a dia, permite aos usuários reservar horários em serviços variados, como salões, clínicas, academias e outros, eliminando complicações e otimizando o tempo. Além de facilitar a organização de compromissos, o sistema melhora a experiência do cliente com uma interface amigável e personalizável, que atende tanto às necessidades dos usuários quanto dos estabelecimentos parceiros. Ao automatizar processos e modernizar o gerenciamento de reservas, o Bookease transforma a interação com serviços essenciais, promovendo conveniência e qualidade em cada etapa.</p>
             </div>
         </div>
-
+        
         <!-- Nossa missão -->
         <div class="h1sec">
             <h1>Nossa missão</h1>
@@ -118,24 +118,42 @@
                 <p>Trazer inovação para transformar a experiência de agendamento, com praticidade e segurança.</p>
             </div>
         </div>
+     
+       
 
-        <!-- Fundadores -->
-        <div class="about_us">
-            <h1>Fundadores</h1>
-            <div class="card_section">
-                <div class="card">
-                    <img src="/public/images/category_images/arthur.jpg" alt="" class="rounded_card_image">
-                    <h3>Arthur Bernardo Paul</h3>
-                    <p>Estudante do Colégio Técnico Industrial de Santa Maria (CTISM)</p>
-                </div>
-                <div class="card">
-                    <img src="/public/images/category_images/bruno.jpg" alt="Foto de Bruno Bellinaso Brasil" class="rounded_card_image">
-                    <h3>Bruno Bellinaso Brasil</h3>
-                    <p>Estudante do Colégio Técnico Industrial de Santa Maria (CTISM)</p>
-                </div>
+        <div class="divider"></div> <!-- Divisória com animação -->
+
+<div class="final">
+    <!-- Texto explicativo -->
+    <div class="textp">
+        <div class="text-card">
+            <h2 class="subtitle">Sobre nós</h2>
+            <p>
+            Somos uma dupla que desenvolveu esse sistema para facilitar a sua vida. Sabemos que, como desenvolvedores, criamos algo novo que vai ajudar você a organizar suas tarefas de forma prática e eficiente. Nosso objetivo é proporcionar uma experiência simples e intuitiva, sempre buscando melhorar e atender às suas necessidades.
+            </p>
+        </div>
+    </div>
+
+    <!-- Imagens finais -->
+    <div class="image-final">
+        <div class="image-grid">
+            <div class="image-card">
+                <img src="/public/images/category_images/arthur.jpg" alt="Foto de Arthur" class="rounded-image">
+                <p>Arthur Bernardo Paul</p>
+            </div>
+            <div class="image-card">
+                <img src="/public/images/category_images/bruno.jpg" alt="Foto de Bruno Bellinaso Brasil" class="rounded-image">
+                <p>Bruno Bellinaso Brasil</p>
             </div>
         </div>
     </div>
+</div>
+
+
+      
+
+</div>
+
 </main>
 
     <footer>
