@@ -16,7 +16,6 @@ a {
     --logo-size: 8.5rem;
 
     /* Colors */
-    --primary-color: #EAAA00;
     --red-1: #bd3528;
     --red-2: #8C271E;
     --red-3: #f5d8d6;
@@ -27,6 +26,10 @@ a {
     --white-2: #f0f3f4;
     --white-3: #f5f3f3;
     --green-1: #5cb85c;
+    --green-2: #b8e0b8;
+    --success: #339900;
+    --alert: #EAAA00;
+    --warning: #cc3300;
 
     /* Font sizes */
     --font-xsm: 8pt;

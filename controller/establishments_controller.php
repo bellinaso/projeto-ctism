@@ -250,6 +250,80 @@
     }
 
 
+    function get_services_from_establishment($id) {
+        $con = new connect_database();
+        $con->connect();
+
+        $query = "SELECT * FROM services where establishments_id = $id";
+
+        $result = $con->consult_all($query);
+
+        if($result != null) {
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+
+    function get_availability_from_service($id) {
+        $con = new connect_database();
+        $con->connect();
+
+        $query = "SELECT 
+                availability.id AS id,
+                availability.service_id AS service_id,
+                availability.week_days,
+                availability.start_time,
+                services.name AS service_name,
+                establishments.name AS establishment_name
+                FROM  availability
+                INNER JOIN services ON availability.service_id = services.id
+                INNER JOIN establishments ON services.establishments_id = establishments.id
+                WHERE establishments.id = $id;";
+
+        $result = $con->consult_all($query);
+
+        if($result != null) {
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+
+    function get_reserves_from_establishment($id) {
+        $con = new connect_database();
+        $con->connect();
+
+        $query = "SELECT 
+                reserves.id AS id,
+                users.name AS user_name,
+                establishments.name AS establishment_name,
+                services.name AS service_name,
+                availability.start_time AS availability_time,
+                reserves.reserve_date,
+                reserves.service_date,
+                reserves.reserve_status
+                FROM reserves
+                JOIN users ON reserves.user_id = users.id
+                JOIN establishments ON reserves.establishments_id = establishments.id
+                JOIN services ON reserves.service_id = services.id
+                JOIN availability ON reserves.availability_id = availability.id;";
+
+        $result = $con->consult_all($query);
+
+        if($result != null) {
+            return $result;
+        }
+        else {
+            return null;
+        }
+    }
+
+
     function validate_cnpj($cnpj) {
         // Remove qualquer caractere que não seja número
         $cnpj = preg_replace('/\D/', '', $cnpj);

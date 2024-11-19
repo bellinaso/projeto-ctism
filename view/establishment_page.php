@@ -17,19 +17,35 @@
     <?php
         require_once '../controller/establishments_controller.php';
         require_once '../controller/categories_controller.php';
-
-        @session_start();
-        $_SESSION['last_page'] = 'establishments.php';
+        require_once '../controller/user_controller.php';
+        require_once '../controller/authentication_controller.php';
 
         if(isset($_REQUEST) && isset($_REQUEST['id'])) {
             $establishment = get_one_establishment($_REQUEST['id']);
 
-            if(strlen($establishment['phone']) == 10) {
-                $establishment['phone'] = preg_replace('/(\d{2})(\d{4})(\d+)/', '($1) $2-$3', $establishment['phone']);
+            if(isset($establishment)) {
+                
+                if(strlen($establishment['phone']) == 10) {
+                    $establishment['phone'] = preg_replace('/(\d{2})(\d{4})(\d+)/', '($1) $2-$3', $establishment['phone']);
+                }
+                else {
+                    $establishment['phone'] = preg_replace('/(\d{2})(\d{5})(\d+)/', '($1) $2-$3', $establishment['phone']);
+                }
+
+                $services = get_services_from_establishment($establishment['id']);
+
+                $availability = get_availability_from_service($establishment['id']);
+
+                $reserves = get_reserves_from_establishment($establishment['id']);
             }
-            else {
-                $establishment['phone'] = preg_replace('/(\d{2})(\d{5})(\d+)/', '($1) $2-$3', $establishment['phone']);
+
+            if(is_logged()) {
+                $logged_user = get_logged_user($_SESSION['login']);
             }
+
+
+            @session_start();
+            $_SESSION['last_page'] = 'establishment_page.php?id='.$_REQUEST['id'];
         }
     ?>
     <header>
@@ -82,28 +98,26 @@
     </header>
 
     <main>
-        <div class="establishment">
+        <div class="establishment_header">
             <?php
                     if(isset($establishment) && $establishment != null) {
                         echo '
-                            <div class="establishment_header">
-                                <img src="../public/images/image_icon.svg" alt="" class="establishment_image">
-                                <div class="establishment_info">
-                                    <h2 class="establishment_title">'.$establishment['name'].'</h2>
-                                    <p>
-                                        <span>Contato: </span>
-                                        '.$establishment['phone'].'
-                                    </p>
-                                    <p>'.$establishment['description'].'</p>
-                                    <p>
-                                        <span>Categoria: </span>
-                                        '.$establishment['category_name'].'
-                                    </p>
-                                    <p>
-                                        <span>Subcategoria: </span>
-                                        '.$establishment['subcategory_name'].'
-                                    </p>
-                                </div>
+                            <img src="../public/images/image_icon.svg" alt="" class="establishment_image">
+                            <div class="establishment_info">
+                                <h2 class="establishment_title">'.$establishment['name'].'</h2>
+                                <p>
+                                    <span>Contato: </span>
+                                    '.$establishment['phone'].'
+                                </p>
+                                <p>'.$establishment['description'].'</p>
+                                <p>
+                                    <span>Categoria: </span>
+                                    '.$establishment['category_name'].'
+                                </p>
+                                <p>
+                                    <span>Subcategoria: </span>
+                                    '.$establishment['subcategory_name'].'
+                                </p>
                             </div>
                         ';
                         }
@@ -117,123 +131,235 @@
                                     <h2>
                                         Parece que o<br>
                                         estabelecimento<br>
+                                        não foi encontrado!
+                                    </h2>
+                                </div>
+                            ';
+                        }
+                    ?>
+        </div>
+        <div class="establishment_content">
+            <?php
+                $message_title = 'Algo inesperado deu errado!';
+                $message= '';
+                $message_style = 'action_failed';
+                if(isset($_REQUEST) && isset($_REQUEST['code'])) {
+                    switch ($_REQUEST['code']) {
+                        case 401:
+                            $message_title = 'Algo inesperado deu errado!';
+                            $message_style = 'action_failed';
+                            break;
+
+                        case 200:
+                            $message_title = 'Ação concluída com suecsso!';
+                            $message_style = 'action_succeed';
+                            if(isset($_REQUEST['cancelled'])) {
+                                $message = "Agendamento <span>#$_REQUEST[cancelled]</span> cancelado.";
+                            }
+                            else if(isset($_REQUEST['completed'])) {
+                                $message = "Agendamento <span>#$_REQUEST[completed]</span> finalizado.";
+                            }
+                            break;
+                    }
+                    echo '
+                    <div class="row">
+                        <div class="'.$message_style.'">
+                            <span>'.$message_title.'</span> '.$message.'
+                        </div>
+                    </div>
+                    ';
+                }
+            ?>
+            
+            <div class="row">
+                <?php
+                    if(isset($logged_user) && $logged_user['id'] == $establishment['user_id']) {
+                        echo '
+                            <h1>Reservas</h1>
+                        ';
+                    }
+                ?>
+                <h1>Serviços</h1>
+            </div>
+
+            <div class="row">
+                <div class="establishment_reserves">
+                        <?php
+                            if(isset($logged_user) && $logged_user['id'] == $establishment['user_id']) {
+                                if($reserves != null) {
+                                    foreach($reserves as $r) {
+                                        echo '
+                                            <div class="reserve">
+                                            <div class="table">
+                                                <div class="table_row">
+                                                    <div class="table_column">
+                                                        <span class="table_strong">ID:</span>
+                                                        <span class="table_strong">Reservador:</span>
+                                                        <span class="table_strong">Serviço:</span>
+                                                        <span class="table_strong">Data:</span>
+                                                        <span class="table_strong">Horário:</span>
+                                                        <span class="table_strong">Status:</span>
+                                                    </div>
+                                                    <div class="table_column">
+                                                        <span>'.$r['id'].'</span>
+                                                        <span>'.$r['user_name'].'</span>
+                                                        <span>'.$r['service_name'].'</span>
+                                                        <span>'.$r['service_date'].'</span>
+                                                        <span>'.$r['availability_time'].'</span>
+                                                        <span class="status_'.$r['reserve_status'].'">'.$r['reserve_status'].'</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            ';
+                                        if($r['reserve_status'] == 'pending') {
+                                            echo '
+                                                <div class="reserve_buttons">
+                                                    <form action="../controller/reserve_controller.php" method="post">
+                                                        <div class="green_button reserve_button">
+                                                            <button type="submit" name="complete" value="'.$r['id'].'">
+                                                                <i class="fa-regular fa-circle-check"></i>
+                                                                Marcar como completo
+                                                            </button>
+                                                        </div>
+                                                        
+                                                        <div class="red_button reserve_button">
+                                                            <button type="submit" name="establishment_cancellation" value="'.$r['id'].'">
+                                                                <i class="fa-solid fa-ban"></i>
+                                                                Cancelar
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            ';
+                                        }
+                                        echo '
+                                            </div>
+                                        ';
+                                    }
+
+                                }
+                                else {
+                                    echo '
+                                        <div class="not_found">
+                                            <i class="fa-solid fa-circle-exclamation"></i>
+                                            <h1>
+                                                Ops!
+                                            </h1>
+                                            <h2>
+                                                Parece que<br>
+                                                nenhuma reserva<br>
+                                                foi encontrada!
+                                            </h2>
+                                        </div>
+                                    ';
+                                }
+                            }
+                        ?>
+                </div>
+                
+
+                <div class="establishment_services">
+    
+                    <div class="manager_buttons">
+                        <div class="green_button new_service">
+                            <button type="button">Adicionar novo</button>
+                        </div>
+                    </div>
+                    <?php
+                        if(isset($services)) {
+                            foreach($services as $s) {
+                                echo '
+    
+                                    <div class="service">
+                                        <div class="service_info">
+                                            <h3>'.$s['name'].'</h3>
+                                            <p>'.$s['description'].'</p>
+                                        </div>
+                                        
+                                        <form action="" method="POST">
+                                    
+                                            <div class="next_week">
+                                ';
+    
+                                for ($i = 0; $i < 7; $i++) {
+                                    $future_date = new DateTime();
+                                    $future_date->add(new DateInterval("P{$i}D"));
+                                
+                                    $formated_date = $future_date->format('d/m');
+                                
+                                    $week_day_id = "week_day_$s[id]_$i";
+    
+                                    $radio_value = $i + 1;
+                                
+                                    $checked = $i === 0 ? 'checked' : '';
+                                
+                                    echo '
+                                                <div class="form_input">
+                                                    <input type="radio" name="available_day" class="available_day_'.$s['id'].'" id="'.$week_day_id.'" value="'.$radio_value.'" '.$checked.'>
+                                                    <label for="'.$week_day_id.'" class="service_button">'.$formated_date.'</label>
+                                                </div>
+                                    ';
+                                }
+    
+                                echo '
+                                            </div>
+    
+                                            <div class="days_slider" id="days_slider_'.$s['id'].'">
+                                ';
+    
+                                for($i=0; $i<7; $i++) {
+                                    $future_date = new DateTime();
+                                    $future_date->add(new DateInterval("P{$i}D"));
+                                
+                                    $formated_date = $future_date->format('l');
+    
+                                    echo '
+                                                <div class="available_times slide">
+                                    ';
+                                    
+                                    foreach($availability as $a) {
+                                        if($a['week_days'] == strtolower($formated_date) && $a['service_id'] == $s['id']) {
+                                            echo '
+                                                    <div class="form_input">
+                                                        <input type="radio" name="available_times" id="'.$a['id'].'" value="'.$a['id'].'">
+                                                        <label for="'.$a['id'].'" class="service_button">'.$a['start_time'].'</label>
+                                                    </div>
+                                            ';
+                                        }
+                                    }
+                                    echo '
+                                                </div>
+                                    ';
+                                }
+                                echo '
+                                            </div>
+                                            <div class="green_button submit_button">
+                                                <button type="submit" name="service_id" value="'.$s['id'].'">Agendar</button>
+                                            </div>
+                                        </form>
+                                </div>
+                                ';
+                            }
+                        }
+                        else {
+                            echo '
+                                <div class="not_found">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                    <h1>
+                                        Ops!
+                                    </h1>
+                                    <h2>
+                                        Parece que nenhum<br>
+                                        serviço<br>
                                         foi encontrado!
                                     </h2>
                                 </div>
                             ';
                         }
                     ?>
-            <div class="establishment_content">
-                <div class="manager_buttons">
-
-                </div>
-                <div class="establishment_services">
-                    
-                    <div class="service">
-                        <div class="service_info">
-                            <h3>Nome do serviço</h3>
-                            <p>Descrição do serviço</p>
-                        </div>
-                        
-                        <form action="pagina_tal">
-                            
-                            <div class="next_week">
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_1" value="1" checked>
-                                    <label for="week_day_1" class="service_button">16/11</label>
-                                </div>
-                                
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_2" value="2">
-                                    <label for="week_day_2" class="service_button">17/11</label>
-                                </div>
-                                
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_3" value="3">
-                                    <label for="week_day_3" class="service_button">18/11</label>
-                                </div>
-                                
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_4" value="4">
-                                    <label for="week_day_4" class="service_button">19/11</label>
-                                </div>
-                                
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_5" value="5">
-                                    <label for="week_day_5" class="service_button">20/11</label>
-                                </div>
-                                
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_6" value="6">
-                                    <label for="week_day_6" class="service_button">21/11</label>
-                                </div>
-                                
-                                <div class="form_input">
-                                    <input type="radio" name="available_day" id="week_day_7" value="7">
-                                    <label for="week_day_7" class="service_button">22/11</label>
-                                </div>
-                            </div>
-
-                            <div class="days_slider" id="days_slider_1">
-                                <div class="available_times slide">
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_1" value="1">
-                                        <label for="times_1" class="service_button">19:00</label>
-                                    </div>
-                                
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_2" value="1">
-                                        <label for="times_2" class="service_button">20:00</label>
-                                    </div>
-                                
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_3" value="1">
-                                        <label for="times_3" class="service_button">21:00</label>
-                                    </div>
-                                </div>
-                                
-                                <div class="available_times slide">
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_1" value="1">
-                                        <label for="times_1" class="service_button">19:00</label>
-                                    </div>
-                                
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_2" value="1">
-                                        <label for="times_2" class="service_button">20:00</label>
-                                    </div>
-                                
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_3" value="1">
-                                        <label for="times_3" class="service_button">21:00</label>
-                                    </div>
-                                </div>
-                                <div class="available_times slide">
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_1" value="1">
-                                        <label for="times_1" class="service_button">19:00</label>
-                                    </div>
-                                
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_2" value="1">
-                                        <label for="times_2" class="service_button">20:00</label>
-                                    </div>
-                                
-                                    <div class="form_input">
-                                        <input type="radio" name="available_times" id="times_3" value="1">
-                                        <label for="times_3" class="service_button">21:00</label>
-                                    </div>
-                                </div>
-
-                            </div>
-                            
-                            <div class="green_button submit_button">
-                                <button type="submit" name="service_id" value="1">Agendar</button>
-                            </div>
-                        </form>
-                    </div>
                 </div>
             </div>
+
         </div>
     </main>
     
@@ -241,17 +367,17 @@
         
     </footer>
     <script>
-        const week_days = document.getElementsByName('available_day');
-        const available_times = document.getElementById('days_slider_1');
-        // const available_times = document.getElementsByClassName('available_times');
-
+        <?php
+        $service_ids = array_map(function($services) {return $services['id'];}, $services);
+        ?>
+        const services_id = <?= json_encode($service_ids) ?>;
         
-        console.log(week_days);
-        
-        week_days.forEach((day, index) => {
-            day.addEventListener('click',  () => {
-                available_times.style.transform = `translateX(-${100*index}%)`;
+        services_id.forEach((id) => {
+            document.querySelectorAll(`.available_day_${id}`).forEach((day, index) => {
+                day.addEventListener('click',  () => {
+                document.getElementById(`days_slider_${id}`).style.transform = `translateX(-${100*index}%)`;
             });
+            })
         });
     </script>
 </body>

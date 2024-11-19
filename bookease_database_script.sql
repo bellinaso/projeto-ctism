@@ -62,28 +62,29 @@ CREATE TABLE services(
     FOREIGN KEY(establishments_id) REFERENCES establishments(id)
 );
 
-CREATE TABLE reserves(
-    id INT auto_increment,
-    user_id INT,
-    establishments_id INT,
-    service_id INT,
-    reserve_date DATE,
-    service_date DATE,
-    reserve_status ENUM('pending', 'cancelled', 'completed'),
-    PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES users(id),
-    FOREIGN KEY(establishments_id) REFERENCES establishments(id),
-    FOREIGN KEY(service_id) REFERENCES services(id)
-);
-
 CREATE TABLE availability(
     id INT auto_increment,
     service_id INT,
     week_days ENUM('monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'),
     start_time TIME,
-    -- finish_time TIME,
     PRIMARY KEY(id),
     FOREIGN KEY(service_id) REFERENCES services(id)
+);
+
+CREATE TABLE reserves(
+    id INT auto_increment,
+    user_id INT,
+    establishments_id INT,
+    service_id INT,
+    availability_id INT,
+    reserve_date DATE,
+    service_date DATE,
+    reserve_status ENUM('pending', 'user_cancellation', 'establishment_cancellation', 'completed'),
+    PRIMARY KEY(id),
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    FOREIGN KEY(establishments_id) REFERENCES establishments(id),
+    FOREIGN KEY(service_id) REFERENCES services(id),
+    FOREIGN KEY(availability_id) REFERENCES availability(id)
 );
 
 CREATE TABLE reviews(
@@ -119,9 +120,13 @@ INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, cr
 INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('34567890123', 'Carlos Souza', 'carlos.souza@email.com', '31987654321', 'Minas Gerais', 'Belo Horizonte', 'senha789', 'admin', '2024-10-03');
 
 
+
+
 INSERT INTO states (name) VALUES ('Rio Grande do Sul');
 
 INSERT INTO cities (name, state_id) VALUES ('Santa Maria', (SELECT id FROM states WHERE name = 'Rio Grande do Sul'));
+
+
 
 
 INSERT INTO categories (name) VALUES
@@ -130,6 +135,8 @@ INSERT INTO categories (name) VALUES
 ('Educação e Aprendizado'),
 ('Alimentação e Gastronomia'),
 ('Lazer e Entretenimento');
+
+
 
 
 INSERT INTO subcategories (name, category_id) VALUES
@@ -152,3 +159,86 @@ INSERT INTO subcategories (name, category_id) VALUES
 
 -- Lazer e Entretenimento
 ('Eventos e Festas', (SELECT id FROM categories WHERE name = 'Lazer e Entretenimento'));
+
+
+
+
+INSERT INTO establishments 
+(cnpj, user_id, name, email, phone, address, latitude, longitude, description, category_id, subcategory_id, creation_date)
+VALUES
+('12345678000195', 1, 'Salão Bela Vida', 'contato@belavida.com', '55999999999', 'Rua das Flores, 123, Centro, Santa Maria, RS, Brasil', -29.6841, -53.8069, 'Salão de beleza especializado em cortes, manicure e pedicure.', 1, 1, '2024-11-18');
+
+
+
+
+INSERT INTO services (establishments_id, name, description, creation_date)
+VALUES
+(1, 'Corte de Cabelo', 'Serviço de corte de cabelo masculino e feminino, com profissionais especializados.', '2024-11-18'),
+(1, 'Manicure e Pedicure', 'Cuidado com unhas, com técnicas de embelezamento e saúde.', '2024-11-18'),
+(1, 'Consulta Médica', 'Atendimento clínico com profissionais qualificados para diversas especialidades.', '2024-11-18'),
+(1, 'Consulta Médica', 'Atendimento clínico com profissionais qualificados para diversas especialidades.', '2024-11-18');
+
+
+
+
+INSERT INTO availability (service_id, week_days, start_time)
+VALUES
+-- Disponibilidade para 'Corte de Cabelo' (service_id 1)
+(1, 'monday', '09:00:00'),
+(1, 'monday', '14:00:00'),
+(1, 'tuesday', '10:00:00'),
+(1, 'tuesday', '15:00:00'),
+(1, 'wednesday', '09:30:00'),
+(1, 'wednesday', '16:00:00'),
+(1, 'thursday', '11:00:00'),
+(1, 'thursday', '17:00:00'),
+(1, 'friday', '10:30:00'),
+(1, 'saturday', '12:00:00'),
+
+-- Disponibilidade para 'Manicure e Pedicure' (service_id 2)
+(2, 'monday', '08:00:00'),
+(2, 'monday', '13:30:00'),
+(2, 'tuesday', '09:00:00'),
+(2, 'wednesday', '14:00:00'),
+(2, 'wednesday', '18:00:00'),
+(2, 'thursday', '08:30:00'),
+(2, 'thursday', '13:00:00'),
+(2, 'friday', '10:00:00'),
+(2, 'friday', '15:30:00'),
+(2, 'saturday', '09:30:00'),
+
+-- Disponibilidade para 'Consulta Médica' (service_id 3)
+(3, 'monday', '07:00:00'),
+(3, 'monday', '11:00:00'),
+(3, 'tuesday', '08:00:00'),
+(3, 'tuesday', '12:30:00'),
+(3, 'wednesday', '09:00:00'),
+(3, 'thursday', '10:30:00'),
+(3, 'friday', '14:00:00'),
+(3, 'friday', '17:00:00'),
+(3, 'saturday', '08:30:00'),
+(3, 'saturday', '13:00:00'),
+
+-- Disponibilidade para 'Consulta Médica' (service_id 3)
+(4, 'monday', '07:00:00'),
+(4, 'monday', '11:00:00'),
+(4, 'tuesday', '08:00:00'),
+(4, 'tuesday', '12:30:00'),
+(4, 'wednesday', '09:00:00'),
+(4, 'thursday', '10:30:00'),
+(4, 'friday', '14:00:00'),
+(4, 'friday', '17:00:00'),
+(4, 'saturday', '08:30:00'),
+(4, 'saturday', '13:00:00');
+
+
+
+
+INSERT INTO reserves (user_id, establishments_id, service_id, availability_id, reserve_date, service_date, reserve_status)
+VALUES
+(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 'pending'),
+(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 3 DAY), 'pending'),
+(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 4 DAY), 'completed'),
+(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 5 DAY), 'establishment_cancellation'),
+(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 6 DAY), 'establishment_cancellation'),
+(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'pending');
