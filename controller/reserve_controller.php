@@ -39,7 +39,7 @@
             }
             else {
                 if(is_logged() == false) {
-                    $_SESSION['last_page'] = "establishment_page.php?id$_POST[establishment_id]";
+                    $_SESSION['last_page'] = "establishment_page.php?id=$_POST[establishment_id]";
         
                     redirect_to('login.php');
                 }
@@ -58,8 +58,6 @@
                     date('Y-m-d'),
                     $service_date,
                     'pending');
-
-                print_r($result);
             }
         }
     }
@@ -74,7 +72,10 @@
         if($availability['service_id'] != $service_id) {
             return 'invalid_availability';
         }
-        else if(validate_date($service_date) == false) {
+
+        $service_date = validate_date($service_date);
+
+        if($service_date == false) {
             return 'invalid_date';
         }
 
@@ -86,12 +87,39 @@
             $service_id,
             $availability_id,
             '$reserve_date',
-            '$service_date',
+            '".$service_date->format('Y-m-d')."',
             '$reserve_status'
         );");
 
         return $query;
     }
+
+
+    function validate_date($date) {
+        
+        if (!preg_match('/^\d{2}\/\d{2}$/', $date)) {
+            return false;
+        }
+        
+        list($day, $month) = explode('/', $date);
+    
+        $current_year = date('Y');
+        $date = DateTime::createFromFormat('d/m/Y', "$day/$month/$current_year");
+    
+        $current_date = new DateTime();
+        $current_date->setTime(0, 0, 0);
+        
+        $next_week = clone $current_date;
+        $next_week->modify('+7 days');
+        
+        if ($date >= $current_date && $date <= $next_week) {
+            return $date;
+        }
+        else {
+            return false;
+        }
+    }
+
 
     function reserve_cancellation($reserve_id, $user) {
         $con = new connect_database();
@@ -135,37 +163,6 @@
             $result = $con->execute("UPDATE reserves SET reserve_status = 'completed' WHERE id = $reserve_id");
 
             return array('result' => $result, 'establishment_id' => $query['establishments_id']);
-        }
-    }
-
-
-    function validate_date($date) {
-        
-        if (!preg_match('/^\d{2}\/\d{2}$/', $date)) {
-            return false;
-        }
-        
-        list($day, $month) = explode('/', $date);
-    
-        $current_year = date('Y');
-        $date = DateTime::createFromFormat('d/m/Y', "$day/$month/$current_year");
-    
-        // if ($date < new DateTime()) {
-        //     $date->modify('+1 year');
-        // }
-    
-        $current_date = new DateTime();
-        $current_date->setTime(0, 0, 0);
-        print_r($current_date);
-        
-        $next_week = clone $current_date;
-        $next_week->modify('+7 days');
-        
-        if ($date >= $current_date && $date <= $next_week) {
-            return true;
-        }
-        else {
-            return false;
         }
     }
 ?>
