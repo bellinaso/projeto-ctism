@@ -97,8 +97,8 @@
             }
             
             .not_found {
-                justify-self: center;
-                align-self: center;
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     }

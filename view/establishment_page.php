@@ -149,6 +149,12 @@
                             $message_title = 'Algo inesperado deu errado!';
                             $message_style = 'action_failed';
                             break;
+                            
+                        case 422:
+                            $message_title = 'Algo deu errado!';
+                            $message = 'Verifique se todos os campos foram preenchidos corretamente.';
+                            $message_style = 'action_failed';
+                            break;
 
                         case 200:
                             $message_title = 'Ação concluída com suecsso!';
@@ -173,7 +179,9 @@
             
             <div class="row">
                 <?php
-                    if(isset($logged_user) && $logged_user['id'] == $establishment['user_id']) {
+                    if(isset($logged_user) &&
+                    isset($establishment) &&
+                    $logged_user['id'] == $establishment['user_id']) {
                         echo '
                             <h1>Reservas</h1>
                         ';
@@ -183,9 +191,14 @@
             </div>
 
             <div class="row">
-                <div class="establishment_reserves">
-                        <?php
-                            if(isset($logged_user) && $logged_user['id'] == $establishment['user_id']) {
+                <?php
+                            if(
+                            isset($logged_user) &&
+                            isset($establishment) &&
+                            $logged_user['id'] == $establishment['user_id']) {
+                                echo '
+                                    <div class="establishment_reserves">                            
+                                ';
                                 if($reserves != null) {
                                     foreach($reserves as $r) {
                                         echo '
@@ -259,12 +272,20 @@
                 
 
                 <div class="establishment_services">
-    
-                    <div class="manager_buttons">
-                        <div class="green_button new_service">
-                            <button type="button">Adicionar novo</button>
-                        </div>
-                    </div>
+                    <?php
+                        if(
+                        isset($logged_user) &&
+                        isset($establishment) &&
+                        $logged_user['id'] == $establishment['user_id']) {
+                            echo '
+                                <div class="manager_buttons">
+                                    <div class="green_button new_service">
+                                        <button type="button">Adicionar novo</button>
+                                    </div>
+                                </div>        
+                            ';
+                        }
+                    ?>
                     <?php
                         if(isset($services)) {
                             foreach($services as $s) {
@@ -276,7 +297,7 @@
                                             <p>'.$s['description'].'</p>
                                         </div>
                                         
-                                        <form action="" method="POST">
+                                        <form action="../controller/reserve_controller.php" method="post">
                                     
                                             <div class="next_week">
                                 ';
@@ -295,7 +316,7 @@
                                 
                                     echo '
                                                 <div class="form_input">
-                                                    <input type="radio" name="available_day" class="available_day_'.$s['id'].'" id="'.$week_day_id.'" value="'.$radio_value.'" '.$checked.'>
+                                                    <input type="radio" name="available_day" class="available_day_'.$s['id'].'" id="'.$week_day_id.'" value="'.$formated_date.'" '.$checked.'>
                                                     <label for="'.$week_day_id.'" class="service_button">'.$formated_date.'</label>
                                                 </div>
                                     ';
@@ -334,8 +355,10 @@
                                 echo '
                                             </div>
                                             <div class="green_button submit_button">
-                                                <button type="submit" name="service_id" value="'.$s['id'].'">Agendar</button>
+                                                <button type="submit" name="register_reserve" value="'.$s['id'].'">Agendar</button>
                                             </div>
+                                            <input type="hidden" name="establishment_id" value="'.$establishment['id'].'">
+                                            <input type="hidden" name="service_id" value="'.$s['id'].'">
                                         </form>
                                 </div>
                                 ';
