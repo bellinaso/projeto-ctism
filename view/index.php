@@ -83,78 +83,89 @@
             <i class="fa-solid fa-chevron-down"></i>
         </a>
     </header>
-  
-    <main>
-    <div class="about_us" id="about_us">
-        <!-- O que é o Bookease? -->
-        <div class="h1pri">
-            <h1>O que é o Bookease?</h1>
-        </div>
-        <div class="card_section">
-            <div class="largeCard">
-                <p>Bookease é uma plataforma intuitiva e inovadora que conecta clientes a diversos estabelecimentos, oferecendo soluções práticas e eficientes para agendamentos online. Com foco na simplificação do dia a dia, permite aos usuários reservar horários em serviços variados, como salões, clínicas, academias e outros, eliminando complicações e otimizando o tempo. Além de facilitar a organização de compromissos, o sistema melhora a experiência do cliente com uma interface amigável e personalizável, que atende tanto às necessidades dos usuários quanto dos estabelecimentos parceiros. Ao automatizar processos e modernizar o gerenciamento de reservas, o Bookease transforma a interação com serviços essenciais, promovendo conveniência e qualidade em cada etapa.</p>
+   
+    <section id="about_us">
+    <div class="container">
+        <!-- O que é o Bookease -->
+        <div class="section" id="what_is_bookease">
+          
+            <div class="card what-is">
+                
+                <p><h4>Sobre o Bookease</h4>O Bookease é uma plataforma inovadora que busca simplificar o processo de agendamento, conectando usuários a serviços de forma rápida e eficiente. Nosso objetivo é proporcionar uma experiência de agendamento prática, intuitiva e acessível a todos, com foco em facilitar o dia a dia dos nossos usuários.</p>
             </div>
         </div>
-        
-        <!-- Nossa missão -->
-        <div class="h1sec">
-            <h1>Nossa missão</h1>
-        </div>
-        <div class="card_section">
-            <div class="card info">
-                <h2>Facilidade</h2>
-                <p>Tornar o agendamento simples e intuitivo, eliminando barreiras tecnológicas para todos os usuários.</p>
-            </div>
-            <div class="card info">
-                <h2>Acessibilidade</h2>
-                <p>Oferecer uma plataforma inclusiva, adaptável a diferentes dispositivos e necessidades específicas.</p>
-            </div>
-            <div class="card info">
-                <h2>Conexão</h2>
-                <p>Facilitar o contato entre clientes e estabelecimentos, promovendo parcerias duradouras.</p>
-            </div>
-            <div class="card info">
-                <h2>Inovação</h2>
-                <p>Trazer inovação para transformar a experiência de agendamento, com praticidade e segurança.</p>
-            </div>
-        </div>
-     
-       
 
-        <div class="divider"></div> <!-- Divisória com animação -->
-
-<div class="final">
-    <!-- Texto explicativo -->
-    <div class="textp">
-        <div class="text-card">
-            <h2 class="subtitle">Sobre nós</h2>
-            <p>
-            Somos uma dupla que desenvolveu esse sistema para facilitar a sua vida. Sabemos que, como desenvolvedores, criamos algo novo que vai ajudar você a organizar suas tarefas de forma prática e eficiente. Nosso objetivo é proporcionar uma experiência simples e intuitiva, sempre buscando melhorar e atender às suas necessidades.
-            </p>
+        <!-- Missões -->
+        <div class="section" id="mission">
+    <h2></h2>
+    <div class="card-grid">
+        <div class="card mission">
+            <h4>Simplificar o Agendamento</h4>
+            <p>A nossa missão é oferecer uma plataforma intuitiva e eficiente, com foco na experiência do usuário e no acesso fácil e rápido a todos os serviços.</p>
+        </div>
+        <div class="card mission">
+            <h4>Inovar Constantemente</h4>
+            <p>Buscar inovação contínua, trazendo novos recursos e melhorias para a plataforma, sempre com base nas necessidades dos usuários e nas tendências do mercado.</p>
+        </div>
+        <div class="card mission">
+            <h4>Impulsionar Estabelecimentos</h4>
+            <p>Contribuir para o crescimento e a visibilidade dos estabelecimentos parceiros, ajudando-os a alcançar mais clientes e a otimizar seus serviços.</p>
+        </div>
+        <div class="card mission">
+            <h4>Facilitar o Acesso aos Serviços</h4>
+            <p>Expandir nossa presença no mercado, promovendo a conveniência e facilitando o acesso aos serviços de qualquer lugar, a qualquer hora.</p>
+        </div>
+        <div class="card mission">
+            <h4>Proporcionar Agilidade no Agendamento</h4>
+            <p>Oferecer um sistema ágil e eficiente que permita aos usuários agendar seus serviços de maneira rápida e sem complicação.</p>
+        </div>
+        <div class="card mission">
+            <h4>Transformar a Experiência do Usuário</h4>
+            <p>Proporcionar uma experiência de usuário excepcional, com uma plataforma que seja fácil de usar, rápida e eficiente, sempre buscando melhorar a usabilidade.</p>
         </div>
     </div>
-
-    <!-- Imagens finais -->
-    <div class="image-final">
-        <div class="image-grid">
-            <div class="image-card">
-                <img src="/public/images/category_images/arthur.jpg" alt="Foto de Arthur" class="rounded-image">
-                <p>Arthur Bernardo Paul</p>
+</div>
+<!-- Fundadores -->
+<div class="section founders-section" id="founders">
+   
+<div class="founders-section">
+    <div class="founder">
+        <div class="card-image">
+            <img src="/public/images/category_images/arthur.jpg" alt="Foto de Arthur" class="rounded-image">
+        </div>
+        <div class="card-content">
+            <h3>Arthur Bernardo Paul</h3>
+            <p>Estudante e cofundador do Bookease. Juntos, buscamos transformar a maneira de agendar serviços.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/arthur_bernardo" target="_blank">LinkedIn</a><br>
+                <a href="https://www.github.com/in/arthurbernardopaul" target="_blank">Github</a>
             </div>
-            <div class="image-card">
-                <img src="/public/images/category_images/bruno.jpg" alt="Foto de Bruno Bellinaso Brasil" class="rounded-image">
-                <p>Bruno Bellinaso Brasil</p>
+        </div>
+    </div>
+    <div class="founder">
+        <div class="card-image">
+            <img src="/public/images/category_images/bruno.jpg" alt="Foto de Bruno Bellinaso Brasil" class="rounded-image">
+        </div>
+        <div class="card-content">
+            <h3>Bruno Bellinaso Brasil</h3>
+            <p>Estudante e cofundador do Bookease. Juntos, buscamos transformar a maneira de agendar serviços.</p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/brunobellinaso" target="_blank">LinkedIn</a><br>
+                <a href="https://www.github.com/in/brunobellinaso" target="_blank">Github</a>
             </div>
         </div>
     </div>
 </div>
+
+
+
+ 
+
+</section>
 
 
       
 
-</div>
-
-</main>
 
     <footer>
     <div class="footer">
@@ -179,7 +190,7 @@
            
             <div class="footer_section">
                 <h4>Contato</h4>
-                <p>Email: <a href="mailto:support@bookease.com">support@bookease.com</a></p>
+                <p>Email:<a href="mailto:support@bookease.com">support@bookease.com</a></p>
                 <p>Telefone: (55) 99727-0790</p>
                 <p>Endereço: Av Roraima, 1000 - Santa Maria, RS</p>
             </div>
@@ -193,11 +204,7 @@
             <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
 
-        <!-- Copyright -->
-        <div class="footer_bottom">
-            <p>© 2024 Bookease. Todos os direitos reservados.</p>
-        </div>
-    </div>
+       
 </footer>
 
 
