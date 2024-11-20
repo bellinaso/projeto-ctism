@@ -19,6 +19,7 @@
         require_once '../controller/redirect_controller.php';
 
         require_once '../controller/establishments_controller.php';
+        require_once '../controller/reserve_controller.php';
         require_once '../controller/categories_controller.php';
 
         include_once '../model/database_connect.php';
@@ -35,6 +36,12 @@
 
         $query = "SELECT * FROM users WHERE email = '$_SESSION[login]';";
         $user = $con->consult($query);
+
+        $establishments = get_my_establishments();
+
+        $reserves = get_my_reserves();
+
+
         
     ?>
     <!-- https://boxicons.com/ -->
@@ -67,13 +74,44 @@
     </header>
 
     <main>
+        <?php
+            $message_title = 'Algo inesperado deu errado!';
+            $message= '';
+            $message_style = 'action_failed';
+            if(isset($_REQUEST) && isset($_REQUEST['code'])) {
+                switch ($_REQUEST['code']) {
+                    case 401:
+                        $message_title = 'Algo inesperado deu errado!';
+                        $message_style = 'action_failed';
+                        break;
+
+                    case 200:
+                        $message_title = 'Ação concluída com suecsso!';
+                        $message_style = 'action_succeed';
+                        if(isset($_REQUEST['cancelled'])) {
+                            $message = "Agendamento <span>#$_REQUEST[cancelled]</span> cancelado.";
+                        }
+                        else if(isset($_REQUEST['completed'])) {
+                            $message = "Agendamento <span>#$_REQUEST[completed]</span> finalizado.";
+                        }
+                        break;
+                }
+                echo '
+                <div class="row">
+                    <div class="'.$message_style.'">
+                        <span>'.$message_title.'</span> '.$message.'
+                    </div>
+                </div>
+                ';
+            }
+        ?>
         <div class="main_content">
             <div class="aside_buttons">
                 <a href="./myaccount.php" class="aside_button">
                     <i class='bx bxs-user'></i>
                     <span>Minhas informações</span>
                 </a>
-                <a href="#" class="aside_button">
+                <a href="?info=my_reserves" class="aside_button">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Meus agendamentos</span>
                 </a>
@@ -117,47 +155,47 @@
                                         <h2>Meus estabelecimentos</h2>
                                         <div class="establishments_list">
                                     ';
-                                
-                                $establishments = get_my_establishments();
-                                if($establishments != null) {
-                                    foreach($establishments as $e) {
-                                        echo '
-                                            <div class="establishment">
-                                                <div class="establishment_image">
-                                                    <a href="/view/establishment_page.php">
-                                                        <img src="/public/images/image_icon.svg" alt="" class="image_icon">
-                                                    </a>
-                                                </div>
-                                                <div class="establishment_info">
-                                                    <h3>
-                                                        <a href="/view/establishment_page.php?id='.$e['id'].'">
-                                                        '.$e['name'].'
+                                    if(isset($establishments)) {
+                                        if($establishments != null) {
+                                        foreach($establishments as $e) {
+                                            echo '
+                                                <div class="establishment">
+                                                    <div class="establishment_image">
+                                                        <a href="/view/establishment_page.php">
+                                                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
                                                         </a>
-                                                    </h3>
-                                                    <p>
-                                                        <span>Descrição: </span>
-                                                        '.$e['description'].'
-                                                    </p>
-                                                    <p>
-                                                        <span>Categoria: </span>
-                                                        '.$e['category_name'].'
-                                                    </p>
-                                                    <p>
-                                                        <span>Subcategoria: </span>
-                                                        '.$e['subcategory_name'].'
-                                                    </p>
-                                                    <p>
-                                                        <span>Endereço: </span>
-                                                        '.$e['address'].'
-                                                    </p>
+                                                    </div>
+                                                    <div class="establishment_info">
+                                                        <h3>
+                                                            <a href="/view/establishment_page.php?id='.$e['id'].'">
+                                                            '.$e['name'].'
+                                                            </a>
+                                                        </h3>
+                                                        <p>
+                                                            <span>Descrição: </span>
+                                                            '.$e['description'].'
+                                                        </p>
+                                                        <p>
+                                                            <span>Categoria: </span>
+                                                            '.$e['category_name'].'
+                                                        </p>
+                                                        <p>
+                                                            <span>Subcategoria: </span>
+                                                            '.$e['subcategory_name'].'
+                                                        </p>
+                                                        <p>
+                                                            <span>Endereço: </span>
+                                                            '.$e['address'].'
+                                                        </p>
+                                                    </div>
+                                                    <div class="open_establishment">
+                                                        <a href="/view/establishment_page.php?id='.$e['id'].'">
+                                                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                        </a>
+                                                    </div>
                                                 </div>
-                                                <div class="open_establishment">
-                                                    <a href="/view/establishment_page.php?id='.$e['id'].'">
-                                                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        ';
+                                            ';
+                                        }
                                     }
                                 }
                                 else {
@@ -180,6 +218,72 @@
                                         </div>
                                     </div>
                                 ';
+                                break;
+
+                            case 'my_reserves':
+                                if(isset($reserves)) {
+                                        if($reserves != null) {
+                                            foreach($reserves as $r) {
+                                                echo '
+                                                    <div class="reserve">
+                                                    <div class="table">
+                                                        <div class="table_row">
+                                                            <div class="table_column">
+                                                                <span class="table_strong">ID:</span>
+                                                                <span class="table_strong">Estabelecimento:</span>
+                                                                <span class="table_strong">Serviço:</span>
+                                                                <span class="table_strong">Data:</span>
+                                                                <span class="table_strong">Horário:</span>
+                                                                <span class="table_strong">Status:</span>
+                                                            </div>
+                                                            <div class="table_column">
+                                                                <span>'.$r['id'].'</span>
+                                                                <span>'.$r['establishment_name'].'</span>
+                                                                <span>'.$r['service_name'].'</span>
+                                                                <span>'.$r['service_date'].'</span>
+                                                                <span>'.$r['availability_time'].'</span>
+                                                                <span class="status_'.$r['reserve_status'].'">'.$r['reserve_status'].'</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    ';
+                                                if($r['reserve_status'] == 'pending') {
+                                                    echo '
+                                                        <div class="reserve_buttons">
+                                                            <form action="../controller/reserve_controller.php" method="post">
+                                                                
+                                                                <div class="red_button reserve_button">
+                                                                    <button type="submit" name="establishment_cancellation" value="'.$r['id'].'">
+                                                                        <i class="fa-solid fa-ban"></i>
+                                                                        Cancelar
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    ';
+                                                }
+                                                echo '
+                                                    </div>
+                                                ';
+                                            }
+        
+                                        }
+                                    }
+                                    else {
+                                        echo '
+                                            <div class="not_found">
+                                                <i class="fa-solid fa-circle-exclamation"></i>
+                                                <h1>
+                                                    Ops!
+                                                </h1>
+                                                <h2>
+                                                    Parece que<br>
+                                                    nenhuma reserva<br>
+                                                    foi encontrada!
+                                                </h2>
+                                            </div>
+                                        ';
+                                    }
                                 break;
                             
                             default:

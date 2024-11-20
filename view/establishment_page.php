@@ -48,7 +48,19 @@
             $_SESSION['last_page'] = 'establishment_page.php?id='.$_REQUEST['id'];
         }
     ?>
-    <header>
+    <header
+        <?php
+            if(isset($establishment)) {
+                echo '
+                    style="background-image: url(../public/images/category_images/'.str_replace(' ','\ ',$establishment['category_name']).'.jpg);
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    background-position: center 120%;
+                    background-size: cover;
+                "
+                ';
+            }
+        ?>>
         <div class="header">
             <div class="logo">
                 <a href="/view/index.php">
@@ -307,6 +319,7 @@
                                     $future_date->add(new DateInterval("P{$i}D"));
                                 
                                     $formated_date = $future_date->format('d/m');
+                                    $mysql_formated_date = $future_date->format('Y-m-d');
                                 
                                     $week_day_id = "week_day_$s[id]_$i";
     
@@ -316,7 +329,7 @@
                                 
                                     echo '
                                                 <div class="form_input">
-                                                    <input type="radio" name="available_day" class="available_day_'.$s['id'].'" id="'.$week_day_id.'" value="'.$formated_date.'" '.$checked.'>
+                                                    <input type="radio" name="available_day" class="available_day_'.$s['id'].'" id="'.$week_day_id.'" value="'.$mysql_formated_date.'" '.$checked.'>
                                                     <label for="'.$week_day_id.'" class="service_button">'.$formated_date.'</label>
                                                 </div>
                                     ';

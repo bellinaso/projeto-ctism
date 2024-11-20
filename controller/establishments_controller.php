@@ -300,6 +300,7 @@
 
         $query = "SELECT 
                 reserves.id AS id,
+                reserves.establishments_id AS establishment_name,
                 users.name AS user_name,
                 establishments.name AS establishment_name,
                 services.name AS service_name,
@@ -311,7 +312,8 @@
                 JOIN users ON reserves.user_id = users.id
                 JOIN establishments ON reserves.establishments_id = establishments.id
                 JOIN services ON reserves.service_id = services.id
-                JOIN availability ON reserves.availability_id = availability.id;";
+                JOIN availability ON reserves.availability_id = availability.id
+                WHERE reserves.establishments_id = $id;";
 
         $result = $con->consult_all($query);
 

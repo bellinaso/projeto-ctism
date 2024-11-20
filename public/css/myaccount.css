@@ -22,6 +22,10 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    header {
+        margin-bottom: 7rem;
+    }
+    
     main {
         width: 100%;
         display: flex;
@@ -29,11 +33,44 @@
         justify-content: center;
         align-items: center;
     }
+
+    .action_failed {
+        min-width: max-content;
+        max-width: 50%;
+        margin: 1rem 0 1rem 0;
+        padding: .75rem;
+        border: 1px solid var(--warning);
+        border-radius: .6rem;
+        background-color: var(--red-3);
+        font-size: var(--font-sm);
+
+        & {
+            span {
+                font-weight: bold;
+            }
+        }
+    }
+
+    .action_succeed {
+        min-width: max-content;
+        max-width: 50%;
+        margin: 1rem 0 1rem 0;
+        padding: .75rem;
+        border: 1px solid var(--success);
+        border-radius: .6rem;
+        background-color: var(--green-2);
+        font-size: var(--font-sm);
+
+        & {
+            span {
+                font-weight: bold;
+            }
+        }
+    }
     
     .main_content {
         display: flex;
         flex-direction: row;
-        margin-top: 10rem;
         width: 70rem;
         height: 40rem;
         border: 1px solid var(--gray-3);
@@ -83,6 +120,8 @@
                 height: 100%;
                 padding: 2rem;
                 display: flex;
+                flex-direction: column;
+                gap: 1.3rem;
                 overflow-y: auto;
             }
 
@@ -117,6 +156,62 @@
                     span {
                         padding: .7rem 1rem .1rem .3rem;
                         border-bottom: 1px solid var(--gray-3);
+                    }
+
+                    .status_completed {
+                        color: var(--success);
+                        font-weight: bold;
+                    }
+        
+                    .status_pending {
+                        color: var(--alert);
+                        font-weight: bold;
+                    }
+        
+                    .status_user_cancellation, .status_establishment_cancellation {
+                        color: var(--warning);
+                        font-weight: bold;
+                    }
+                }
+            }
+
+            .reserve {
+                width: 100%;
+                padding: 1rem;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+                background-color: var(--white-2);
+                border: 1px solid var(--gray-3);
+                border-radius: 1rem;
+                font-size: var(--font-sm);
+            }
+
+            .reserve_buttons {
+        
+                & {
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 1.3rem;
+                    }
+        
+                    .reserve_button {
+                        width: 9rem;
+                        height: 3rem;
+                        padding: .6rem;
+        
+                        & {
+                            button {
+                                display: flex;
+                                flex-direction: row;
+                                gap: .3rem;
+                            }
+                            i {
+                                font-size: 1rem;
+                            }
+                        }
                     }
                 }
             }

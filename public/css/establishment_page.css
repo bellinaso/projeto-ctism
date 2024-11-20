@@ -24,8 +24,7 @@
 @media only screen and (min-width: 1200px) {
     header {
         height: 25rem;
-        background-image: url('../images/category_images/Gastronomia.jpg');
-        background-color: #000;
+        background: linear-gradient(45deg, #0b1314 0%, #140d0d 40%, #0a0303 60%, #02161a 100%);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center 175%;
