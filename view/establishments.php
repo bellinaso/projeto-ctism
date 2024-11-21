@@ -111,7 +111,7 @@
     
                                 <div class="establishment_image">
                                     <a href="/view/establishment_page.php?id='.$e['id'].'">
-                                        <img src="/public/images/image_icon.svg" alt="" class="image_icon">
+                                        <img src="../controller/uploads/'.$e['cnpj'].'.jpg" alt="" class="image_icon">
                                     </a>
                                 </div>
     
@@ -292,13 +292,26 @@
                         lng: parseFloat(location.longitude)
                     },
                     title: location.title,
-                    icon: ICONS.educacao,
+                    // label: {
+                    //     // text: `${location.title}`,
+                    //     text: `teste`,
+                    //     color: "#BD2A2E",
+                    //     fontSize: "14px",
+                    //     fontWeight: "bold"
+                    // },
                     optmized: false
                 });
 
                 // Opcional: Adiciona uma janela de informação para cada marcador
                 const infoWindow = new google.maps.InfoWindow({
-                    content: `<h3>${location.name}</h3><p>${location.address}</p>`
+                    content: `
+                    <div style='float: left; object-fit: cover;'>
+                        <img style="width: 6rem; heigth: 6rem;" src='../controller/uploads/${location.image}.jpg'>
+                    </div>
+                    <div style='float:right; padding: 10px;'>
+                        <h3><a href="/view/establishment_page.php?id=${location.id}">${location.name}</a></h3>
+                        <p>${location.address}</p>
+                    </div>`
                 });
 
                 // Exibe a infoWindow ao clicar no marcador

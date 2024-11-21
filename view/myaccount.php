@@ -161,8 +161,8 @@
                                             echo '
                                                 <div class="establishment">
                                                     <div class="establishment_image">
-                                                        <a href="/view/establishment_page.php">
-                                                            <img src="/public/images/image_icon.svg" alt="" class="image_icon">
+                                                        <a href="/view/establishment_page.php?id='.$e['id'].'">
+                                                            <img src="../controller/uploads/'.$e['cnpj'].'.jpg" alt="" class="image_icon">
                                                         </a>
                                                     </div>
                                                     <div class="establishment_info">

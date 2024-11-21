@@ -87,6 +87,25 @@
                 redirect_to('establishment_register.php?code=422&error_at=invalid_subcategory');
             }
 
+            // Image Validation
+            if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+                $upload_dir = './uploads/';
+    
+                if (!is_dir($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+
+                $file_temp_path = $_FILES['image']['tmp_name'];
+                $file_extension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
+            
+                $new_file_name = $cnpj.'.jpg';
+                $destination = $upload_dir.$new_file_name;
+            
+                if (!move_uploaded_file($file_temp_path, $destination)) {
+                    redirect_to('establishment_register.php?code=422&error_at=saving_image');
+                }
+            }
+
             $address = "Rua $street, $establishment_number, Bairro $district, $city[name], $state[name], Brazil";
             // Rua, Número, Bairro, Cidade, Estado, País
 
@@ -104,10 +123,10 @@
                 $con->execute("UPDATE users SET user_type = 'manager' WHERE email = '$login';");
             }
             else {
-                // if(preg_match("/users\.(\w+)/", $error_message, $matches)) {
-                //     $affected_column = $matches[1]; 
-                // }
-                // redirect_to("register.php?code=422&error_at=duplicated_$affected_column");
+                if(preg_match("/establishments\.(\w+)/", $error_message, $matches)) {
+                    $affected_column = $matches[1]; 
+                }   
+                redirect_to("establishment_register.php?code=422&error_at=duplicated_$affected_column");
             }
         }
         else if(isset($_POST['update'])) {
@@ -144,7 +163,6 @@
             return $result;
         }
         else {
-            print_r($result);
             return $result->getMessage();
         }
     }

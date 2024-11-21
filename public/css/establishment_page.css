@@ -22,6 +22,23 @@
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    .row {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: flex-start;
+    }
+
+    .column {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        gap: 1.5rem;
+    }
+
     header {
         height: 25rem;
         background: linear-gradient(45deg, #0b1314 0%, #140d0d 40%, #0a0303 60%, #02161a 100%);
@@ -102,15 +119,6 @@
         }
     }
 
-    .row {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: flex-start;
-        gap: 1.5rem;
-    }
-
     .action_failed {
         min-width: max-content;
         max-width: 50%;
@@ -171,6 +179,7 @@
                 align-self: flex-end;
             }
             .new_service {
+                right: 0;
                 padding: .6rem;
                 height: 3rem;
             }
@@ -187,7 +196,6 @@
         justify-content: start;
         align-items: center;
         gap: 1.3rem;
-        padding-top: 4.3rem;
     }
 
     .reserve {
@@ -272,23 +280,118 @@
         }
     }
 
-    .service {
+    .service, .service_register {
         display: flex;
         flex-direction: column;
         background-color: var(--white-2);
         border: 1px solid var(--gray-3);
         border-radius: 1rem;
         width: 100%;
-        min-height: 14rem;
         padding: 1rem;
         font-size: var(--font-sm);
-        overflow: hidden;
+    }
+    
+    .week_days {
+        margin: 1rem 0 1rem 0;
+    }
 
+    .service_register {
+        display: none;
+        & {
+            input[type=time] {
+                padding: .6rem;
+                border-radius: .5rem;
+                background-color: var(--red-3);
+                border: none;
+                outline: 1px solid var(--red-1);
+                font-weight: bold;
+                text-align: center;
+                transition: all ease-in-out 0.3s;
+            }
+            
+            input[type=time]:hover, input[type=time]:focus {
+                color: var(--white-1);
+                background-color: var(--red-1);
+                outline: 1px solid var(--red-2);
+            }
+
+            input[type=time]::-webkit-inner-spin-button,
+            input[type=time]::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+            
+            .time_button {
+                width: 2.5rem;
+                height: 2.5rem;
+                color: var(--white-1);
+                border: none;
+            }
+        }
+
+        .form_input {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            
+            & {
+                input {
+                    width: 100%;
+                    height: 2.5rem;
+                    padding: 1rem;
+                    margin-top: .3rem;
+                    border: none;
+                    outline: 1px solid var(--gray-2);
+                    border-radius: .5rem;
+                    font-size: var(--font-sm);
+                    transition: all ease-in-out 0.27s;
+                }
+
+                input:hover {
+                    padding-left: 1.17rem;
+                }
+                
+                input:focus {
+                    outline: 1px solid var(--red-1);
+                    padding-left: 1.17rem;
+                }
+            }
+        }
+
+        label, span {
+            color: var(--gray-1);
+            font-size: var(--font-sm);
+            font-weight: bold;
+        }
+
+        label {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        #description_count {
+            color: var(--gray-2);
+        }
+
+        #limit_exceeded {
+            color: var(--red-1);
+        }
+    }
+
+    
+    .service {
+        min-height: 14rem;
+        overflow: hidden;
         & {
             .service_info {
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
+            }
+
+            p {
+                text-align: justify;
             }
 
             form {
@@ -327,36 +430,41 @@
                 gap: 3rem;
             }
 
-            input[type=radio] {
-                display: none;
-            }
-
-            .service_button {
-                padding: .6rem;
-                border-radius: .5rem;
-                border: 1px solid var(--red-2);
-                background-color: var(--red-3);
-                color: var(--gray-1);
-                font-weight: bold;
-                cursor: pointer;
-                transition: all ease-in-out 0.3s;
-            }
-            
-            .service_button:hover {
-                background-color: var(--red-1);
-                color: var(--white-1);
-            }
-            
-            input[type=radio]:checked + .service_button {
-                background-color: var(--red-1);
-                color: var(--white-1);
-            }
-
             .submit_button {
                 align-self: flex-end;
                 width: 6rem;
                 height: 3rem;
             }
         }
+    }
+
+    input[type=radio], input[type=checkbox] {
+        display: none;
+    }
+
+    .service_button {
+        padding: .6rem;
+        border-radius: .5rem;
+        border: 1px solid var(--red-2);
+        background-color: var(--red-3);
+        color: var(--gray-1);
+        font-weight: bold;
+        cursor: pointer;
+        transition: all ease-in-out 0.3s;
+    }
+    
+    .service_button:hover {
+        background-color: var(--red-1);
+        color: var(--white-1);
+    }
+    
+    input[type=radio]:checked + .service_button,
+    input[type=checkbox]:checked + .service_button {
+        background-color: var(--red-1);
+        color: var(--white-1);
+    }
+
+    .show {
+        display: flex;
     }
 }

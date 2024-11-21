@@ -138,14 +138,14 @@
                                 break;
                             case 'duplicated_cnpj':
                                 echo '
-                                <span class="error_at">Subategoria inválida! Subategoria inexistente.</span>
+                                <span class="error_at">CNPJ duplicado! Este CNJP já foi utilizado para cadastrar um estabelecimento.</span>
                                 ';
                                 break;
                         }
                     }
                 }
             ?>
-            <form method="post" action="/controller/establishments_controller.php">
+            <form method="post" action="/controller/establishments_controller.php" enctype="multipart/form-data">
 
                 <!-- 
                     - USER_ID
@@ -262,7 +262,8 @@
                     </div>
                 </div>
 
-                <div class="form_input">
+                <div class="form_input_group">
+                    <div class="form_input">
                         <label for="description">
                             <span>Descrição</span>
                             <span id="description_count">0/200</span>
@@ -270,6 +271,13 @@
                         <span id="limit_exceeded"></span>
                         <textarea name="description" id="description" placeholder="Escreva uma breve descrição do seu estabelecimento" ></textarea>
                     </div>
+                    <div class="form_input">
+                        <label for="image">
+                            Foto
+                        </label>
+                        <input type="file" name="image" id="image">
+                    </div>
+                </div>
 
                 <!-- https://blog.logrocket.com/creating-custom-select-dropdown-css/ -->
 

@@ -23,7 +23,8 @@
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     body {
-        min-width: 100vw;
+        /* min-width: 100vw; */
+        width: 100vw;
         min-height: 100vh;
         display: flex;
         flex-direction: column;

@@ -114,7 +114,7 @@
             <?php
                     if(isset($establishment) && $establishment != null) {
                         echo '
-                            <img src="../public/images/image_icon.svg" alt="" class="establishment_image">
+                            <img src="../controller/uploads/'.$establishment['cnpj'].'.jpg" alt="" class="establishment_image">
                             <div class="establishment_info">
                                 <h2 class="establishment_title">'.$establishment['name'].'</h2>
                                 <p>
@@ -284,20 +284,104 @@
                 
 
                 <div class="establishment_services">
-                    <?php
-                        if(
+                <?php
+                    if(
                         isset($logged_user) &&
                         isset($establishment) &&
                         $logged_user['id'] == $establishment['user_id']) {
                             echo '
                                 <div class="manager_buttons">
                                     <div class="green_button new_service">
-                                        <button type="button">Adicionar novo</button>
+                                        <button type="button" onclick="create_new_service()">Adicionar novo</button>
                                     </div>
-                                </div>        
+                                </div>
+                                
+                            <div class="service_register">
+                                <form action="../controller/service_controller.php" method="post">
+                                    <input type="hidden" name="establishment_id" value="'.$establishment['id'].'">
+                                    <div class="row">
+                                        <div class="form_input">
+                                            <label for="name">
+                                                Nome do serviço
+                                            </label>
+                                            <input type="text" name="name" id="name" placeholder="Insira um nome para o serviço">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form_input">
+                                            <label for="description">
+                                                Descrição
+                                                <span id="description_count">0/200</span>
+                                            </label>
+                                            <span id="limit_exceeded"></span>
+                                            <input type="text" name="description" id="description" placeholder="Insira uma descrição do serviço">
+                                        </div>
+                                    </div>
+                                    <label>
+                                        Horários disponíveis
+                                    </label>
+                                    <div class="row week_days">
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="DOM">
+                                                <label for="DOM" class="service_button">DOM</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="SEG">
+                                                <label for="SEG" class="service_button">SEG</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="TER">
+                                                <label for="TER" class="service_button">TER</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="QUA">
+                                                <label for="QUA" class="service_button">QUA</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="QUI">
+                                                <label for="QUI" class="service_button">QUI</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="SEX">
+                                                <label for="SEX" class="service_button">SEX</label>
+                                            </div>
+                                        </div>
+        
+                                        <div class="column">
+                                            <div class="form_input">
+                                                <input type="checkbox" name="week_days" id="SAB">
+                                                <label for="SAB" class="service_button">SAB</label>
+                                            </div>
+                                        </div>
+        
+                                    </div>
+                                    <div class="row">
+                                        <div class="green_button new_service">
+                                            <button type="submit" name="create_new">Confirmar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                             ';
                         }
-                    ?>
+                        ?>
                     <?php
                         if(isset($services)) {
                             foreach($services as $s) {
@@ -346,17 +430,21 @@
                                     $future_date->add(new DateInterval("P{$i}D"));
                                 
                                     $formated_date = $future_date->format('l');
-    
+
+                                    
                                     echo '
-                                                <div class="available_times slide">
+                                        <div class="available_times slide">
                                     ';
                                     
                                     foreach($availability as $a) {
+                                        
                                         if($a['week_days'] == strtolower($formated_date) && $a['service_id'] == $s['id']) {
+
+                                            $formated_start_time = date('h:i', strtotime($a['start_time']));
                                             echo '
                                                     <div class="form_input">
                                                         <input type="radio" name="available_times" id="'.$a['id'].'" value="'.$a['id'].'">
-                                                        <label for="'.$a['id'].'" class="service_button">'.$a['start_time'].'</label>
+                                                        <label for="'.$a['id'].'" class="service_button">'.$formated_start_time.'</label>
                                                     </div>
                                             ';
                                         }
@@ -402,6 +490,126 @@
     <footer>
         
     </footer>
+
+    <script>
+        const columns = document.querySelectorAll(".column");
+
+        columns.forEach((column, index) => {
+            const checkbox = column.querySelector('input[type="checkbox"]');
+
+            const initial_time_input = document.createElement("input");
+
+            const new_button_div = document.createElement("div");
+            const new_button = document.createElement("button");
+            
+            const delete_button_div = document.createElement("div");
+            const delete_button = document.createElement("button");
+
+            initial_time_input.type = "time";
+            initial_time_input.name = `service_availability_time_${index}[]`;
+
+            new_button_div.className = "green_button time_button";
+            delete_button_div.className = "red_button time_button";
+
+            new_button.innerHTML = '<i class="fa-solid fa-plus"></i>';
+            delete_button.innerHTML = '<i class="fa-solid fa-minus"></i>';
+
+            checkbox.addEventListener("change", () => {
+
+                if (checkbox.checked) {
+                    new_button_div.appendChild(new_button);
+                    delete_button_div.appendChild(delete_button);
+
+                    column.appendChild(new_button_div);
+                    column.appendChild(initial_time_input);
+                    column.appendChild(delete_button_div);
+        
+                    new_button.addEventListener("click", (e) => {
+                        e.preventDefault();
+
+                        const time_input = document.createElement("input");
+                        time_input.type = "time";
+                        time_input.name = `service_availability_time_${index}[]`;
+
+                        console.log(column.lastElementChild);
+                        
+                        column.insertBefore(time_input, column.lastElementChild);
+                    });
+
+                    delete_button.addEventListener("click", (e) => {
+                        e.preventDefault();
+
+                        if(column.children.length > 4) {
+                            column.removeChild(column.lastElementChild.previousElementSibling);
+                        }
+                    });
+                }
+                else {
+                    
+                    const time_inputs = column.querySelectorAll("input[type=time]");
+                    const buttons_div = column.querySelectorAll(".time_button");
+
+                    time_inputs.forEach((time_input) =>  {
+                        column.removeChild(time_input);
+                    });
+
+                    buttons_div.forEach((button) =>  {
+                        column.removeChild(button);
+                    });
+                }
+            });
+
+            
+        });
+    </script>
+
+    <script>
+        const desciption_input = document.getElementById('description');
+        const description_count = document.getElementById('description_count');
+        const limit_exceeded = document.getElementById('limit_exceeded');
+        const max_chars = 100;
+
+        desciption_input.addEventListener('input', () => {
+            const current_length = desciption_input.value.length;
+            description_count.textContent = `${current_length}/100`;
+            
+            if (current_length > max_chars) {
+                limit_exceeded.textContent = 'A descrição deve ser menor do que 100 caracteres!';
+                description_count.style.color = 'var(--red-1)';
+            }
+            else {
+                limit_exceeded.textContent = '';
+                description_count.style.color = 'var(--gray-2)';
+            }
+        });
+    </script>
+
+    <script>
+        function create_new_service() {
+            const create_service_button = document.querySelector(".new_service");
+
+            if(create_service_button.classList.contains("green_button")) {
+                create_service_button.classList.remove("green_button")
+                create_service_button.classList.add("red_button")
+                create_service_button.children[0].innerText = "Cancelar"
+            }
+            else {
+                create_service_button.classList.add("green_button")
+                create_service_button.classList.remove("red_button")
+                create_service_button.children[0].innerText = "Adicionar novo"
+            }
+
+            const create_service = document.querySelector(".service_register");
+
+            if(create_service.classList.contains("show")) {
+                create_service.classList.remove("show")
+            }
+            else {
+                create_service.classList.add("show")
+            }
+        }
+    </script>
+
     <script>
         <?php
         $service_ids = array_map(function($services) {return $services['id'];}, $services);

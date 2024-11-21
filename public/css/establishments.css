@@ -206,7 +206,10 @@
                     }
                     
                     .image_icon {
+                        border-radius: .5rem;
                         width: 6rem;
+                        height: 6rem;
+                        object-fit: cover;
                     }
                     
                     span {

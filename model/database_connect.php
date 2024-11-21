@@ -31,9 +31,9 @@ class connect_database {
     public function execute($query) {
         try {
             if ($result = $this->mysqli->query($query)){
+                $last_insert_id = $this->mysqli->insert_id;
                 $this->mysqli->commit();
                 return $result;
-                // null
             }
             else {
                 $this->rows_affected = 0;
@@ -43,6 +43,27 @@ class connect_database {
         catch (Exception $exc) {
             $this->mysqli->rollback();
             $this->disconnect();
+            print_r($exc);
+            return $exc;
+        }
+    }
+
+    public function insert($query) {
+        try {
+            if ($result = $this->mysqli->query($query)){
+                $last_insert_id = $this->mysqli->insert_id;
+                $this->mysqli->commit();
+                return ($last_insert_id);
+            }
+            else {
+                $this->rows_affected = 0;
+                throw new Exception();
+            }
+        }
+        catch (Exception $exc) {
+            $this->mysqli->rollback();
+            $this->disconnect();
+            print_r($exc);
             return $exc;
         }
     }

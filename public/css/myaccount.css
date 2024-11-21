@@ -223,6 +223,9 @@
             }
             
             .establishments_list {
+                display: flex;
+                flex-direction: column;
+                gap: 1.3rem;
                 height: 100%;
                 overflow-y: scroll;
             }
@@ -242,7 +245,7 @@
                 
                 & {
                     img {
-                        border-radius: 0;
+                        border-radius: .5rem;
                     }
                     
                     a {
@@ -258,6 +261,8 @@
                     
                     .image_icon {
                         width: 6rem;
+                        height: 6rem;
+                        object-fit: cover;
                     }
                     
                     span {

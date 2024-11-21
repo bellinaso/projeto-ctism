@@ -39,6 +39,7 @@ CREATE TABLE establishments(
     name VARCHAR(200),
     email VARCHAR(100),
     phone VARCHAR(14),
+    image VARCHAR(100),
     address VARCHAR(200),
     latitude DOUBLE,
     longitude DOUBLE,
@@ -56,7 +57,7 @@ CREATE TABLE services(
     id INT auto_increment,
     establishments_id INT,
     name VARCHAR(100),
-    description TEXT,
+    description VARCHAR(200),
     creation_date DATE,
     PRIMARY KEY(id),
     FOREIGN KEY(establishments_id) REFERENCES establishments(id)
@@ -87,15 +88,15 @@ CREATE TABLE reserves(
     FOREIGN KEY(availability_id) REFERENCES availability(id)
 );
 
-CREATE TABLE reviews(
-    id INT auto_increment,
-    reserve_id INT,
-    review_note INT,
-    commentary TEXT,
-    review_date DATE,
-    PRIMARY KEY(id),
-    FOREIGN KEY(reserve_id) REFERENCES reserves(id)
-);
+-- CREATE TABLE reviews(
+--     id INT auto_increment,
+--     reserve_id INT,
+--     review_note INT,
+--     commentary TEXT,
+--     review_date DATE,
+--     PRIMARY KEY(id),
+--     FOREIGN KEY(reserve_id) REFERENCES reserves(id)
+-- );
 
 CREATE TABLE states(
     id INT auto_increment,
@@ -113,11 +114,17 @@ CREATE TABLE cities(
 
 -- DEBUG SECTION
 
-INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('12345678901', 'João Silva', 'joao.silva@email.com', '11987654321', 'São Paulo', 'São Paulo', 'senha123', 'user', '2024-10-01');
-
-INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('23456789012', 'Maria Oliveira', 'maria.oliveira@email.com', '21987654321', 'Rio de Janeiro', 'Rio de Janeiro', 'senha456', 'manager', '2024-10-02');
-
-INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES ('34567890123', 'Carlos Souza', 'carlos.souza@email.com', '31987654321', 'Minas Gerais', 'Belo Horizonte', 'senha789', 'admin', '2024-10-03');
+INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES
+('12345678901', 'Maria Silva', 'maria.silva@gmail.com', '11987654321', 'São Paulo', 'São Paulo', 'senha123', 'user', '2024-11-21'),
+('98765432100', 'João Oliveira', 'joao.oliveira@yahoo.com', '21987654321', 'Rio de Janeiro', 'Rio de Janeiro', 'senha123', 'user', '2024-11-20'),
+('45678912309', 'Ana Costa', 'ana.costa@hotmail.com', '31987654321', 'Minas Gerais', 'Belo Horizonte', 'senha123', 'manager', '2024-11-19'),
+('65432198708', 'Carlos Pereira', 'carlos.pereira@outlook.com', '41987654321', 'Paraná', 'Curitiba', 'senha123', 'admin', '2024-11-18'),
+('78912345607', 'Fernanda Lima', 'fernanda.lima@gmail.com', '51987654321', 'Rio Grande do Sul', 'Porto Alegre', 'senha123', 'user', '2024-11-17'),
+('32165498706', 'Lucas Santos', 'lucas.santos@gmail.com', '61987654321', 'Distrito Federal', 'Brasília', 'senha123', 'user', '2024-11-16'),
+('98712365405', 'Juliana Mendes', 'juliana.mendes@gmail.com', '71987654321', 'Bahia', 'Salvador', 'senha123', 'manager', '2024-11-15'),
+('12398745604', 'Roberto Almeida', 'roberto.almeida@gmail.com', '81987654321', 'Pernambuco', 'Recife', 'senha123', 'user', '2024-11-14'),
+('45632178903', 'Carolina Souza', 'carolina.souza@gmail.com', '91987654321', 'Ceará', 'Fortaleza', 'senha123', 'admin', '2024-11-13'),
+('65498732102', 'Pedro Gonçalves', 'pedro.goncalves@gmail.com', '21912345678', 'Espírito Santo', 'Vitória', 'senha123', 'user', '2024-11-12');
 
 
 
@@ -163,82 +170,419 @@ INSERT INTO subcategories (name, category_id) VALUES
 
 
 
-INSERT INTO establishments 
-(cnpj, user_id, name, email, phone, address, latitude, longitude, description, category_id, subcategory_id, creation_date)
-VALUES
-('12345678000195', 1, 'Salão Bela Vida', 'contato@belavida.com', '55999999999', 'Rua das Flores, 123, Centro, Santa Maria, RS, Brasil', -29.6841, -53.8069, 'Salão de beleza especializado em cortes, manicure e pedicure.', 1, 1, '2024-11-18');
+INSERT INTO establishments (cnpj, user_id, name, email, phone, image, address, latitude, longitude, description, category_id, subcategory_id, creation_date) VALUES
+('12345678000190', 3, 'Academia Bem-Estar', 'contato@academiabemestar.com', '5532245678', '12345678000190', 'Av. Presidente Vargas, 1200', -29.68922, -53.80694, 'Academia com foco em saúde e bem-estar', 1, 3, '2024-11-21'),
+('98765432000180', 7, 'Pet Center Santa Maria', 'contato@petcentersm.com', '5532249876', '98765432000180', 'Rua Venâncio Aires, 345', -29.68344, -53.80601, 'Serviços completos para pets e animais', 1, 4, '2024-11-20');
+
+INSERT INTO establishments (cnpj, user_id, name, email, phone, image, address, latitude, longitude, description, category_id, subcategory_id, creation_date) VALUES
+('11223344000155', 3, 'Restaurante Sabor Gaúcho', 'contato@saborgaucho.com', '5532233344', '11223344000155', 'Rua do Acampamento, 789', -29.68772, -53.81200, 'Especialidades da culinária gaúcha', 4, 9, '2024-11-19'),
+('44556778000111', 7, 'TechFix Informática', 'contato@techfixsm.com', '5532211234', '44556778000111', 'Av. Rio Branco, 567', -29.68845, -53.81032, 'Manutenção e suporte de tecnologia', 2, 6, '2024-11-18');
 
 
 
 
-INSERT INTO services (establishments_id, name, description, creation_date)
-VALUES
-(1, 'Corte de Cabelo', 'Serviço de corte de cabelo masculino e feminino, com profissionais especializados.', '2024-11-18'),
-(1, 'Manicure e Pedicure', 'Cuidado com unhas, com técnicas de embelezamento e saúde.', '2024-11-18'),
-(1, 'Consulta Médica', 'Atendimento clínico com profissionais qualificados para diversas especialidades.', '2024-11-18'),
-(1, 'Consulta Médica', 'Atendimento clínico com profissionais qualificados para diversas especialidades.', '2024-11-18');
+
+-- Serviços para "Academia Bem-Estar" (establishment id: 1)
+INSERT INTO services (establishments_id, name, description, creation_date) VALUES
+(1, 'Treinamento Funcional', 'Aprimore seu condicionamento físico com nossos treinos personalizados.', '2024-11-21'),
+(1, 'Aulas de Yoga', 'Relaxe e fortaleça o corpo com práticas de yoga.', '2024-11-21'),
+(1, 'Musculação', 'Espaço completo com equipamentos modernos.', '2024-11-21'),
+(1, 'Personal Trainer', 'Treinamento individual com profissionais especializados.', '2024-11-21'),
+(1, 'Avaliação Física', 'Acompanhe seu progresso com avaliações periódicas.', '2024-11-21');
+
+-- Serviços para "Pet Center Santa Maria" (establishment id: 2)
+INSERT INTO services (establishments_id, name, description, creation_date) VALUES
+(2, 'Banho e Tosa', 'Cuidados completos para higiene e estética do seu pet.', '2024-11-20'),
+(2, 'Consulta Veterinária', 'Atendimento médico especializado para seu animal.', '2024-11-20'),
+(2, 'Creche para Pets', 'Espaço seguro e divertido para o dia a dia do seu pet.', '2024-11-20'),
+(2, 'Venda de Rações', 'Rações e suplementos das melhores marcas.', '2024-11-20'),
+(2, 'Adestramento', 'Cursos de adestramento para cães de todas as raças.', '2024-11-20');
+
+-- Serviços para "Restaurante Sabor Gaúcho" (establishment id: 3)
+INSERT INTO services (establishments_id, name, description, creation_date) VALUES
+(3, 'Buffet Livre', 'Grande variedade de pratos típicos da culinária gaúcha.', '2024-11-19'),
+(3, 'Rodízio de Carnes', 'Carnes nobres servidas à vontade.', '2024-11-19'),
+(3, 'Delivery', 'Entregamos pratos deliciosos na sua casa.', '2024-11-19'),
+(3, 'Sobremesas Artesanais', 'Sobremesas caseiras e tradicionais.', '2024-11-19'),
+(3, 'Almoços Executivos', 'Opções rápidas e saborosas para o dia a dia.', '2024-11-19');
+
+-- Serviços para "TechFix Informática" (establishment id: 4)
+INSERT INTO services (establishments_id, name, description, creation_date) VALUES
+(4, 'Reparo de Computadores', 'Conserto de desktops e notebooks.', '2024-11-18'),
+(4, 'Instalação de Softwares', 'Instalação e configuração de programas.', '2024-11-18'),
+(4, 'Manutenção Preventiva', 'Evite problemas futuros com nosso serviço de manutenção.', '2024-11-18'),
+(4, 'Suporte Técnico', 'Atendimento remoto e presencial para empresas e residências.', '2024-11-18'),
+(4, 'Venda de Peças', 'Componentes de hardware para upgrade e reparos.', '2024-11-18');
 
 
 
 
-INSERT INTO availability (service_id, week_days, start_time)
-VALUES
--- Disponibilidade para 'Corte de Cabelo' (service_id 1)
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(1, 'monday', '08:00:00'),
 (1, 'monday', '09:00:00'),
+(1, 'monday', '10:00:00'),
+(1, 'monday', '11:00:00'),
 (1, 'monday', '14:00:00'),
+(1, 'monday', '15:00:00'),
+(1, 'monday', '16:00:00'),
+(1, 'tuesday', '08:00:00'),
+(1, 'tuesday', '09:00:00'),
 (1, 'tuesday', '10:00:00'),
+(1, 'tuesday', '14:00:00'),
 (1, 'tuesday', '15:00:00'),
-(1, 'wednesday', '09:30:00'),
-(1, 'wednesday', '16:00:00'),
-(1, 'thursday', '11:00:00'),
-(1, 'thursday', '17:00:00'),
-(1, 'friday', '10:30:00'),
-(1, 'saturday', '12:00:00'),
+(1, 'wednesday', '08:00:00'),
+(1, 'wednesday', '09:00:00'),
+(1, 'wednesday', '10:00:00'),
+(1, 'wednesday', '14:00:00'),
+(1, 'wednesday', '15:00:00'),
+(1, 'thursday', '08:00:00'),
+(1, 'thursday', '09:00:00'),
+(1, 'thursday', '10:00:00'),
+(1, 'thursday', '14:00:00');
 
--- Disponibilidade para 'Manicure e Pedicure' (service_id 2)
+INSERT INTO availability (service_id, week_days, start_time) VALUES
 (2, 'monday', '08:00:00'),
-(2, 'monday', '13:30:00'),
+(2, 'monday', '09:00:00'),
+(2, 'monday', '10:00:00'),
+(2, 'monday', '11:00:00'),
+(2, 'monday', '14:00:00'),
+(2, 'monday', '15:00:00'),
+(2, 'monday', '16:00:00'),
+(2, 'tuesday', '08:00:00'),
 (2, 'tuesday', '09:00:00'),
+(2, 'tuesday', '10:00:00'),
+(2, 'tuesday', '14:00:00'),
+(2, 'tuesday', '15:00:00'),
+(2, 'wednesday', '08:00:00'),
+(2, 'wednesday', '09:00:00'),
+(2, 'wednesday', '10:00:00'),
 (2, 'wednesday', '14:00:00'),
-(2, 'wednesday', '18:00:00'),
-(2, 'thursday', '08:30:00'),
-(2, 'thursday', '13:00:00'),
-(2, 'friday', '10:00:00'),
-(2, 'friday', '15:30:00'),
-(2, 'saturday', '09:30:00'),
+(2, 'wednesday', '15:00:00'),
+(2, 'thursday', '08:00:00'),
+(2, 'thursday', '09:00:00'),
+(2, 'thursday', '10:00:00'),
+(2, 'thursday', '14:00:00');
 
--- Disponibilidade para 'Consulta Médica' (service_id 3)
-(3, 'monday', '07:00:00'),
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(3, 'monday', '08:00:00'),
+(3, 'monday', '09:00:00'),
+(3, 'monday', '10:00:00'),
 (3, 'monday', '11:00:00'),
+(3, 'monday', '14:00:00'),
+(3, 'monday', '15:00:00'),
+(3, 'monday', '16:00:00'),
 (3, 'tuesday', '08:00:00'),
-(3, 'tuesday', '12:30:00'),
+(3, 'tuesday', '09:00:00'),
+(3, 'tuesday', '10:00:00'),
+(3, 'tuesday', '14:00:00'),
+(3, 'tuesday', '15:00:00'),
+(3, 'wednesday', '08:00:00'),
 (3, 'wednesday', '09:00:00'),
-(3, 'thursday', '10:30:00'),
-(3, 'friday', '14:00:00'),
-(3, 'friday', '17:00:00'),
-(3, 'saturday', '08:30:00'),
-(3, 'saturday', '13:00:00'),
+(3, 'wednesday', '10:00:00'),
+(3, 'wednesday', '14:00:00'),
+(3, 'wednesday', '15:00:00'),
+(3, 'thursday', '08:00:00'),
+(3, 'thursday', '09:00:00'),
+(3, 'thursday', '10:00:00'),
+(3, 'thursday', '14:00:00');
 
--- Disponibilidade para 'Consulta Médica' (service_id 3)
-(4, 'monday', '07:00:00'),
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(4, 'monday', '08:00:00'),
+(4, 'monday', '09:00:00'),
+(4, 'monday', '10:00:00'),
 (4, 'monday', '11:00:00'),
+(4, 'monday', '14:00:00'),
+(4, 'monday', '15:00:00'),
+(4, 'monday', '16:00:00'),
 (4, 'tuesday', '08:00:00'),
-(4, 'tuesday', '12:30:00'),
+(4, 'tuesday', '09:00:00'),
+(4, 'tuesday', '10:00:00'),
+(4, 'tuesday', '14:00:00'),
+(4, 'tuesday', '15:00:00'),
+(4, 'wednesday', '08:00:00'),
 (4, 'wednesday', '09:00:00'),
-(4, 'thursday', '10:30:00'),
-(4, 'friday', '14:00:00'),
-(4, 'friday', '17:00:00'),
-(4, 'saturday', '08:30:00'),
-(4, 'saturday', '13:00:00');
+(4, 'wednesday', '10:00:00'),
+(4, 'wednesday', '14:00:00'),
+(4, 'wednesday', '15:00:00'),
+(4, 'thursday', '08:00:00'),
+(4, 'thursday', '09:00:00'),
+(4, 'thursday', '10:00:00'),
+(4, 'thursday', '14:00:00');
 
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(5, 'monday', '08:00:00'),
+(5, 'monday', '09:00:00'),
+(5, 'monday', '10:00:00'),
+(5, 'monday', '11:00:00'),
+(5, 'monday', '14:00:00'),
+(5, 'monday', '15:00:00'),
+(5, 'monday', '16:00:00'),
+(5, 'tuesday', '08:00:00'),
+(5, 'tuesday', '09:00:00'),
+(5, 'tuesday', '10:00:00'),
+(5, 'tuesday', '14:00:00'),
+(5, 'tuesday', '15:00:00'),
+(5, 'wednesday', '08:00:00'),
+(5, 'wednesday', '09:00:00'),
+(5, 'wednesday', '10:00:00'),
+(5, 'wednesday', '14:00:00'),
+(5, 'wednesday', '15:00:00'),
+(5, 'thursday', '08:00:00'),
+(5, 'thursday', '09:00:00'),
+(5, 'thursday', '10:00:00'),
+(5, 'thursday', '14:00:00');
 
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(6, 'monday', '08:00:00'),
+(6, 'monday', '09:00:00'),
+(6, 'monday', '10:00:00'),
+(6, 'monday', '11:00:00'),
+(6, 'monday', '14:00:00'),
+(6, 'monday', '15:00:00'),
+(6, 'monday', '16:00:00'),
+(6, 'tuesday', '08:00:00'),
+(6, 'tuesday', '09:00:00'),
+(6, 'tuesday', '10:00:00'),
+(6, 'tuesday', '14:00:00'),
+(6, 'tuesday', '15:00:00'),
+(6, 'wednesday', '08:00:00'),
+(6, 'wednesday', '09:00:00'),
+(6, 'wednesday', '10:00:00'),
+(6, 'wednesday', '14:00:00'),
+(6, 'wednesday', '15:00:00'),
+(6, 'thursday', '08:00:00'),
+(6, 'thursday', '09:00:00'),
+(6, 'thursday', '10:00:00'),
+(6, 'thursday', '14:00:00');
 
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(7, 'monday', '08:00:00'),
+(7, 'monday', '09:00:00'),
+(7, 'monday', '10:00:00'),
+(7, 'monday', '11:00:00'),
+(7, 'monday', '14:00:00'),
+(7, 'monday', '15:00:00'),
+(7, 'monday', '16:00:00'),
+(7, 'tuesday', '08:00:00'),
+(7, 'tuesday', '09:00:00'),
+(7, 'tuesday', '10:00:00'),
+(7, 'tuesday', '14:00:00'),
+(7, 'tuesday', '15:00:00'),
+(7, 'wednesday', '08:00:00'),
+(7, 'wednesday', '09:00:00'),
+(7, 'wednesday', '10:00:00'),
+(7, 'wednesday', '14:00:00'),
+(7, 'wednesday', '15:00:00'),
+(7, 'thursday', '08:00:00'),
+(7, 'thursday', '09:00:00'),
+(7, 'thursday', '10:00:00'),
+(7, 'thursday', '14:00:00');
 
-INSERT INTO reserves (user_id, establishments_id, service_id, availability_id, reserve_date, service_date, reserve_status)
-VALUES
-(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 2 DAY), 'pending'),
-(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 3 DAY), 'pending'),
-(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 4 DAY), 'completed'),
-(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 5 DAY), 'establishment_cancellation'),
-(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 6 DAY), 'establishment_cancellation'),
-(2, 1, 3, 35, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 7 DAY), 'pending');
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(8, 'monday', '08:00:00'),
+(8, 'monday', '09:00:00'),
+(8, 'monday', '10:00:00'),
+(8, 'monday', '11:00:00'),
+(8, 'monday', '14:00:00'),
+(8, 'monday', '15:00:00'),
+(8, 'monday', '16:00:00'),
+(8, 'tuesday', '08:00:00'),
+(8, 'tuesday', '09:00:00'),
+(8, 'tuesday', '10:00:00'),
+(8, 'tuesday', '14:00:00'),
+(8, 'tuesday', '15:00:00'),
+(8, 'wednesday', '08:00:00'),
+(8, 'wednesday', '09:00:00'),
+(8, 'wednesday', '10:00:00'),
+(8, 'wednesday', '14:00:00'),
+(8, 'wednesday', '15:00:00'),
+(8, 'thursday', '08:00:00'),
+(8, 'thursday', '09:00:00'),
+(8, 'thursday', '10:00:00'),
+(8, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(9, 'monday', '08:00:00'),
+(9, 'monday', '09:00:00'),
+(9, 'monday', '10:00:00'),
+(9, 'monday', '11:00:00'),
+(9, 'monday', '14:00:00'),
+(9, 'monday', '15:00:00'),
+(9, 'monday', '16:00:00'),
+(9, 'tuesday', '08:00:00'),
+(9, 'tuesday', '09:00:00'),
+(9, 'tuesday', '10:00:00'),
+(9, 'tuesday', '14:00:00'),
+(9, 'tuesday', '15:00:00'),
+(9, 'wednesday', '08:00:00'),
+(9, 'wednesday', '09:00:00'),
+(9, 'wednesday', '10:00:00'),
+(9, 'wednesday', '14:00:00'),
+(9, 'wednesday', '15:00:00'),
+(9, 'thursday', '08:00:00'),
+(9, 'thursday', '09:00:00'),
+(9, 'thursday', '10:00:00'),
+(9, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(10, 'monday', '08:00:00'),
+(10, 'monday', '09:00:00'),
+(10, 'monday', '10:00:00'),
+(10, 'monday', '11:00:00'),
+(10, 'monday', '14:00:00'),
+(10, 'monday', '15:00:00'),
+(10, 'monday', '16:00:00'),
+(10, 'tuesday', '08:00:00'),
+(10, 'tuesday', '09:00:00'),
+(10, 'tuesday', '10:00:00'),
+(10, 'tuesday', '14:00:00'),
+(10, 'tuesday', '15:00:00'),
+(10, 'wednesday', '08:00:00'),
+(10, 'wednesday', '09:00:00'),
+(10, 'wednesday', '10:00:00'),
+(10, 'wednesday', '14:00:00'),
+(10, 'wednesday', '15:00:00'),
+(10, 'thursday', '08:00:00'),
+(10, 'thursday', '09:00:00'),
+(10, 'thursday', '10:00:00'),
+(10, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(11, 'monday', '08:00:00'),
+(11, 'monday', '09:00:00'),
+(11, 'monday', '10:00:00'),
+(11, 'monday', '11:00:00'),
+(11, 'monday', '14:00:00'),
+(11, 'monday', '15:00:00'),
+(11, 'monday', '16:00:00'),
+(11, 'tuesday', '08:00:00'),
+(11, 'tuesday', '09:00:00'),
+(11, 'tuesday', '10:00:00'),
+(11, 'tuesday', '14:00:00'),
+(11, 'tuesday', '15:00:00'),
+(11, 'wednesday', '08:00:00'),
+(11, 'wednesday', '09:00:00'),
+(11, 'wednesday', '10:00:00'),
+(11, 'wednesday', '14:00:00'),
+(11, 'wednesday', '15:00:00'),
+(11, 'thursday', '08:00:00'),
+(11, 'thursday', '09:00:00'),
+(11, 'thursday', '10:00:00'),
+(11, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(12, 'monday', '08:00:00'),
+(12, 'monday', '09:00:00'),
+(12, 'monday', '10:00:00'),
+(12, 'monday', '11:00:00'),
+(12, 'monday', '14:00:00'),
+(12, 'monday', '15:00:00'),
+(12, 'monday', '16:00:00'),
+(12, 'tuesday', '08:00:00'),
+(12, 'tuesday', '09:00:00'),
+(12, 'tuesday', '10:00:00'),
+(12, 'tuesday', '14:00:00'),
+(12, 'tuesday', '15:00:00'),
+(12, 'wednesday', '08:00:00'),
+(12, 'wednesday', '09:00:00'),
+(12, 'wednesday', '10:00:00'),
+(12, 'wednesday', '14:00:00'),
+(12, 'wednesday', '15:00:00'),
+(12, 'thursday', '08:00:00'),
+(12, 'thursday', '09:00:00'),
+(12, 'thursday', '10:00:00'),
+(12, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(13, 'monday', '08:00:00'),
+(13, 'monday', '09:00:00'),
+(13, 'monday', '10:00:00'),
+(13, 'monday', '11:00:00'),
+(13, 'monday', '14:00:00'),
+(13, 'monday', '15:00:00'),
+(13, 'monday', '16:00:00'),
+(13, 'tuesday', '08:00:00'),
+(13, 'tuesday', '09:00:00'),
+(13, 'tuesday', '10:00:00'),
+(13, 'tuesday', '14:00:00'),
+(13, 'tuesday', '15:00:00'),
+(13, 'wednesday', '08:00:00'),
+(13, 'wednesday', '09:00:00'),
+(13, 'wednesday', '10:00:00'),
+(13, 'wednesday', '14:00:00'),
+(13, 'wednesday', '15:00:00'),
+(13, 'thursday', '08:00:00'),
+(13, 'thursday', '09:00:00'),
+(13, 'thursday', '10:00:00'),
+(13, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(14, 'monday', '08:00:00'),
+(14, 'monday', '09:00:00'),
+(14, 'monday', '10:00:00'),
+(14, 'monday', '11:00:00'),
+(14, 'monday', '14:00:00'),
+(14, 'monday', '15:00:00'),
+(14, 'monday', '16:00:00'),
+(14, 'tuesday', '08:00:00'),
+(14, 'tuesday', '09:00:00'),
+(14, 'tuesday', '10:00:00'),
+(14, 'tuesday', '14:00:00'),
+(14, 'tuesday', '15:00:00'),
+(14, 'wednesday', '08:00:00'),
+(14, 'wednesday', '09:00:00'),
+(14, 'wednesday', '10:00:00'),
+(14, 'wednesday', '14:00:00'),
+(14, 'wednesday', '15:00:00'),
+(14, 'thursday', '08:00:00'),
+(14, 'thursday', '09:00:00'),
+(14, 'thursday', '10:00:00'),
+(14, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(15, 'monday', '08:00:00'),
+(15, 'monday', '09:00:00'),
+(15, 'monday', '10:00:00'),
+(15, 'monday', '11:00:00'),
+(15, 'monday', '14:00:00'),
+(15, 'monday', '15:00:00'),
+(15, 'monday', '16:00:00'),
+(15, 'tuesday', '08:00:00'),
+(15, 'tuesday', '09:00:00'),
+(15, 'tuesday', '10:00:00'),
+(15, 'tuesday', '14:00:00'),
+(15, 'tuesday', '15:00:00'),
+(15, 'wednesday', '08:00:00'),
+(15, 'wednesday', '09:00:00'),
+(15, 'wednesday', '10:00:00'),
+(15, 'wednesday', '14:00:00'),
+(15, 'wednesday', '15:00:00'),
+(15, 'thursday', '08:00:00'),
+(15, 'thursday', '09:00:00'),
+(15, 'thursday', '10:00:00'),
+(15, 'thursday', '14:00:00');
+
+INSERT INTO availability (service_id, week_days, start_time) VALUES
+(16, 'monday', '08:00:00'),
+(16, 'monday', '09:00:00'),
+(16, 'monday', '10:00:00'),
+(16, 'monday', '11:00:00'),
+(16, 'monday', '14:00:00'),
+(16, 'monday', '15:00:00'),
+(16, 'monday', '16:00:00'),
+(16, 'tuesday', '08:00:00'),
+(16, 'tuesday', '09:00:00'),
+(16, 'tuesday', '10:00:00'),
+(16, 'tuesday', '14:00:00'),
+(16, 'tuesday', '15:00:00'),
+(16, 'wednesday', '08:00:00'),
+(16, 'wednesday', '09:00:00'),
+(16, 'wednesday', '10:00:00'),
+(16, 'wednesday', '14:00:00'),
+(16, 'wednesday', '15:00:00'),
+(16, 'thursday', '08:00:00'),
+(16, 'thursday', '09:00:00'),
+(16, 'thursday', '10:00:00'),
+(16, 'thursday', '14:00:00');
+
