@@ -137,8 +137,14 @@
             <h3>Arthur Bernardo Paul</h3>
             <p>Estudante e cofundador do Bookease. Juntos, buscamos transformar a maneira de agendar serviços.</p>
             <div class="social-links">
-                <a href="https://www.instagram.com/arthur_bernardo" target="_blank">LinkedIn</a><br>
-                <a href="https://www.github.com/in/arthurbernardopaul" target="_blank">Github</a>
+                <a href="https://www.instagram.com/arthur_bernardo" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <!-- LinkedIn -->
+                </a>
+                <a href="https://www.github.com/in/arthurbernardopaul" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                    <!-- Github -->
+                </a>
             </div>
         </div>
     </div>
@@ -150,8 +156,14 @@
             <h3>Bruno Bellinaso Brasil</h3>
             <p>Estudante e cofundador do Bookease. Juntos, buscamos transformar a maneira de agendar serviços.</p>
             <div class="social-links">
-                <a href="https://www.instagram.com/brunobellinaso" target="_blank">LinkedIn</a><br>
-                <a href="https://www.github.com/in/brunobellinaso" target="_blank">Github</a>
+                <a href="https://www.instagram.com/brunobellinaso" target="_blank">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <!-- LinkedIn -->
+                </a>
+                <a href="https://www.github.com/in/brunobellinaso" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                    <!-- Github -->
+                </a>
             </div>
         </div>
     </div>
@@ -190,7 +202,7 @@
            
             <div class="footer_section">
                 <h4>Contato</h4>
-                <p>Email:<a href="mailto:support@bookease.com">support@bookease.com</a></p>
+                <p>Email: <a href="mailto:support@bookease.com">support@bookease.com</a></p>
                 <p>Telefone: (55) 99727-0790</p>
                 <p>Endereço: Av Roraima, 1000 - Santa Maria, RS</p>
             </div>

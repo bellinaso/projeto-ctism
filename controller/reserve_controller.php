@@ -181,10 +181,12 @@
 
         
         $user = $con->consult("SELECT * FROM users WHERE email = '$user'");
+        print_r($user);
 
         $query = $con->consult("SELECT
                                         establishments.user_id,
-                                        reserves.establishments_id
+                                        reserves.establishments_id,
+                                        reserves.user_id as reserve_user_id
                                         FROM reserves
                                         JOIN establishments ON reserves.establishments_id = establishments.id
                                         WHERE reserves.id = $reserve_id;");
@@ -195,7 +197,7 @@
 
             return array('result' => $result, 'establishment_id' => $query['establishments_id']);
         }
-        else if ($user['id'] == $query['user_id'] && $user['user_type'] == 'user') {
+        else if ($user['id'] == $query['reserve_user_id'] && $user['user_type'] == 'user') {
 
             $result = $con->execute("UPDATE reserves SET reserve_status = 'user_cancellation' WHERE id = $reserve_id");
     

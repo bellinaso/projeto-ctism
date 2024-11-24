@@ -256,8 +256,6 @@
         });
     </script>
 
-
-    <script src="../public/js/svg_pin_icons.js"></script>
     <script>
         const locations = <?= $jsonEstablishments ?>;
 

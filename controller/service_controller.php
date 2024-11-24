@@ -93,7 +93,7 @@
 
 
         if($user['id'] == $establishment['user_id']) {
-            return $con->execute("INSERT INTO services (establishments_id, name, description, creation_date) 
+            return $con->insert("INSERT INTO services (establishments_id, name, description, creation_date) 
             VALUES
             ($establishment_id,
             '$service_name',

@@ -381,7 +381,7 @@
 
     
     .service {
-        min-height: 14rem;
+        min-height: 18rem;
         overflow: hidden;
         & {
             .service_info {

@@ -128,13 +128,13 @@
     .footer_top {
         display: flex;
         flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
+        justify-content: space-evenly;
+        gap: 2rem;
         margin-bottom: 20px;
     }
 
     .footer_section {
-        max-width: 250px;
+        max-width: 300px;
     }
 
     .footer_section h4 {
@@ -168,6 +168,7 @@
         margin: 0 10px;
         font-size: 1.5rem;
         text-decoration: none;
+        transition: all ease-in-out .2s;
     }
 
     .footer_socials a:hover {
@@ -179,195 +180,198 @@
         font-size: 0.8rem;
         color: #bbb;
     }
- /* Estilo geral */
-#about_us {
+
+    #about_us {
     background-color: #fff;
     color: #333;
     padding: 5rem 2rem;
     font-family: 'Arial', sans-serif;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-h2 {
-    text-align: center;
-    color: #000;
-    font-size: 2.4rem;
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-}
-
-p {
-    font-size: 1.1rem;
-    color: #555;
-    text-align: left;
-    max-width: 800px;
-    margin: 0 auto 2rem;
-}
-
-/* Seções */
-.section {
-    margin-bottom: 4rem;
-}
-
-.card {
-    background-color: #fff;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid #000;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Cartão O que é o Bookease */
-.what-is {
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.what-is:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.what-is h4 {
-    font-size: 1.6rem;
-    color: #000;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.what-is p {
-    font-size: 1rem;
-    color: #333;
-}
-
-/* Cartões de Missão */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
-    justify-items: center;
-}
-
-.mission {
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    text-align: left;
-}
-
-.mission:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.mission h4 {
-    font-size: 1.6rem;
-    color: #000;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-}
-
-.mission p {
-    font-size: 1rem;
-    color: #333;
-    text-align: left;
-}
-
-/* Cartões de Fundadores */
-.founders-section {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: space-between;
-    margin-top: 3rem;
-}
-
-.founder {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    padding: 2rem;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 48%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.founder:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
-.card-image {
-    width: 120px; /* Define um tamanho fixo para a imagem */
-    height: 120px; /* Define um tamanho fixo para a imagem */
-    border-radius: 50%; /* Torna a imagem redonda */
-    overflow: hidden;
-    border: 4px solid #ddd; /* Adiciona borda para destacar a imagem */
-    margin-bottom: 1rem; /* Espaço entre a imagem e o conteúdo */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
-}
-
-.card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Garante que a imagem cubra todo o círculo sem distorção */
-    transition: transform 0.3s ease;
-}
-
-.card-image:hover img {
-    transform: scale(1.1); /* Efeito de zoom ao passar o mouse sobre a imagem */
-}
-
-.card-content {
-    padding: 1rem;
-    text-align: center;
-}
-
-.card-content h3 {
-    font-size: 1.4rem;
-    color: #000;
-    margin-bottom: 0.5rem;
-    text-transform: capitalize;
-}
-
-.card-content p {
-    font-size: 1rem;
-    color: #666;
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-    .founder {
-        width: 100%;
     }
-
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    
+    h2 {
+        text-align: center;
+        color: #000;
+        font-size: 2.4rem;
+        margin-bottom: 2rem;
+        text-transform: uppercase;
+    }
+    
+    p {
+        font-size: 1.1rem;
+        color: #555;
+        text-align: left;
+        max-width: 800px;
+        margin: 0 auto 2rem;
+    }
+    
+    .section {
+        margin-bottom: 4rem;
+    }
+    
+    .card {
+        background-color: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid #000;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Cartão O que é o Bookease */
+    .what-is {
+        padding: 2rem;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .what-is:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .what-is h4 {
+        font-size: 1.6rem;
+        color: #000;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+    
+    .what-is p {
+        font-size: 1rem;
+        color: #333;
+    }
+    
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        justify-items: center;
+    }
+    
+    .mission {
+        padding: 2rem;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: left;
+    }
+    
+    .mission:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .mission h4 {
+        font-size: 1.6rem;
+        color: #000;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+    }
+    
+    .mission p {
+        font-size: 1rem;
+        color: #333;
+        text-align: left;
+    }
+    
     .founders-section {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 3rem;
         justify-content: center;
-        gap: 1rem;
+        align-items: center;
+        margin-top: 3rem;
     }
-}
+    
+    .founder {
+        width: 24rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        padding: 2rem;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .founder:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-image {
+        width: 120px; /* Define um tamanho fixo para a imagem */
+        height: 120px; /* Define um tamanho fixo para a imagem */
+        border-radius: 50%; /* Torna a imagem redonda */
+        overflow: hidden;
+        border: 4px solid #ddd; /* Adiciona borda para destacar a imagem */
+        margin-bottom: 1rem; /* Espaço entre a imagem e o conteúdo */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+    }
+    
+    .card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Garante que a imagem cubra todo o círculo sem distorção */
+        transition: transform 0.3s ease;
+    }
+    
+    .card-image:hover img {
+        transform: scale(1.1); /* Efeito de zoom ao passar o mouse sobre a imagem */
+    }
+    
+    .card-content {
+        padding: 1rem;
+        text-align: center;
 
+        & {
+            h3 {
+                font-size: 1.4rem;
+            color: #000;
+            margin-bottom: 0.5rem;
+            text-transform: capitalize;
+            }
+
+            p {
+                font-size: 1rem;
+                color: #666;
+            }
+
+            .social-links {
+                display: flex;
+                flex-direction: row;
+                gap: 1.3rem;
+                justify-content: center;
+                align-items: center;
+            }
+
+            a {
+                font-size: 1.7rem;
+                transition: all ease-in-out .3s;
+            }
+
+            a:hover {
+                transform: scale(1.03);
+            }
+        }
+    }
 }
