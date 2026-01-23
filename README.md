@@ -40,12 +40,12 @@ O objetivo do Bookeasy é otimizar o processo de marcação de serviços, propor
 
 ## Capturas de tela
 
-<img align="center" alt="index page" width="45%" src="./public/screenshots/1-index.png"/>
-<img align="center" alt="home page" width="45%" src="./public/screenshots/2-home.png"/>
-<img align="center" alt="user view establishments" width="45%" src="./public/screenshots/3-establishment-user.png"/>
-<img align="center" alt="user schedule" width="45%" src="./public/screenshots/4-my-schedules.png"/>
-<img align="center" alt="admin view establishments" width="45%" src="./public/screenshots/5-establishment-admin.png"/>
-<img align="center" alt="admin page" width="45%" src="./public/screenshots/6-admin1.png"/>
+<img align="center" alt="index page" width="70%" src="./public/screenshots/1-index.png"/>
+<img align="center" alt="home page" width="70%" src="./public/screenshots/2-home.png"/>
+<img align="center" alt="user view establishments" width="70%" src="./public/screenshots/3-establishment-user.png"/>
+<img align="center" alt="user schedule" width="70%" src="./public/screenshots/4-my-schedules.png"/>
+<img align="center" alt="admin view establishments" width="70%" src="./public/screenshots/5-establishment-admin.png"/>
+<img align="center" alt="admin page" width="70%" src="./public/screenshots/6-admin1.png"/>
 
 
 ## Como executar localmente
