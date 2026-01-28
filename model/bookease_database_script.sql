@@ -88,15 +88,15 @@ CREATE TABLE reserves(
     FOREIGN KEY(availability_id) REFERENCES availability(id)
 );
 
--- CREATE TABLE reviews(
---     id INT auto_increment,
---     reserve_id INT,
---     review_note INT,
---     commentary TEXT,
---     review_date DATE,
---     PRIMARY KEY(id),
---     FOREIGN KEY(reserve_id) REFERENCES reserves(id)
--- );
+CREATE TABLE reviews(
+    id INT auto_increment,
+    reserve_id INT,
+    review_note INT,
+    commentary TEXT,
+    review_date DATE,
+    PRIMARY KEY(id),
+    FOREIGN KEY(reserve_id) REFERENCES reserves(id)
+);
 
 CREATE TABLE states(
     id INT auto_increment,
@@ -112,7 +112,15 @@ CREATE TABLE cities(
     FOREIGN KEY(state_id) REFERENCES states(id)
 );
 
--- DEBUG SECTION
+CREATE TABLE csrf_tokens (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    token VARCHAR(191) NOT NULL UNIQUE,
+    expiration_date DATETIME NOT NULL,
+    FOREIGN KEY(user_id) REFERENCES user(id)
+);
+
+-- DEBUG: TEST INSERTS
 
 INSERT INTO users (cpf, name, email, phone, state, city, password, user_type, creation_date) VALUES
 ('12345678901', 'Maria Silva', 'maria.silva@gmail.com', '11987654321', 'São Paulo', 'São Paulo', 'senha123', 'user', '2024-11-21'),
